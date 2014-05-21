@@ -14,14 +14,23 @@
 		5890ACEE192CD9CE00B6BD97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890ACED192CD9CE00B6BD97 /* main.m */; };
 		5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890ACF1192CD9CE00B6BD97 /* AppDelegate.m */; };
 		5890ACF5192CD9CE00B6BD97 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5890ACF3192CD9CE00B6BD97 /* Main_iPhone.storyboard */; };
-		5890ACF8192CD9CE00B6BD97 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5890ACF6192CD9CE00B6BD97 /* Main_iPad.storyboard */; };
-		5890ACFB192CD9CE00B6BD97 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890ACFA192CD9CE00B6BD97 /* ViewController.m */; };
+		5890ACFB192CD9CE00B6BD97 /* LmViewControllerCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890ACFA192CD9CE00B6BD97 /* LmViewControllerCamera.m */; };
 		5890ACFD192CD9CE00B6BD97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5890ACFC192CD9CE00B6BD97 /* Images.xcassets */; };
 		5890AD04192CD9CE00B6BD97 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890AD03192CD9CE00B6BD97 /* XCTest.framework */; };
 		5890AD05192CD9CE00B6BD97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890ACE1192CD9CD00B6BD97 /* Foundation.framework */; };
 		5890AD06192CD9CE00B6BD97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890ACE5192CD9CD00B6BD97 /* UIKit.framework */; };
 		5890AD0E192CD9CE00B6BD97 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5890AD0C192CD9CE00B6BD97 /* InfoPlist.strings */; };
 		5890AD10192CD9CE00B6BD97 /* LuminaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD0F192CD9CE00B6BD97 /* LuminaTests.m */; };
+		5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD1B192CDA4100B6BD97 /* LmViewControllerRoot.m */; };
+		5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD1E192CDA9000B6BD97 /* LmViewControllerExport.m */; };
+		5890AD23192CDC3E00B6BD97 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD22192CDC3E00B6BD97 /* CameraManager.m */; };
+		5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD27192CDD0F00B6BD97 /* UIDevice+extend.m */; };
+		5890AD35192CDD0F00B6BD97 /* UIScreen+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD29192CDD0F00B6BD97 /* UIScreen+extend.m */; };
+		5890AD36192CDD0F00B6BD97 /* UIView+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD2B192CDD0F00B6BD97 /* UIView+extend.m */; };
+		5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD2D192CDD0F00B6BD97 /* UIScrollView+extend.m */; };
+		5890AD38192CDD0F00B6BD97 /* UIImage+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD2F192CDD0F00B6BD97 /* UIImage+extend.m */; };
+		5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD31192CDD0F00B6BD97 /* UIViewController+extend.m */; };
+		5890AD3A192CDD0F00B6BD97 /* UIImagePickerController+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD33192CDD0F00B6BD97 /* UIImagePickerController+extend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,15 +55,34 @@
 		5890ACF0192CD9CE00B6BD97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5890ACF1192CD9CE00B6BD97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		5890ACF4192CD9CE00B6BD97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		5890ACF7192CD9CE00B6BD97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		5890ACF9192CD9CE00B6BD97 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5890ACFA192CD9CE00B6BD97 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		5890ACF9192CD9CE00B6BD97 /* LmViewControllerCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LmViewControllerCamera.h; sourceTree = "<group>"; };
+		5890ACFA192CD9CE00B6BD97 /* LmViewControllerCamera.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LmViewControllerCamera.m; sourceTree = "<group>"; };
 		5890ACFC192CD9CE00B6BD97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		5890AD02192CD9CE00B6BD97 /* LuminaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LuminaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5890AD03192CD9CE00B6BD97 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		5890AD0B192CD9CE00B6BD97 /* LuminaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LuminaTests-Info.plist"; sourceTree = "<group>"; };
 		5890AD0D192CD9CE00B6BD97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5890AD0F192CD9CE00B6BD97 /* LuminaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuminaTests.m; sourceTree = "<group>"; };
+		5890AD1A192CDA4100B6BD97 /* LmViewControllerRoot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmViewControllerRoot.h; sourceTree = "<group>"; };
+		5890AD1B192CDA4100B6BD97 /* LmViewControllerRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewControllerRoot.m; sourceTree = "<group>"; };
+		5890AD1D192CDA9000B6BD97 /* LmViewControllerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmViewControllerExport.h; sourceTree = "<group>"; };
+		5890AD1E192CDA9000B6BD97 /* LmViewControllerExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewControllerExport.m; sourceTree = "<group>"; };
+		5890AD21192CDC3E00B6BD97 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
+		5890AD22192CDC3E00B6BD97 /* CameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraManager.m; sourceTree = "<group>"; };
+		5890AD26192CDD0F00B6BD97 /* UIDevice+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+extend.h"; sourceTree = "<group>"; };
+		5890AD27192CDD0F00B6BD97 /* UIDevice+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+extend.m"; sourceTree = "<group>"; };
+		5890AD28192CDD0F00B6BD97 /* UIScreen+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+extend.h"; sourceTree = "<group>"; };
+		5890AD29192CDD0F00B6BD97 /* UIScreen+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+extend.m"; sourceTree = "<group>"; };
+		5890AD2A192CDD0F00B6BD97 /* UIView+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+extend.h"; sourceTree = "<group>"; };
+		5890AD2B192CDD0F00B6BD97 /* UIView+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+extend.m"; sourceTree = "<group>"; };
+		5890AD2C192CDD0F00B6BD97 /* UIScrollView+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+extend.h"; sourceTree = "<group>"; };
+		5890AD2D192CDD0F00B6BD97 /* UIScrollView+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+extend.m"; sourceTree = "<group>"; };
+		5890AD2E192CDD0F00B6BD97 /* UIImage+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+extend.h"; sourceTree = "<group>"; };
+		5890AD2F192CDD0F00B6BD97 /* UIImage+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+extend.m"; sourceTree = "<group>"; };
+		5890AD30192CDD0F00B6BD97 /* UIViewController+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+extend.h"; sourceTree = "<group>"; };
+		5890AD31192CDD0F00B6BD97 /* UIViewController+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+extend.m"; sourceTree = "<group>"; };
+		5890AD32192CDD0F00B6BD97 /* UIImagePickerController+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImagePickerController+extend.h"; sourceTree = "<group>"; };
+		5890AD33192CDD0F00B6BD97 /* UIImagePickerController+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImagePickerController+extend.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,12 +142,13 @@
 		5890ACE7192CD9CE00B6BD97 /* Lumina */ = {
 			isa = PBXGroup;
 			children = (
+				5890AD24192CDCE600B6BD97 /* Categories */,
+				5890AD21192CDC3E00B6BD97 /* CameraManager.h */,
+				5890AD22192CDC3E00B6BD97 /* CameraManager.m */,
 				5890ACF0192CD9CE00B6BD97 /* AppDelegate.h */,
 				5890ACF1192CD9CE00B6BD97 /* AppDelegate.m */,
 				5890ACF3192CD9CE00B6BD97 /* Main_iPhone.storyboard */,
-				5890ACF6192CD9CE00B6BD97 /* Main_iPad.storyboard */,
-				5890ACF9192CD9CE00B6BD97 /* ViewController.h */,
-				5890ACFA192CD9CE00B6BD97 /* ViewController.m */,
+				5890AD19192CD9EC00B6BD97 /* ViewControllers */,
 				5890ACFC192CD9CE00B6BD97 /* Images.xcassets */,
 				5890ACE8192CD9CE00B6BD97 /* Supporting Files */,
 			);
@@ -153,6 +182,40 @@
 				5890AD0C192CD9CE00B6BD97 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5890AD19192CD9EC00B6BD97 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5890AD1A192CDA4100B6BD97 /* LmViewControllerRoot.h */,
+				5890AD1B192CDA4100B6BD97 /* LmViewControllerRoot.m */,
+				5890ACF9192CD9CE00B6BD97 /* LmViewControllerCamera.h */,
+				5890ACFA192CD9CE00B6BD97 /* LmViewControllerCamera.m */,
+				5890AD1D192CDA9000B6BD97 /* LmViewControllerExport.h */,
+				5890AD1E192CDA9000B6BD97 /* LmViewControllerExport.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5890AD24192CDCE600B6BD97 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				5890AD26192CDD0F00B6BD97 /* UIDevice+extend.h */,
+				5890AD27192CDD0F00B6BD97 /* UIDevice+extend.m */,
+				5890AD28192CDD0F00B6BD97 /* UIScreen+extend.h */,
+				5890AD29192CDD0F00B6BD97 /* UIScreen+extend.m */,
+				5890AD2A192CDD0F00B6BD97 /* UIView+extend.h */,
+				5890AD2B192CDD0F00B6BD97 /* UIView+extend.m */,
+				5890AD2C192CDD0F00B6BD97 /* UIScrollView+extend.h */,
+				5890AD2D192CDD0F00B6BD97 /* UIScrollView+extend.m */,
+				5890AD2E192CDD0F00B6BD97 /* UIImage+extend.h */,
+				5890AD2F192CDD0F00B6BD97 /* UIImage+extend.m */,
+				5890AD30192CDD0F00B6BD97 /* UIViewController+extend.h */,
+				5890AD31192CDD0F00B6BD97 /* UIViewController+extend.m */,
+				5890AD32192CDD0F00B6BD97 /* UIImagePickerController+extend.h */,
+				5890AD33192CDD0F00B6BD97 /* UIImagePickerController+extend.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,7 +294,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5890ACF8192CD9CE00B6BD97 /* Main_iPad.storyboard in Resources */,
 				5890ACFD192CD9CE00B6BD97 /* Images.xcassets in Resources */,
 				5890ACF5192CD9CE00B6BD97 /* Main_iPhone.storyboard in Resources */,
 				5890ACEC192CD9CE00B6BD97 /* InfoPlist.strings in Resources */,
@@ -253,9 +315,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5890ACFB192CD9CE00B6BD97 /* ViewController.m in Sources */,
+				5890ACFB192CD9CE00B6BD97 /* LmViewControllerCamera.m in Sources */,
+				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
+				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
+				5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */,
+				5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */,
 				5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */,
+				5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */,
+				5890AD36192CDD0F00B6BD97 /* UIView+extend.m in Sources */,
+				5890AD35192CDD0F00B6BD97 /* UIScreen+extend.m in Sources */,
+				5890AD38192CDD0F00B6BD97 /* UIImage+extend.m in Sources */,
+				5890AD23192CDC3E00B6BD97 /* CameraManager.m in Sources */,
 				5890ACEE192CD9CE00B6BD97 /* main.m in Sources */,
+				5890AD3A192CDD0F00B6BD97 /* UIImagePickerController+extend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,14 +364,6 @@
 				5890ACF4192CD9CE00B6BD97 /* Base */,
 			);
 			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		5890ACF6192CD9CE00B6BD97 /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5890ACF7192CD9CE00B6BD97 /* Base */,
-			);
-			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
 		};
 		5890AD0C192CD9CE00B6BD97 /* InfoPlist.strings */ = {
@@ -390,10 +454,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Toshiki Nakanishi (WRHUFP3254)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lumina/Lumina-Prefix.pch";
 				INFOPLIST_FILE = "Lumina/Lumina-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "F0C00530-9322-4DA4-AEFF-EA611EB87BB6";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -403,10 +470,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Toshiki Nakanishi (7FY9ETDU35)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lumina/Lumina-Prefix.pch";
 				INFOPLIST_FILE = "Lumina/Lumina-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6F757C89-7E69-4CCF-B45A-821A61AC6F70";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

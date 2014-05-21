@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LmViewControllerExport.h
 //  Lumina
 //
 //  Created by SSC on 2014/05/21.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface LmViewControllerExport : UIViewController
 
 @end
