@@ -49,3 +49,5 @@
 
 #import "LmCurrentCamera.h"
 #import "LmCurrentSettings.h"
+#import "LmCurrentImage.h"
+#import "MotionOrientation.h"

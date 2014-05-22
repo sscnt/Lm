@@ -156,7 +156,8 @@
 -(id)init{
 
    if(super.init){
-
+       
+       _rawNSDataCache = [NSMutableArray array];
        [self setupAVCapture:AVCaptureSessionPresetInputPriority];
     return self;
    }
@@ -172,7 +173,7 @@ return nil;
 
     if(super.init){
     
-
+        _rawNSDataCache = [NSMutableArray array];
         [self setupAVCapture:preset];
         
         return self;
@@ -190,6 +191,45 @@ return nil;
 }
 
 
+#pragma mark convert
+
+- (void)addPixelDataObject:(NSData *)data
+{
+    [_rawNSDataCache addObject:data];
+    [self popCacheAndConvert];
+}
+
+- (void)popCacheAndConvert
+{
+    if ([self.rawNSDataCache count] == 0) {
+        return;
+    }
+    LOG(@"%d", (int)[self.rawNSDataCache count]);
+    __block CameraManager* _self = self;
+    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t q_main = dispatch_get_main_queue();
+    
+    dispatch_async(q_main, ^{
+        LmObjectPixelData* data = (LmObjectPixelData*)[_self.rawNSDataCache objectAtIndex:0];
+        [_self.rawNSDataCache removeObjectAtIndex:0];
+        CVPixelBufferRef imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
+        
+        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+        
+        void* baseAddress = imageBuffer;
+        CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, baseAddress, data.bufferSize, NULL);
+        CGImageRef cgImage = CGImageCreate(data.width, data.height, 8, 32, data.bytesPerRow, colorspace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, TRUE, kCGRenderingIntentDefault);
+        CGDataProviderRelease(dataProvider);
+        UIImage* image = [UIImage imageWithCGImage:cgImage];
+        [LmCurrentImage writeTmpImage:image];
+        CGImageRelease(cgImage);
+        CGColorSpaceRelease(colorspace);
+        
+        [_self.delegate singleImageSavedWithOrientation:data.orientation];
+    });
+    
+    return;
+}
 
 
 //
@@ -227,8 +267,8 @@ return nil;
                     //[camera setActiveVideoMinFrameDuration:bestFrameRateRange.minFrameDuration];
                     //[camera setActiveVideoMaxFrameDuration:bestFrameRateRange.maxFrameDuration];
                     
-                    [camera setActiveVideoMinFrameDuration:CMTimeMake(10, 300)];
-                    [camera setActiveVideoMaxFrameDuration:CMTimeMake(10, 300)];
+                    [camera setActiveVideoMinFrameDuration:CMTimeMake(1, 5)];
+                    [camera setActiveVideoMaxFrameDuration:CMTimeMake(1, 5)];
                     [camera unlockForConfiguration];
                 }
             }
@@ -289,7 +329,7 @@ return nil;
 	NSDictionary *rgbOutputSettings = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCMPixelFormat_32BGRA)};
     videoOutput = AVCaptureVideoDataOutput.new;
 	[videoOutput setVideoSettings:rgbOutputSettings];
-	[videoOutput setAlwaysDiscardsLateVideoFrames:NO];     //  NOだとコマ落ちしないが重い処理には向かない
+	[videoOutput setAlwaysDiscardsLateVideoFrames:YES];     //  NOだとコマ落ちしないが重い処理には向かない
   	videoOutputQueue = dispatch_queue_create("VideoData Output Queue", DISPATCH_QUEUE_SERIAL);
 	[videoOutput setSampleBufferDelegate:self queue:videoOutputQueue];
     
@@ -426,22 +466,40 @@ return nil;
 /////////////////////////////////////////////////////////////////////////////////
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    @autoreleasepool {
-        
+
         __block CameraManager* _self = self;
         
         if (_currentCapturedNumber < _allCaptureNumber) {
+            _currentCapturedNumber++;
             
-            CVImageBufferRef cameraFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
-            CVPixelBufferLockBaseAddress(cameraFrame, 0);
+            CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+            CVPixelBufferLockBaseAddress(imageBuffer,0);
+            
+            size_t bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+            size_t width = CVPixelBufferGetWidth(imageBuffer);
+            size_t height = CVPixelBufferGetHeight(imageBuffer);
+            void *src_buff = CVPixelBufferGetBaseAddress(imageBuffer);
+            
+            LmObjectPixelData* data = [[LmObjectPixelData alloc] init];
+            data.width = width;
+            data.height = height;
+            data.bytesPerRow = bytesPerRow;
+            data.bufferSize = CVPixelBufferGetDataSize(imageBuffer);
+            data.orientation = [MotionOrientation sharedInstance].deviceOrientation;
+            data.pixelData = [NSData dataWithBytes:src_buff length:bytesPerRow * height];
+            CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+            
+            [_self addPixelDataObject:data];
+            
+            /*
             CGImageRef cgImage = [CameraManager imageFromSampleBuffer:sampleBuffer];
             UIImage* captureImage = [UIImage imageWithCGImage:cgImage];
             CGImageRelease(cgImage);
             
             dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [_self.delegate singleImageCaptured:captureImage withOrientation:[UIDevice currentDevice].orientation];
+                [_self.delegate singleImageCaptured:captureImage withOrientation:[MotionOrientation sharedInstance].deviceOrientation];
             });
-            _currentCapturedNumber++;
+             */
         }
         
         /*
@@ -461,7 +519,6 @@ return nil;
          
          */
 
-    }
 }
 
 

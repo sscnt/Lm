@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CMBufferQueue.h>
+#import "LmObjectPixelData.h"
 
 
 ////////////////////////////////
@@ -27,7 +28,7 @@
 @optional
 
 -(void)videoFrameUpdate:(CGImageRef)cgImage from:(CameraManager*)manager;
-- (void)singleImageCaptured:(UIImage*)image withOrientation:(UIDeviceOrientation)orientation;
+- (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation;
 @end
 
 //////////////////////////////////////////////////
@@ -57,6 +58,10 @@ AVCaptureSessionPresetiFrame1280x720
 @property (nonatomic, assign) BOOL processingToConvert;
 @property (nonatomic, assign) int currentCapturedNumber;
 @property (nonatomic, assign) int allCaptureNumber;
+@property (nonatomic, strong) NSMutableArray* rawNSDataCache;
+
+- (void)addPixelDataObject:(LmObjectPixelData*)data;
+- (void)popCacheAndConvert;
 
 - (void)takeAPhoto;
 

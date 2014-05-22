@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5806D754192E2B7600B384F8 /* LmCurrentImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806D753192E2B7600B384F8 /* LmCurrentImage.m */; };
+		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
+		583BA0BC192DF1D700852B0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583BA0BB192DF1D700852B0D /* CoreMotion.framework */; };
+		583BA0BF192DF47400852B0D /* LmViewCameraPreviewOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0BE192DF47400852B0D /* LmViewCameraPreviewOverlay.m */; };
+		583BA0C3192E050100852B0D /* LmObjectPixelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0C2192E050100852B0D /* LmObjectPixelData.m */; };
 		588CC33D192DDA460030AA82 /* LmCurrentCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC33C192DDA460030AA82 /* LmCurrentCamera.m */; };
 		588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC341192DDF430030AA82 /* LmCurrentSettings.m */; };
 		588CC347192DE04F0030AA82 /* LmButtonShutter.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC346192DE04F0030AA82 /* LmButtonShutter.m */; };
@@ -49,6 +54,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5806D752192E2B7600B384F8 /* LmCurrentImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentImage.h; sourceTree = "<group>"; };
+		5806D753192E2B7600B384F8 /* LmCurrentImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCurrentImage.m; sourceTree = "<group>"; };
+		583BA0B7192DF0E800852B0D /* MotionOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionOrientation.h; sourceTree = "<group>"; };
+		583BA0B8192DF0E800852B0D /* MotionOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionOrientation.m; sourceTree = "<group>"; };
+		583BA0BB192DF1D700852B0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		583BA0BD192DF47400852B0D /* LmViewCameraPreviewOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmViewCameraPreviewOverlay.h; sourceTree = "<group>"; };
+		583BA0BE192DF47400852B0D /* LmViewCameraPreviewOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewCameraPreviewOverlay.m; sourceTree = "<group>"; };
+		583BA0C1192E050100852B0D /* LmObjectPixelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmObjectPixelData.h; sourceTree = "<group>"; };
+		583BA0C2192E050100852B0D /* LmObjectPixelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmObjectPixelData.m; sourceTree = "<group>"; };
 		588CC33B192DDA460030AA82 /* LmCurrentCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentCamera.h; sourceTree = "<group>"; };
 		588CC33C192DDA460030AA82 /* LmCurrentCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCurrentCamera.m; sourceTree = "<group>"; };
 		588CC340192DDF430030AA82 /* LmCurrentSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentSettings.h; sourceTree = "<group>"; };
@@ -105,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				583BA0BC192DF1D700852B0D /* CoreMotion.framework in Frameworks */,
 				5890ACE4192CD9CD00B6BD97 /* CoreGraphics.framework in Frameworks */,
 				5890ACE6192CD9CD00B6BD97 /* UIKit.framework in Frameworks */,
 				5890ACE2192CD9CD00B6BD97 /* Foundation.framework in Frameworks */,
@@ -124,9 +139,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		583BA0BA192DF0EF00852B0D /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				583BA0B7192DF0E800852B0D /* MotionOrientation.h */,
+				583BA0B8192DF0E800852B0D /* MotionOrientation.m */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		583BA0C0192E04E600852B0D /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				583BA0C1192E050100852B0D /* LmObjectPixelData.h */,
+				583BA0C2192E050100852B0D /* LmObjectPixelData.m */,
+			);
+			name = Objects;
+			sourceTree = "<group>";
+		};
 		588CC33E192DDA4C0030AA82 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5806D752192E2B7600B384F8 /* LmCurrentImage.h */,
+				5806D753192E2B7600B384F8 /* LmCurrentImage.m */,
 				588CC33B192DDA460030AA82 /* LmCurrentCamera.h */,
 				588CC33C192DDA460030AA82 /* LmCurrentCamera.m */,
 				588CC340192DDF430030AA82 /* LmCurrentSettings.h */,
@@ -152,6 +187,8 @@
 				588CC349192DE4EE0030AA82 /* LmViewCameraBottomBar.m */,
 				588CC34B192DE4FE0030AA82 /* LmViewCameraTopBar.h */,
 				588CC34C192DE4FE0030AA82 /* LmViewCameraTopBar.m */,
+				583BA0BD192DF47400852B0D /* LmViewCameraPreviewOverlay.h */,
+				583BA0BE192DF47400852B0D /* LmViewCameraPreviewOverlay.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -178,6 +215,7 @@
 		5890ACE0192CD9CD00B6BD97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				583BA0BB192DF1D700852B0D /* CoreMotion.framework */,
 				5890ACE1192CD9CD00B6BD97 /* Foundation.framework */,
 				5890ACE3192CD9CD00B6BD97 /* CoreGraphics.framework */,
 				5890ACE5192CD9CD00B6BD97 /* UIKit.framework */,
@@ -189,8 +227,10 @@
 		5890ACE7192CD9CE00B6BD97 /* Lumina */ = {
 			isa = PBXGroup;
 			children = (
+				583BA0BA192DF0EF00852B0D /* Libraries */,
 				5890AD24192CDCE600B6BD97 /* Categories */,
 				588CC33E192DDA4C0030AA82 /* Shared */,
+				583BA0C0192E04E600852B0D /* Objects */,
 				5890AD21192CDC3E00B6BD97 /* CameraManager.h */,
 				5890AD22192CDC3E00B6BD97 /* CameraManager.m */,
 				5890ACF0192CD9CE00B6BD97 /* AppDelegate.h */,
@@ -365,13 +405,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				588CC347192DE04F0030AA82 /* LmButtonShutter.m in Sources */,
+				5806D754192E2B7600B384F8 /* LmCurrentImage.m in Sources */,
 				5890ACFB192CD9CE00B6BD97 /* LmViewControllerCamera.m in Sources */,
 				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
 				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
 				588CC34D192DE4FE0030AA82 /* LmViewCameraTopBar.m in Sources */,
 				5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */,
 				5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */,
+				583BA0C3192E050100852B0D /* LmObjectPixelData.m in Sources */,
+				583BA0BF192DF47400852B0D /* LmViewCameraPreviewOverlay.m in Sources */,
 				5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */,
+				583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */,
 				5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */,
 				588CC33D192DDA460030AA82 /* LmCurrentCamera.m in Sources */,
 				5890AD36192CDD0F00B6BD97 /* UIView+extend.m in Sources */,

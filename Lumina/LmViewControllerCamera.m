@@ -17,6 +17,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [MotionOrientation initialize];
+    
     //// camera
     _cameraManager = [[CameraManager alloc] init];
     _cameraManager.delegate = self;
@@ -25,6 +27,8 @@
     _cameraPreview = [[UIView alloc] initWithFrame:CGRectMake(0.0f, [LmCurrentSettings topBarHeight], [UIScreen width], [UIScreen height] - [LmCurrentSettings topBarHeight] - [LmCurrentSettings bottomBarHeight])];
     [self.view addSubview:_cameraPreview];
     [_cameraManager setPreview:_cameraPreview];
+    _cameraPreviewOverlay = [[LmViewCameraPreviewOverlay alloc] initWithFrame:_cameraPreview.frame];
+    [self.view addSubview:_cameraPreviewOverlay];
     
     //// Bar
     _topBar = [[LmViewCameraTopBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen width], [LmCurrentSettings topBarHeight])];
@@ -48,8 +52,9 @@
 
 #pragma mark delegate
 
-- (void)singleImageCaptured:(UIImage *)image withOrientation:(UIDeviceOrientation)orientation
+- (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation
 {
+    UIImage* image = [LmCurrentImage tmpImage];
     LOG(@"photo saved.");
     switch (orientation) {
         case UIDeviceOrientationUnknown:
@@ -67,9 +72,9 @@
             break;
         default:
             break;
-    }
-    
+    }    
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    [_cameraPreviewOverlay flash];
 }
 
 - (void)didReceiveMemoryWarning
