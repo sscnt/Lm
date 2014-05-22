@@ -27,6 +27,7 @@
 @optional
 
 -(void)videoFrameUpdate:(CGImageRef)cgImage from:(CameraManager*)manager;
+- (void)singleImageCaptured:(UIImage*)image withOrientation:(UIDeviceOrientation)orientation;
 @end
 
 //////////////////////////////////////////////////
@@ -52,6 +53,12 @@ AVCaptureSessionPresetiFrame1280x720
 -(id)initWithPreset:(NSString*)preset;
 
 @property(nonatomic, assign) id <CameraManagerDelegate> delegate;
+
+@property (nonatomic, assign) BOOL processingToConvert;
+@property (nonatomic, assign) int currentCapturedNumber;
+@property (nonatomic, assign) int allCaptureNumber;
+
+- (void)takeAPhoto;
 
 /////////////////////////////////////////////////////////
 //      プレビュー制御
@@ -110,4 +117,5 @@ typedef void (^takePhotoBlock)(UIImage *image, NSError *error);
 +(CGImageRef) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
 //      画像回転
 +(UIImage*)rotateImage:(UIImage*)img angle:(int)angle;
+
 @end

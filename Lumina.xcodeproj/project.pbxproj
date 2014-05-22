@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		588CC33D192DDA460030AA82 /* LmCurrentCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC33C192DDA460030AA82 /* LmCurrentCamera.m */; };
+		588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC341192DDF430030AA82 /* LmCurrentSettings.m */; };
+		588CC347192DE04F0030AA82 /* LmButtonShutter.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC346192DE04F0030AA82 /* LmButtonShutter.m */; };
+		588CC34A192DE4EE0030AA82 /* LmViewCameraBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC349192DE4EE0030AA82 /* LmViewCameraBottomBar.m */; };
+		588CC34D192DE4FE0030AA82 /* LmViewCameraTopBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC34C192DE4FE0030AA82 /* LmViewCameraTopBar.m */; };
 		5890ACE2192CD9CD00B6BD97 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890ACE1192CD9CD00B6BD97 /* Foundation.framework */; };
 		5890ACE4192CD9CD00B6BD97 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890ACE3192CD9CD00B6BD97 /* CoreGraphics.framework */; };
 		5890ACE6192CD9CD00B6BD97 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5890ACE5192CD9CD00B6BD97 /* UIKit.framework */; };
@@ -44,6 +49,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		588CC33B192DDA460030AA82 /* LmCurrentCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentCamera.h; sourceTree = "<group>"; };
+		588CC33C192DDA460030AA82 /* LmCurrentCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCurrentCamera.m; sourceTree = "<group>"; };
+		588CC340192DDF430030AA82 /* LmCurrentSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentSettings.h; sourceTree = "<group>"; };
+		588CC341192DDF430030AA82 /* LmCurrentSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCurrentSettings.m; sourceTree = "<group>"; };
+		588CC345192DE04F0030AA82 /* LmButtonShutter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmButtonShutter.h; sourceTree = "<group>"; };
+		588CC346192DE04F0030AA82 /* LmButtonShutter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmButtonShutter.m; sourceTree = "<group>"; };
+		588CC348192DE4EE0030AA82 /* LmViewCameraBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmViewCameraBottomBar.h; sourceTree = "<group>"; };
+		588CC349192DE4EE0030AA82 /* LmViewCameraBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewCameraBottomBar.m; sourceTree = "<group>"; };
+		588CC34B192DE4FE0030AA82 /* LmViewCameraTopBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmViewCameraTopBar.h; sourceTree = "<group>"; };
+		588CC34C192DE4FE0030AA82 /* LmViewCameraTopBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewCameraTopBar.m; sourceTree = "<group>"; };
 		5890ACDE192CD9CD00B6BD97 /* Lumina.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lumina.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5890ACE1192CD9CD00B6BD97 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5890ACE3192CD9CD00B6BD97 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -109,6 +124,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		588CC33E192DDA4C0030AA82 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				588CC33B192DDA460030AA82 /* LmCurrentCamera.h */,
+				588CC33C192DDA460030AA82 /* LmCurrentCamera.m */,
+				588CC340192DDF430030AA82 /* LmCurrentSettings.h */,
+				588CC341192DDF430030AA82 /* LmCurrentSettings.m */,
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		588CC343192DE02C0030AA82 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+				588CC344192DE0390030AA82 /* Camera */,
+			);
+			name = UIComponents;
+			sourceTree = "<group>";
+		};
+		588CC344192DE0390030AA82 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				588CC345192DE04F0030AA82 /* LmButtonShutter.h */,
+				588CC346192DE04F0030AA82 /* LmButtonShutter.m */,
+				588CC348192DE4EE0030AA82 /* LmViewCameraBottomBar.h */,
+				588CC349192DE4EE0030AA82 /* LmViewCameraBottomBar.m */,
+				588CC34B192DE4FE0030AA82 /* LmViewCameraTopBar.h */,
+				588CC34C192DE4FE0030AA82 /* LmViewCameraTopBar.m */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
 		5890ACD5192CD9CD00B6BD97 = {
 			isa = PBXGroup;
 			children = (
@@ -143,11 +190,13 @@
 			isa = PBXGroup;
 			children = (
 				5890AD24192CDCE600B6BD97 /* Categories */,
+				588CC33E192DDA4C0030AA82 /* Shared */,
 				5890AD21192CDC3E00B6BD97 /* CameraManager.h */,
 				5890AD22192CDC3E00B6BD97 /* CameraManager.m */,
 				5890ACF0192CD9CE00B6BD97 /* AppDelegate.h */,
 				5890ACF1192CD9CE00B6BD97 /* AppDelegate.m */,
 				5890ACF3192CD9CE00B6BD97 /* Main_iPhone.storyboard */,
+				588CC343192DE02C0030AA82 /* UIComponents */,
 				5890AD19192CD9EC00B6BD97 /* ViewControllers */,
 				5890ACFC192CD9CE00B6BD97 /* Images.xcassets */,
 				5890ACE8192CD9CE00B6BD97 /* Supporting Files */,
@@ -315,17 +364,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				588CC347192DE04F0030AA82 /* LmButtonShutter.m in Sources */,
 				5890ACFB192CD9CE00B6BD97 /* LmViewControllerCamera.m in Sources */,
 				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
 				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
+				588CC34D192DE4FE0030AA82 /* LmViewCameraTopBar.m in Sources */,
 				5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */,
 				5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */,
 				5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */,
 				5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */,
+				588CC33D192DDA460030AA82 /* LmCurrentCamera.m in Sources */,
 				5890AD36192CDD0F00B6BD97 /* UIView+extend.m in Sources */,
 				5890AD35192CDD0F00B6BD97 /* UIScreen+extend.m in Sources */,
 				5890AD38192CDD0F00B6BD97 /* UIImage+extend.m in Sources */,
+				588CC34A192DE4EE0030AA82 /* LmViewCameraBottomBar.m in Sources */,
 				5890AD23192CDC3E00B6BD97 /* CameraManager.m in Sources */,
+				588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */,
 				5890ACEE192CD9CE00B6BD97 /* main.m in Sources */,
 				5890AD3A192CDD0F00B6BD97 /* UIImagePickerController+extend.m in Sources */,
 			);
@@ -540,6 +594,7 @@
 				5890AD15192CD9CE00B6BD97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5890AD16192CD9CE00B6BD97 /* Build configuration list for PBXNativeTarget "LuminaTests" */ = {
 			isa = XCConfigurationList;
@@ -548,6 +603,7 @@
 				5890AD18192CD9CE00B6BD97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

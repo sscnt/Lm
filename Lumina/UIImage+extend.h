@@ -29,5 +29,5 @@
            drawTransposed:(BOOL)transpose
      interpolationQuality:(CGInterpolationQuality)quality;
 - (CGAffineTransform)transformForOrientation:(CGSize)newSize;
-
++ (UIImage *)fixOrientationOfImage:(UIImage *)image;
 @end

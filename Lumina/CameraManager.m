@@ -157,7 +157,7 @@
 
    if(super.init){
 
-       [self setupAVCapture:AVCaptureSessionPresetHigh];
+       [self setupAVCapture:AVCaptureSessionPresetInputPriority];
     return self;
    }
 return nil;
@@ -200,10 +200,39 @@ return nil;
     /////////////////////////////////////////////////
     self.backCameraDevice = nil;
     self.frontCameraDevice = nil;
+    
+    AVCaptureDeviceFormat *bestFormat = nil;
+    AVFrameRateRange *bestFrameRateRange = nil;
+    
     NSArray*    cameraArray = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
     for(AVCaptureDevice *camera in cameraArray){
-        if(camera.position == AVCaptureDevicePositionBack)
+        if(camera.position == AVCaptureDevicePositionBack){
             self.backCameraDevice = camera;
+            if ([camera lockForConfiguration:nil]) {
+                
+                
+                for ( AVCaptureDeviceFormat *format in [camera formats] ) {
+                    for ( AVFrameRateRange *range in format.videoSupportedFrameRateRanges ) {
+                        if ( range.maxFrameRate > bestFrameRateRange.maxFrameRate ) {
+                            bestFormat = format;
+                            bestFrameRateRange = range;
+                        }
+                    }
+                    bestFormat = format;
+                }
+                bestFormat = [[camera formats] objectAtIndex:19];
+                NSLog(@"%@", bestFormat);
+                if (bestFormat) {
+                    camera.activeFormat = bestFormat;
+                    //[camera setActiveVideoMinFrameDuration:bestFrameRateRange.minFrameDuration];
+                    //[camera setActiveVideoMaxFrameDuration:bestFrameRateRange.maxFrameDuration];
+                    
+                    [camera setActiveVideoMinFrameDuration:CMTimeMake(10, 300)];
+                    [camera setActiveVideoMaxFrameDuration:CMTimeMake(10, 300)];
+                    [camera unlockForConfiguration];
+                }
+            }
+        }
         if(camera.position == AVCaptureDevicePositionFront)
             self.frontCameraDevice = camera;
     }
@@ -260,7 +289,7 @@ return nil;
 	NSDictionary *rgbOutputSettings = @{(id)kCVPixelBufferPixelFormatTypeKey: @(kCMPixelFormat_32BGRA)};
     videoOutput = AVCaptureVideoDataOutput.new;
 	[videoOutput setVideoSettings:rgbOutputSettings];
-	[videoOutput setAlwaysDiscardsLateVideoFrames:YES];     //  NOだとコマ落ちしないが重い処理には向かない
+	[videoOutput setAlwaysDiscardsLateVideoFrames:NO];     //  NOだとコマ落ちしないが重い処理には向かない
   	videoOutputQueue = dispatch_queue_create("VideoData Output Queue", DISPATCH_QUEUE_SERIAL);
 	[videoOutput setSampleBufferDelegate:self queue:videoOutputQueue];
     
@@ -399,16 +428,24 @@ return nil;
 {
     @autoreleasepool {
         
-        //     キャプチャ画像からUIImageを作成する
-        CVImageBufferRef cameraFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
-        CVPixelBufferLockBaseAddress(cameraFrame, 0);
-        int bufferHeight = CVPixelBufferGetHeight(cameraFrame);
-        int bufferWidth = CVPixelBufferGetWidth(cameraFrame);
+        __block CameraManager* _self = self;
         
-        CGImageRef cgImage = [CameraManager imageFromSampleBuffer:sampleBuffer];
-        UIImage* captureImage = [UIImage imageWithCGImage:cgImage];
-        CGImageRelease(cgImage);
+        if (_currentCapturedNumber < _allCaptureNumber) {
+            
+            CVImageBufferRef cameraFrame = CMSampleBufferGetImageBuffer(sampleBuffer);
+            CVPixelBufferLockBaseAddress(cameraFrame, 0);
+            CGImageRef cgImage = [CameraManager imageFromSampleBuffer:sampleBuffer];
+            UIImage* captureImage = [UIImage imageWithCGImage:cgImage];
+            CGImageRelease(cgImage);
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                [_self.delegate singleImageCaptured:captureImage withOrientation:[UIDevice currentDevice].orientation];
+            });
+            _currentCapturedNumber++;
+        }
         
+        /*
+        return;
         ////////////////////////////////////////////
         //      メインスレッドでの処理
         ////////////////////////////////////////////
@@ -421,6 +458,8 @@ return nil;
                 [self.delegate videoFrameUpdate:self.videoImage.CGImage from:self];
             }
         });
+         
+         */
 
     }
 }
@@ -468,6 +507,14 @@ return nil;
     return nil;
 }
 
+#pragma mark Shooting
+
+- (void)takeAPhoto
+{
+    _processingToConvert = NO;
+    _allCaptureNumber = 1;
+    _currentCapturedNumber = 0;
+}
 
 #pragma mark - クラス・メソッド
 

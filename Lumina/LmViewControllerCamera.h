@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "CameraManager.h"
+#import "LmButtonShutter.h"
+#import "LmViewCameraTopBar.h"
+#import "LmViewCameraBottomBar.h"
 
-@interface LmViewControllerCamera : UIViewController
+@interface LmViewControllerCamera : UIViewController <CameraManagerDelegate>
 
 @property (nonatomic, strong) CameraManager* cameraManager;
 @property (nonatomic, strong) UIView* cameraPreview;
+@property (nonatomic, strong) LmButtonShutter* shutterButton;
+@property (nonatomic, strong) LmViewCameraTopBar* topBar;
+@property (nonatomic, strong) LmViewCameraBottomBar* bottomBar;
+
+- (void)didShutterButtonTouchUpInside:(id)sender;
 
 @end
