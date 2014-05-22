@@ -40,6 +40,7 @@
     //// Shutter
     _shutterButton = [[LmButtonShutter alloc] initWithFrame:[LmCurrentSettings shutterButtonRect]];
     [_shutterButton addTarget:self action:@selector(didShutterButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [_shutterButton addTarget:self action:@selector(didShutterButtonTouchCancel:) forControlEvents:UIControlEventTouchUpOutside];
     [_bottomBar addShutterButton:_shutterButton];
 }
 
@@ -47,7 +48,13 @@
 
 - (void)didShutterButtonTouchUpInside:(id)sender
 {
+    ((LmButtonShutter*)sender).holding = NO;
     [_cameraManager takeAPhoto];
+}
+
+- (void)didShutterButtonTouchCancel:(id)sender
+{
+    ((LmButtonShutter*)sender).holding = NO;    
 }
 
 #pragma mark delegate

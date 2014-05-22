@@ -23,5 +23,6 @@
 @property (nonatomic, strong) LmViewCameraBottomBar* bottomBar;
 
 - (void)didShutterButtonTouchUpInside:(id)sender;
+- (void)didShutterButtonTouchCancel:(id)sender;
 
 @end

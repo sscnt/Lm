@@ -466,10 +466,14 @@ return nil;
 /////////////////////////////////////////////////////////////////////////////////
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-
-        __block CameraManager* _self = self;
-        
         if (_currentCapturedNumber < _allCaptureNumber) {
+            
+            AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+            if (device.adjustingFocus) {
+                LOG(@"Sorry adjusting focus.");
+                return;
+            }
+            
             _currentCapturedNumber++;
             
             CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
@@ -489,7 +493,7 @@ return nil;
             data.pixelData = [NSData dataWithBytes:src_buff length:bytesPerRow * height];
             CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
             
-            [_self addPixelDataObject:data];
+            [self addPixelDataObject:data];
             
             /*
             CGImageRef cgImage = [CameraManager imageFromSampleBuffer:sampleBuffer];

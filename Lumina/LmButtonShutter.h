@@ -10,4 +10,6 @@
 
 @interface LmButtonShutter : UIButton
 
+@property (nonatomic, assign) BOOL holding;
+
 @end
