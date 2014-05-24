@@ -15,10 +15,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
-        self.backgroundColor = [UIColor greenColor];
+        self.backgroundColor = [UIColor clearColor];
+        self.alpha = 1.0f;
         
         //// Slider
-        _paddingTop = 20.0f;
+        _paddingTop = 30.0f;
         float paddingBottom = 10.0f;
         CGFloat sliderHeight = frame.size.height - _paddingTop - paddingBottom;
         float padding = 8.0f;
@@ -28,7 +29,7 @@
         [self addSubview:_sliderView];
         
         //// Label
-        _scaleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, frame.size.width, _paddingTop)];
+        _scaleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, frame.size.width, 20.0f)];
         _scaleLabel.backgroundColor = [UIColor clearColor];
         _scaleLabel.textColor = [UIColor whiteColor];
         _scaleLabel.numberOfLines = 0;
@@ -43,14 +44,13 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-    
     // タッチされたビューを取得する
     UIView *hitView = [super hitTest:point withEvent:event];
     
     // タッチされたものがselfだったらイベントを発生させない
     if ( self == hitView )
     {
-        return nil;
+        return _sliderView;
     }
     
     // それ意外だったらイベント発生させる
@@ -111,7 +111,6 @@
 - (void)touchesBeganWithSlider:(LmCmViewSlider*)slider
 {
     [self.delegate touchesBeganWithSlider:self];
-    self.active = YES;
 }
 
 - (void)touchesMovedWithSlider:(LmCmViewSlider*)slider
@@ -123,7 +122,6 @@
 {
     [self.delegate touchesEndedWithSlider:self];
     [self setScaleToLabel:slider.value];
-    self.active = NO;
 }
 
 #pragma mark draw

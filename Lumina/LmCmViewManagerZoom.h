@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LmCmViewZoomSlider.h"
 
 @protocol LmCmViewManagerZoomDelegate <NSObject>
 
@@ -14,14 +15,16 @@
 
 @class LmCmViewController;
 
-@interface LmCmViewManagerZoom : NSObject <UIGestureRecognizerDelegate>
+@interface LmCmViewManagerZoom : NSObject <UIGestureRecognizerDelegate, LmCmViewZoomSliderDelegate>
 
 @property (nonatomic, weak) UIView* view;
 @property (nonatomic, weak) LmCmViewController<LmCmViewManagerZoomDelegate>* delegate;
 @property (nonatomic, assign) float beginScale;
 @property (nonatomic, assign) float currentScale;
+@property (nonatomic, strong) LmCmViewZoomSlider* zoomSlider;
 
 - (void)viewDidLoad;
-- (void)setZoom:(float)zoom;
+- (void)transformLayerWithZoomScale:(float)zoom;
+- (void)applyZoomScaleToSlider:(float)scale;
 
 @end

@@ -19,11 +19,9 @@
 
 @property (nonatomic, weak) UIView* view;
 @property (nonatomic, weak) LmCmViewController<LmCmViewManagerPreviewDelegate>* delegate;
-@property (nonatomic, strong) LmCmViewZoomSlider* zoomSlider;
 
 - (void)viewDidLoad;
 
 - (void)showZoomSlider;
-- (void)setZoomScaleToSlider:(float)zoom;
 
 @end

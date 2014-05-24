@@ -20,7 +20,17 @@
     //// Zoom recognizer
     UIGestureRecognizer *recognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinchFrom:)];
     recognizer.delegate = self;
-    //[_self.cameraPreviewOverlay addGestureRecognizer:recognizer];
+    [_self.cameraPreviewOverlay addGestureRecognizer:recognizer];
+    
+    //// Zoom slider
+    float sliderWidth = 30.0f;
+    _zoomSlider = [[LmCmViewZoomSlider alloc] initWithFrame:CGRectMake([UIScreen width] - sliderWidth, 0.0f, sliderWidth, 260.0f)];
+    _zoomSlider.sliderStrokeColor = [UIColor whiteColor];
+    _zoomSlider.sliderThumbColor = [UIColor whiteColor];
+    _zoomSlider.center = CGPointMake(_zoomSlider.center.x, [_self.cameraPreviewOverlay height] / 2.0f);
+    _zoomSlider.value = 0.0f;
+    _zoomSlider.delegate = self;
+    [_self.cameraPreviewOverlay addSubview:_zoomSlider];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
@@ -44,6 +54,7 @@
 
 - (void)handlePinchFrom:(UIPinchGestureRecognizer *)recognizer
 {
+    LmCmViewController* _self = self.delegate;
     
     // 新しく適用するスケールを計算する (適用されているスケール x 新しくピンチしたスケール)
     _currentScale = _beginScale * recognizer.scale;
@@ -52,19 +63,40 @@
     }else if(_currentScale > [LmCmSharedCamera maxZoomScaleSupported]){
         _currentScale = [LmCmSharedCamera maxZoomScaleSupported];
     }
-    [self setZoom:_currentScale];
+    [self transformLayerWithZoomScale:_currentScale];
+    [self applyZoomScaleToSlider:_currentScale];
 }
 
-- (void)setZoom:(float)zoom
+//// zoom must be 1.0 - max
+- (void)transformLayerWithZoomScale:(float)zoom
 {
-    
     LmCmViewController* _self = self.delegate;
     
     // スケールをビューに適用する
     [_self.cameraPreview.layer setAffineTransform:CGAffineTransformMakeScale(zoom, zoom)];
     [LmCmSharedCamera setZoom:zoom];
-    _currentScale = zoom;
-    [_self.previewManager setZoomScaleToSlider:zoom / [LmCmSharedCamera maxZoomScaleSupported]];
+}
+
+- (void)applyZoomScaleToSlider:(float)scale
+{
+    _zoomSlider.value = (scale - 1.0f) / ([LmCmSharedCamera maxZoomScaleSupported] - 1.0f);
+}
+
+#pragma mark delegate
+
+- (void)touchesBeganWithSlider:(LmCmViewZoomSlider *)slider
+{
+    
+}
+
+- (void)touchesEndedWithSlider:(LmCmViewZoomSlider *)slider
+{
+    
+}
+
+- (void)slider:(LmCmViewZoomSlider *)slider DidValueChange:(CGFloat)value
+{
+    [self transformLayerWithZoomScale:(value * ([LmCmSharedCamera maxZoomScaleSupported] - 1.0f) + 1.0f)];
 }
 
 @end
