@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LmCmViewBarButton.h"
+#import "LmCmViewSettingsList.h"
 
 @protocol LmCmViewManagerToolsDelegate <NSObject>
 - (void)openCameraRoll;
@@ -15,14 +16,16 @@
 
 @class LmCmViewController;
 
-@interface LmCmViewManagerTools : NSObject
+@interface LmCmViewManagerTools : NSObject <LmCmViewSettingsListDelegate>
 
 @property (nonatomic, weak) UIView* view;
 @property (nonatomic, weak) LmCmViewController<LmCmViewManagerToolsDelegate>* delegate;
 @property (nonatomic, strong) LmCmViewBarButton* settingsButton;
 @property (nonatomic, strong) LmCmViewBarButton* camerarollButton;
+@property (nonatomic, strong) LmCmViewSettingsList* settingsList;
 
 - (void)viewDidLoad;
+- (void)showSettingsList;
 
 - (void)settingsButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)camerarollButtonDidTouchUpInside:(LmCmViewBarButton*)sender;

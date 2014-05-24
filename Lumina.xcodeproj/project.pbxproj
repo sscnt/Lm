@@ -53,6 +53,9 @@
 		58F455FA19303CBF008E55AB /* LmCmViewSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F455F519303CBF008E55AB /* LmCmViewSlider.m */; };
 		58F455FC19303CBF008E55AB /* LmCmViewZoomSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F455F919303CBF008E55AB /* LmCmViewZoomSlider.m */; };
 		58F455FE19303D9B008E55AB /* UISliderThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F455F719303CBF008E55AB /* UISliderThumbView.m */; };
+		58F638181930E6EF004F506F /* LmCmViewSettingsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F638171930E6EF004F506F /* LmCmViewSettingsList.m */; };
+		58F6381F1930E8C6004F506F /* LmCmButtonSettingsItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F6381E1930E8C6004F506F /* LmCmButtonSettingsItem.m */; };
+		58F638231930E9F5004F506F /* VnViewLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F638221930E9F5004F506F /* VnViewLabel.m */; };
 		58F6FE47192F71D700EF7BFC /* LmCmViewManagerPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F6FE46192F71D700EF7BFC /* LmCmViewManagerPreview.m */; };
 		58F6FE4D192F76E300EF7BFC /* LmLivePreview.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F6FE4C192F76E300EF7BFC /* LmLivePreview.m */; };
 		58F6FE50192F801000EF7BFC /* LmGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58F6FE4F192F801000EF7BFC /* LmGLView.m */; };
@@ -164,6 +167,12 @@
 		58F455F719303CBF008E55AB /* UISliderThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UISliderThumbView.m; sourceTree = "<group>"; };
 		58F455F819303CBF008E55AB /* LmCmViewZoomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewZoomSlider.h; sourceTree = "<group>"; };
 		58F455F919303CBF008E55AB /* LmCmViewZoomSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewZoomSlider.m; sourceTree = "<group>"; };
+		58F638161930E6EF004F506F /* LmCmViewSettingsList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewSettingsList.h; sourceTree = "<group>"; };
+		58F638171930E6EF004F506F /* LmCmViewSettingsList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewSettingsList.m; sourceTree = "<group>"; };
+		58F6381D1930E8C6004F506F /* LmCmButtonSettingsItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonSettingsItem.h; sourceTree = "<group>"; };
+		58F6381E1930E8C6004F506F /* LmCmButtonSettingsItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmButtonSettingsItem.m; sourceTree = "<group>"; };
+		58F638211930E9F5004F506F /* VnViewLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VnViewLabel.h; sourceTree = "<group>"; };
+		58F638221930E9F5004F506F /* VnViewLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VnViewLabel.m; sourceTree = "<group>"; };
 		58F6FE45192F71D700EF7BFC /* LmCmViewManagerPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewManagerPreview.h; sourceTree = "<group>"; };
 		58F6FE46192F71D700EF7BFC /* LmCmViewManagerPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewManagerPreview.m; sourceTree = "<group>"; };
 		58F6FE4B192F76E300EF7BFC /* LmLivePreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmLivePreview.h; sourceTree = "<group>"; };
@@ -223,6 +232,8 @@
 		583BA0BA192DF0EF00852B0D /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				58F638211930E9F5004F506F /* VnViewLabel.h */,
+				58F638221930E9F5004F506F /* VnViewLabel.m */,
 				583BA0B7192DF0E800852B0D /* MotionOrientation.h */,
 				583BA0B8192DF0E800852B0D /* MotionOrientation.m */,
 			);
@@ -423,6 +434,7 @@
 		58F455F119303C77008E55AB /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				58F6381C1930E87A004F506F /* Settings */,
 				588CC344192DE0390030AA82 /* Camera */,
 				58F455F319303C9B008E55AB /* Slider */,
 			);
@@ -440,6 +452,17 @@
 				58F455F919303CBF008E55AB /* LmCmViewZoomSlider.m */,
 			);
 			name = Slider;
+			sourceTree = "<group>";
+		};
+		58F6381C1930E87A004F506F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				58F638161930E6EF004F506F /* LmCmViewSettingsList.h */,
+				58F638171930E6EF004F506F /* LmCmViewSettingsList.m */,
+				58F6381D1930E8C6004F506F /* LmCmButtonSettingsItem.h */,
+				58F6381E1930E8C6004F506F /* LmCmButtonSettingsItem.m */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		58F6FE51192F81B800EF7BFC /* Shader */ = {
@@ -601,6 +624,7 @@
 			files = (
 				58F6FE50192F801000EF7BFC /* LmGLView.m in Sources */,
 				58F6FE4D192F76E300EF7BFC /* LmLivePreview.m in Sources */,
+				58F638181930E6EF004F506F /* LmCmViewSettingsList.m in Sources */,
 				580E03301930C270001C26B3 /* LmCmViewManagerTools.m in Sources */,
 				588CC347192DE04F0030AA82 /* LmCmButtonShutter.m in Sources */,
 				58F6FE47192F71D700EF7BFC /* LmCmViewManagerPreview.m in Sources */,
@@ -610,6 +634,7 @@
 				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
 				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
 				580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */,
+				58F6381F1930E8C6004F506F /* LmCmButtonSettingsItem.m in Sources */,
 				588CC34D192DE4FE0030AA82 /* LmCmViewTopBar.m in Sources */,
 				5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */,
 				5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */,
@@ -628,6 +653,7 @@
 				5890AD23192CDC3E00B6BD97 /* LmCmCameraManager.m in Sources */,
 				588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */,
 				5890ACEE192CD9CE00B6BD97 /* main.m in Sources */,
+				58F638231930E9F5004F506F /* VnViewLabel.m in Sources */,
 				5890AD3A192CDD0F00B6BD97 /* UIImagePickerController+extend.m in Sources */,
 				58F455FE19303D9B008E55AB /* UISliderThumbView.m in Sources */,
 			);

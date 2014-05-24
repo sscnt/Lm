@@ -53,3 +53,4 @@
 #import "LmCurrentImage.h"
 #import "MotionOrientation.h"
 #import "LmLivePreview.h"
+#import "VnViewLabel.h"

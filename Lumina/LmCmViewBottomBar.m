@@ -34,7 +34,7 @@
 
 - (void)addCamerarollButton:(LmCmViewBarButton *)button
 {
-    button.center = CGPointMake([button width] / 2.0f, [self height] / 2.0f);
+    button.center = CGPointMake([button width] / 2.0f + 10.0f, [self height] / 2.0f);
     [self addSubview:button];
 }
 

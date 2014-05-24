@@ -140,7 +140,7 @@
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if ([viewController isKindOfClass:[UIImagePickerController class]]) {
+    if ([[[viewController class] description] isEqualToString:@"PUUIAlbumListViewController"]) {
         self.toolsManager.camerarollButton.selected = NO;
     }
 }

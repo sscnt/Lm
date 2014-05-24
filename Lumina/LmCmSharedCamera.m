@@ -108,4 +108,11 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     return [UIColor colorWithWhite:0.10f alpha:0.50f];
 }
 
+#pragma mark settings
+
++ (UIColor *)settingsBgColor
+{
+    return [UIColor colorWithWhite:0.10f alpha:0.90f];
+}
+
 @end

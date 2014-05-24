@@ -22,6 +22,14 @@ typedef NS_ENUM(NSInteger, LmCmSharedCameraFocusMode){
     LmCmSharedCameraFocusModeManual
 };
 
+typedef NS_ENUM(NSInteger, LmCmSharedCameraTheme){
+    LmCmSharedCameraThemeBlack = 1,
+};
+
+typedef NS_ENUM(NSInteger, LmCmViewSettingsListItem){
+    LmCmViewSettingsListItemShowGrid = 1,
+    LmCmViewSettingsListItemSquare
+};
 
 @interface LmCmSharedCamera : NSObject
 
@@ -29,6 +37,7 @@ typedef NS_ENUM(NSInteger, LmCmSharedCameraFocusMode){
 @property (nonatomic, assign) LmCmSharedCameraFocusMode  focusMode;
 @property (nonatomic, assign) int timerSeconds;
 @property (nonatomic, assign) float zoom;
+@property (nonatomic, assign) BOOL square;
 
 + (LmCmSharedCamera*)instance;
 
@@ -51,5 +60,6 @@ typedef NS_ENUM(NSInteger, LmCmSharedCameraFocusMode){
 + (BOOL)showGrid;
 
 + (UIColor*)zoomSliderBgColor;
++ (UIColor*)settingsBgColor;
 
 @end

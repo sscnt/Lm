@@ -42,6 +42,12 @@
     [_flashView.layer addAnimation:flash forKey:@"flashAnimation"];
 }
 
+- (void)setShowGrid:(BOOL)showGrid
+{
+    _showGrid = showGrid;
+    [self setNeedsDisplay];
+}
+
 - (void)drawRect:(CGRect)rect
 {
 
