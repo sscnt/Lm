@@ -26,7 +26,7 @@
     _previewManager.delegate = self;
     
     //// camera
-    _cameraManager = [[CameraManager alloc] init];
+    _cameraManager = [[LmCmCameraManager alloc] init];
     _cameraManager.delegate = self;
     
     //// Preview

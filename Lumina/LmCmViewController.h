@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CameraManager.h"
+#import "LmCmCameraManager.h"
 #import "LmCmViewPreviewOverlay.h"
 #import "LmCmButtonShutter.h"
 #import "LmCmViewTopBar.h"
@@ -17,7 +17,7 @@
 
 @interface LmCmViewController : UIViewController <CameraManagerDelegate, UIGestureRecognizerDelegate, LmCmViewManagerZoomDelegate, LmCmViewManagerPreviewDelegate>
 
-@property (nonatomic, strong) CameraManager* cameraManager;
+@property (nonatomic, strong) LmCmCameraManager* cameraManager;
 @property (nonatomic, strong) UIView* cameraPreview;
 @property (nonatomic, strong) LmCmViewPreviewOverlay* cameraPreviewOverlay;
 @property (nonatomic, strong) LmCmButtonShutter* shutterButton;

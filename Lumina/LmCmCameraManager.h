@@ -23,18 +23,18 @@
 ////////////////////////////////////////////////
 //      カメラマネージャデリゲート
 ////////////////////////////////////////////////
-@class CameraManager;
+@class LmCmCameraManager;
 @protocol CameraManagerDelegate <NSObject>
 @optional
 
--(void)videoFrameUpdate:(CGImageRef)cgImage from:(CameraManager*)manager;
+-(void)videoFrameUpdate:(CGImageRef)cgImage from:(LmCmCameraManager*)manager;
 - (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation;
 @end
 
 //////////////////////////////////////////////////
 //      カメラマネージャクラス
 //////////////////////////////////////////////////
-@interface CameraManager : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface LmCmCameraManager : NSObject <AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 
 
 /*///////////////////////////////////////////

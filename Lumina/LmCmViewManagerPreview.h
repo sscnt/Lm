@@ -21,7 +21,6 @@
 @property (nonatomic, weak) LmCmViewController<LmCmViewManagerPreviewDelegate>* delegate;
 
 - (void)viewDidLoad;
-
-- (void)showZoomSlider;
+- (void)viewDidTouchUpInside:(UITapGestureRecognizer*)sender;
 
 @end

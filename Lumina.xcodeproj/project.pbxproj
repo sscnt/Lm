@@ -40,7 +40,7 @@
 		5890AD10192CD9CE00B6BD97 /* LuminaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD0F192CD9CE00B6BD97 /* LuminaTests.m */; };
 		5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD1B192CDA4100B6BD97 /* LmViewControllerRoot.m */; };
 		5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD1E192CDA9000B6BD97 /* LmViewControllerExport.m */; };
-		5890AD23192CDC3E00B6BD97 /* CameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD22192CDC3E00B6BD97 /* CameraManager.m */; };
+		5890AD23192CDC3E00B6BD97 /* LmCmCameraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD22192CDC3E00B6BD97 /* LmCmCameraManager.m */; };
 		5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD27192CDD0F00B6BD97 /* UIDevice+extend.m */; };
 		5890AD35192CDD0F00B6BD97 /* UIScreen+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD29192CDD0F00B6BD97 /* UIScreen+extend.m */; };
 		5890AD36192CDD0F00B6BD97 /* UIView+extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5890AD2B192CDD0F00B6BD97 /* UIView+extend.m */; };
@@ -136,8 +136,8 @@
 		5890AD1B192CDA4100B6BD97 /* LmViewControllerRoot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewControllerRoot.m; sourceTree = "<group>"; };
 		5890AD1D192CDA9000B6BD97 /* LmViewControllerExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmViewControllerExport.h; sourceTree = "<group>"; };
 		5890AD1E192CDA9000B6BD97 /* LmViewControllerExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmViewControllerExport.m; sourceTree = "<group>"; };
-		5890AD21192CDC3E00B6BD97 /* CameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraManager.h; sourceTree = "<group>"; };
-		5890AD22192CDC3E00B6BD97 /* CameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraManager.m; sourceTree = "<group>"; };
+		5890AD21192CDC3E00B6BD97 /* LmCmCameraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmCameraManager.h; sourceTree = "<group>"; };
+		5890AD22192CDC3E00B6BD97 /* LmCmCameraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmCameraManager.m; sourceTree = "<group>"; };
 		5890AD26192CDD0F00B6BD97 /* UIDevice+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+extend.h"; sourceTree = "<group>"; };
 		5890AD27192CDD0F00B6BD97 /* UIDevice+extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+extend.m"; sourceTree = "<group>"; };
 		5890AD28192CDD0F00B6BD97 /* UIScreen+extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+extend.h"; sourceTree = "<group>"; };
@@ -315,8 +315,6 @@
 				58F455EC193031DD008E55AB /* CameraModule */,
 				588CC33E192DDA4C0030AA82 /* Shared */,
 				583BA0C0192E04E600852B0D /* Objects */,
-				5890AD21192CDC3E00B6BD97 /* CameraManager.h */,
-				5890AD22192CDC3E00B6BD97 /* CameraManager.m */,
 				5890ACF0192CD9CE00B6BD97 /* AppDelegate.h */,
 				5890ACF1192CD9CE00B6BD97 /* AppDelegate.m */,
 				5890ACF3192CD9CE00B6BD97 /* Main_iPhone.storyboard */,
@@ -394,6 +392,8 @@
 		58F455EC193031DD008E55AB /* CameraModule */ = {
 			isa = PBXGroup;
 			children = (
+				5890AD21192CDC3E00B6BD97 /* LmCmCameraManager.h */,
+				5890AD22192CDC3E00B6BD97 /* LmCmCameraManager.m */,
 				5890ACF9192CD9CE00B6BD97 /* LmCmViewController.h */,
 				5890ACFA192CD9CE00B6BD97 /* LmCmViewController.m */,
 				58F455F119303C77008E55AB /* UIComponents */,
@@ -613,7 +613,7 @@
 				5890AD38192CDD0F00B6BD97 /* UIImage+extend.m in Sources */,
 				58FA0F1F192F4DAF00260A65 /* LmCmViewManagerZoom.m in Sources */,
 				588CC34A192DE4EE0030AA82 /* LmCmViewBottomBar.m in Sources */,
-				5890AD23192CDC3E00B6BD97 /* CameraManager.m in Sources */,
+				5890AD23192CDC3E00B6BD97 /* LmCmCameraManager.m in Sources */,
 				588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */,
 				5890ACEE192CD9CE00B6BD97 /* main.m in Sources */,
 				5890AD3A192CDD0F00B6BD97 /* UIImagePickerController+extend.m in Sources */,

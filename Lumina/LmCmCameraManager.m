@@ -6,12 +6,12 @@
 //  Copyright (c) 2013年 takatronix.com. All rights reserved.
 //
 
-#import "CameraManager.h"
+#import "LmCmCameraManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 
 
-@interface CameraManager(){
+@interface LmCmCameraManager(){
 
     AVCaptureSession*               captureSession;
     AVCaptureDeviceInput*           videoInput;             //  現在のビデオ入力デバイス
@@ -31,7 +31,7 @@
 
 @end
 
-@implementation CameraManager
+@implementation LmCmCameraManager
 
 
 #pragma mark - カメラ切り替え
@@ -208,7 +208,7 @@ return nil;
         return;
     }
     self.processingToConvert = YES;
-    __block CameraManager* _self = self;
+    __block LmCmCameraManager* _self = self;
     dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_queue_t q_main = dispatch_get_main_queue();
     
@@ -413,17 +413,17 @@ return nil;
     BOOL isMirrored = self.isUsingFrontCamera;
     
     if (orientation == UIDeviceOrientationPortrait) {
-        image = [CameraManager rotateImage:self.videoImage angle:270];
+        image = [LmCmCameraManager rotateImage:self.videoImage angle:270];
     } else if (orientation == UIDeviceOrientationPortraitUpsideDown) {
-            image = [CameraManager rotateImage:self.videoImage angle:90];
+            image = [LmCmCameraManager rotateImage:self.videoImage angle:90];
     } else if (orientation == UIDeviceOrientationLandscapeRight) {
         if(isMirrored)
             image = self.videoImage;
         else
-            image = [CameraManager rotateImage:self.videoImage angle:180];
+            image = [LmCmCameraManager rotateImage:self.videoImage angle:180];
     }else {
         if(isMirrored)
-            image = [CameraManager rotateImage:self.videoImage angle:180];
+            image = [LmCmCameraManager rotateImage:self.videoImage angle:180];
         else
             image = self.videoImage;
     }
