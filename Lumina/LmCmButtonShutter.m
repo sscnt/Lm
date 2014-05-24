@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 SSC. All rights reserved.
 //
 
-#import "LmButtonShutter.h"
+#import "LmCmButtonShutter.h"
 
-@implementation LmButtonShutter
+@implementation LmCmButtonShutter
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -33,12 +33,12 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    float lineWidth = 2.0f;
-    float radius = rect.size.width / 2.0f - 5.0f;
+    float lineWidth = 3.0f;
+    float radius = rect.size.width / 2.0f - 6.0f;
     UIColor* color = [UIColor whiteColor];
     UIColor* ovalColor = color;
     if (_holding) {
-        ovalColor = [UIColor colorWithWhite:1.0f alpha:0.50f];
+        ovalColor = [UIColor colorWithWhite:1.0f alpha:0.10f];
     }
     
     //// Stroke Drawing

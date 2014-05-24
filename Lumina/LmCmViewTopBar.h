@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LmViewCameraTopBar : UIView
+@interface LmCmViewTopBar : UIView
 
 @end

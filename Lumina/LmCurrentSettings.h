@@ -15,8 +15,5 @@ typedef NS_ENUM(NSInteger, LmCurrentSettingsTheme){
 @interface LmCurrentSettings : NSObject
 
 + (LmCurrentSettings*)instance;
-+ (float)topBarHeight;
-+ (float)bottomBarHeight;
-+ (CGRect)shutterButtonRect;
 
 @end

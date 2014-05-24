@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LmViewCameraPreviewOverlay : UIView
+@interface LmCmViewPreviewOverlay : UIView
 {
     UIView* _flashView;
 }
+
+@property (nonatomic, assign) BOOL showGrid;
 
 - (void)flash;
 

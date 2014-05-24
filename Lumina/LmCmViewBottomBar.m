@@ -6,20 +6,21 @@
 //  Copyright (c) 2014年 SSC. All rights reserved.
 //
 
-#import "LmViewCameraBottomBar.h"
+#import "LmCmViewBottomBar.h"
 
-@implementation LmViewCameraBottomBar
+@implementation LmCmViewBottomBar
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.backgroundColor = [LmCmSharedCamera bottomBarColor];
     }
     return self;
 }
 
-- (void)addShutterButton:(LmButtonShutter *)button
+- (void)addShutterButton:(LmCmButtonShutter *)button
 {
     button.center = CGPointMake([self width] / 2.0f, [self height] / 2.0f);
     [self addSubview:button];

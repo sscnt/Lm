@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LmViewControllerCamera.h"
+#import "LmCmViewController.h"
 
 @interface LmViewControllerRoot : UINavigationController <UINavigationControllerDelegate>
 

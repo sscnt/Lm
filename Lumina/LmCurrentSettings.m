@@ -45,19 +45,4 @@ static LmCurrentSettings* sharedLmCurrentSettings = nil;
 }
 
 #pragma mark ui
-
-+ (float)topBarHeight
-{
-    return 50.0f;
-}
-
-+ (float)bottomBarHeight
-{
-    return 88.0f;
-}
-
-+ (CGRect)shutterButtonRect
-{
-    return CGRectMake(0.0f, 0.0f, 70.0f, 70.0f);
-}
 @end

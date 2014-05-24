@@ -18,17 +18,32 @@ typedef NS_ENUM(NSInteger, LmCurrentCameraMode){
 };
 
 
-@interface LmCurrentCamera : NSObject
+@interface LmCmSharedCamera : NSObject
 
 @property (nonatomic, assign) LmCurrentCameraMode mode;
 @property (nonatomic, assign) int timerSeconds;
+@property (nonatomic, assign) float zoom;
 
-+ (LmCurrentCamera*)instance;
++ (LmCmSharedCamera*)instance;
 
 + (BOOL)isTimerEnabled;
 + (int)timerSeconds;
 
 + (LmCurrentCameraMode)currentMode;
 + (void)setMode:(LmCurrentCameraMode)mode;
+
++ (void)setZoom:(float)zoom;
++ (float)maxZoomScaleSupported;
+
+#pragma mark settings
+
++ (float)topBarHeight;
++ (float)bottomBarHeight;
++ (CGRect)shutterButtonRect;
++ (UIColor*)topBarColor;
++ (UIColor*)bottomBarColor;
++ (BOOL)showGrid;
+
++ (UIColor*)zoomSliderBgColor;
 
 @end

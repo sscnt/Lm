@@ -201,17 +201,20 @@ return nil;
 
 - (void)popCacheAndConvert
 {
+    if (self.processingToConvert) {
+        return;
+    }
     if ([self.rawNSDataCache count] == 0) {
         return;
     }
-    LOG(@"%d", (int)[self.rawNSDataCache count]);
+    self.processingToConvert = YES;
     __block CameraManager* _self = self;
     dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_queue_t q_main = dispatch_get_main_queue();
     
     dispatch_async(q_main, ^{
+        LOG(@"count: %d", (int)[_self.rawNSDataCache count]);
         LmObjectPixelData* data = (LmObjectPixelData*)[_self.rawNSDataCache objectAtIndex:0];
-        [_self.rawNSDataCache removeObjectAtIndex:0];
         CVPixelBufferRef imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
         
         CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
@@ -226,6 +229,9 @@ return nil;
         CGColorSpaceRelease(colorspace);
         
         [_self.delegate singleImageSavedWithOrientation:data.orientation];
+        [_self.rawNSDataCache removeObjectAtIndex:0];
+        _self.processingToConvert = NO;
+        [_self popCacheAndConvert];
     });
     
     return;
@@ -261,7 +267,7 @@ return nil;
                     bestFormat = format;
                 }
                 bestFormat = [[camera formats] objectAtIndex:19];
-                NSLog(@"%@", bestFormat);
+                LOG(@"%@", bestFormat);
                 if (bestFormat) {
                     camera.activeFormat = bestFormat;
                     //[camera setActiveVideoMinFrameDuration:bestFrameRateRange.minFrameDuration];
@@ -289,7 +295,7 @@ return nil;
     
   	self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:captureSession];
 	[self.previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
-    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
+    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
     
     
     [self setupImageCapture];
@@ -504,6 +510,9 @@ return nil;
                 [_self.delegate singleImageCaptured:captureImage withOrientation:[MotionOrientation sharedInstance].deviceOrientation];
             });
              */
+        }else{
+            CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+            [[LmLivePreview instance] processNewCameraFrame:imageBuffer];
         }
         
         /*

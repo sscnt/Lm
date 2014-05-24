@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LmButtonShutter : UIButton
+@interface LmCmButtonShutter : UIButton
 
 @property (nonatomic, assign) BOOL holding;
 

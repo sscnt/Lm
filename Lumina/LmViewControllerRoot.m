@@ -19,7 +19,7 @@
     [super viewDidLoad];
     [self.navigationBar setHidden:YES];
     self.delegate = self;
-    LmViewControllerCamera* controller = [[LmViewControllerCamera alloc] init];
+    LmCmViewController* controller = [[LmCmViewController alloc] init];
     [self pushViewController:controller animated:NO];
     
 }

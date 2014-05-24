@@ -6,15 +6,16 @@
 //  Copyright (c) 2014年 SSC. All rights reserved.
 //
 
-#import "LmViewCameraTopBar.h"
+#import "LmCmViewTopBar.h"
 
-@implementation LmViewCameraTopBar
+@implementation LmCmViewTopBar
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        self.backgroundColor = [LmCmSharedCamera topBarColor];
     }
     return self;
 }
