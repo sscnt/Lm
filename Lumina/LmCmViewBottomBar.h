@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "LmCmButtonShutter.h"
+#import "LmCmViewBarButton.h"
 
 @interface LmCmViewBottomBar : UIView
 
 - (void)addShutterButton:(LmCmButtonShutter*)button;
+- (void)addSettingsButton:(LmCmViewBarButton*)button;
+- (void)addCamerarollButton:(LmCmViewBarButton*)button;
 
 @end

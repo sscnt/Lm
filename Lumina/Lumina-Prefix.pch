@@ -46,6 +46,7 @@
 #import "UIViewController+extend.h"
 #import "UIImagePickerController+extend.h"
 #import "UIImage+extend.h"
+#import "UIImagePickerController+extend.h"
 
 #import "LmCmSharedCamera.h"
 #import "LmCurrentSettings.h"

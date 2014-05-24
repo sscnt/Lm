@@ -26,13 +26,16 @@
     [self addSubview:button];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)addSettingsButton:(LmCmViewBarButton *)button
 {
-    // Drawing code
+    button.center = CGPointMake([self width] / 2.0f + [LmCmSharedCamera shutterButtonRect].size.width / 2.0f + [button width] / 2.0f + 20.0f, [self height] / 2.0f);
+    [self addSubview:button];
 }
-*/
+
+- (void)addCamerarollButton:(LmCmViewBarButton *)button
+{
+    button.center = CGPointMake([button width] / 2.0f, [self height] / 2.0f);
+    [self addSubview:button];
+}
 
 @end

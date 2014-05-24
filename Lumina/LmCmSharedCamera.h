@@ -9,18 +9,24 @@
 #import <Foundation/Foundation.h>
 
 
-typedef NS_ENUM(NSInteger, LmCurrentCameraMode){
-    LmCurrentCameraModeNormal = 1,
-    LmCurrentCameraModeBurst,
-    LmCurrentCameraModeX30,
-    LmCurrentCameraModeX60,
-    LmCurrentCameraModeX120
+typedef NS_ENUM(NSInteger, LmCmSharedCameraMode){
+    LmCmSharedCameraModeNormal = 1,
+    LmCmSharedCameraModeBurst,
+    LmCmSharedCameraModeX30,
+    LmCmSharedCameraModeX60,
+    LmCmSharedCameraModeX120
+};
+
+typedef NS_ENUM(NSInteger, LmCmSharedCameraFocusMode){
+    LmCmSharedCameraFocusModeAuto = 1,
+    LmCmSharedCameraFocusModeManual
 };
 
 
 @interface LmCmSharedCamera : NSObject
 
-@property (nonatomic, assign) LmCurrentCameraMode mode;
+@property (nonatomic, assign) LmCmSharedCameraMode mode;
+@property (nonatomic, assign) LmCmSharedCameraFocusMode  focusMode;
 @property (nonatomic, assign) int timerSeconds;
 @property (nonatomic, assign) float zoom;
 
@@ -29,8 +35,8 @@ typedef NS_ENUM(NSInteger, LmCurrentCameraMode){
 + (BOOL)isTimerEnabled;
 + (int)timerSeconds;
 
-+ (LmCurrentCameraMode)currentMode;
-+ (void)setMode:(LmCurrentCameraMode)mode;
++ (LmCmSharedCameraMode)currentMode;
++ (void)setMode:(LmCmSharedCameraMode)mode;
 
 + (void)setZoom:(float)zoom;
 + (float)maxZoomScaleSupported;

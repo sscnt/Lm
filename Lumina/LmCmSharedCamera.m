@@ -46,6 +46,9 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
 
 + (void)reset
 {
+    LmCmSharedCamera* _self = [self instance];
+    _self.focusMode = LmCmSharedCameraFocusModeAuto;
+    _self.mode = LmCmSharedCameraModeNormal;
     [[LmCmSharedCamera instance] reset];
 }
 

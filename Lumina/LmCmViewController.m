@@ -24,6 +24,9 @@
     _previewManager = [[LmCmViewManagerPreview alloc] init];
     _previewManager.view = self.view;
     _previewManager.delegate = self;
+    _toolsManager = [[LmCmViewManagerTools alloc] init];
+    _toolsManager.delegate = self;
+    _toolsManager.view = self.view;
     
     //// camera
     _cameraManager = [[LmCmCameraManager alloc] init];
@@ -52,6 +55,7 @@
     //// View did load
     [_zoomViewManager viewDidLoad];
     [_previewManager viewDidLoad];
+    [_toolsManager viewDidLoad];
 }
 
 #pragma mark shutter
@@ -126,10 +130,69 @@
 
 }
 
+#pragma mark camera roll
+
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([viewController isKindOfClass:[UIImagePickerController class]]) {
+        self.toolsManager.camerarollButton.selected = NO;
+    }
+}
+
+- (void)openCameraRoll
+{
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    pickerController.delegate = self;
+    [pickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self presentViewController:pickerController animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    UIImage* imageOriginal = [info objectForKey:UIImagePickerControllerOriginalImage];
+    
+    if(imageOriginal){
+        if(picker.sourceType == UIImagePickerControllerSourceTypeCamera){
+            UIImageWriteToSavedPhotosAlbum(imageOriginal, nil, nil, nil);
+        }
+        //// Do your stuff
+        
+    } else {
+        NSURL* imageurl = [info objectForKey:UIImagePickerControllerReferenceURL];
+        ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:imageurl
+                 resultBlock: ^(ALAsset *asset)
+         {
+             ALAssetRepresentation *representation;
+             representation = [asset defaultRepresentation];
+             UIImage* imageOriginal = [[UIImage alloc] initWithCGImage:representation.fullResolutionImage];
+             //// Do your stuff
+             
+         }
+                failureBlock:^(NSError *error)
+         {
+         }
+         ];
+    }
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

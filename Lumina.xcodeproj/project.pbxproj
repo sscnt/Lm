@@ -15,6 +15,8 @@
 		5806D768192E38F600B384F8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D767192E38F600B384F8 /* QuartzCore.framework */; };
 		5806D76A192E390000B384F8 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D769192E390000B384F8 /* AssetsLibrary.framework */; };
 		5806D76B192E390600B384F8 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D75C192E384B00B384F8 /* libGPUImage.a */; };
+		580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */; };
+		580E03301930C270001C26B3 /* LmCmViewManagerTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */; };
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
 		583BA0BC192DF1D700852B0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583BA0BB192DF1D700852B0D /* CoreMotion.framework */; };
 		583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */; };
@@ -96,6 +98,10 @@
 		5806D765192E38ED00B384F8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5806D767192E38F600B384F8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5806D769192E390000B384F8 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		580E03281930BAC6001C26B3 /* LmCmViewBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewBarButton.h; sourceTree = "<group>"; };
+		580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewBarButton.m; sourceTree = "<group>"; };
+		580E032E1930C270001C26B3 /* LmCmViewManagerTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewManagerTools.h; sourceTree = "<group>"; };
+		580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewManagerTools.m; sourceTree = "<group>"; };
 		583BA0B7192DF0E800852B0D /* MotionOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionOrientation.h; sourceTree = "<group>"; };
 		583BA0B8192DF0E800852B0D /* MotionOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionOrientation.m; sourceTree = "<group>"; };
 		583BA0BB192DF1D700852B0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -265,6 +271,8 @@
 				588CC34C192DE4FE0030AA82 /* LmCmViewTopBar.m */,
 				583BA0BD192DF47400852B0D /* LmCmViewPreviewOverlay.h */,
 				583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */,
+				580E03281930BAC6001C26B3 /* LmCmViewBarButton.h */,
+				580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -450,6 +458,8 @@
 				58FA0F1E192F4DAF00260A65 /* LmCmViewManagerZoom.m */,
 				58F6FE45192F71D700EF7BFC /* LmCmViewManagerPreview.h */,
 				58F6FE46192F71D700EF7BFC /* LmCmViewManagerPreview.m */,
+				580E032E1930C270001C26B3 /* LmCmViewManagerTools.h */,
+				580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */,
 			);
 			name = ViewManager;
 			sourceTree = "<group>";
@@ -591,6 +601,7 @@
 			files = (
 				58F6FE50192F801000EF7BFC /* LmGLView.m in Sources */,
 				58F6FE4D192F76E300EF7BFC /* LmLivePreview.m in Sources */,
+				580E03301930C270001C26B3 /* LmCmViewManagerTools.m in Sources */,
 				588CC347192DE04F0030AA82 /* LmCmButtonShutter.m in Sources */,
 				58F6FE47192F71D700EF7BFC /* LmCmViewManagerPreview.m in Sources */,
 				58F455FC19303CBF008E55AB /* LmCmViewZoomSlider.m in Sources */,
@@ -598,6 +609,7 @@
 				5890ACFB192CD9CE00B6BD97 /* LmCmViewController.m in Sources */,
 				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
 				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
+				580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */,
 				588CC34D192DE4FE0030AA82 /* LmCmViewTopBar.m in Sources */,
 				5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */,
 				5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */,

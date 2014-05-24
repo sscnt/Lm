@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LmCmViewZoomSlider.h"
 
 @protocol LmCmViewManagerPreviewDelegate <NSObject>
 
