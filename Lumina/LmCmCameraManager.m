@@ -84,20 +84,24 @@
 
 - (void)flash:(BOOL)enabled
 {
+    [_backCameraDevice lockForConfiguration:nil];
     if (enabled) {
         _backCameraDevice.flashMode = AVCaptureFlashModeOn;
     }else{
         _backCameraDevice.flashMode = AVCaptureFlashModeOff;
     }
+    [_backCameraDevice unlockForConfiguration];
 }
 
 - (void)autoFlash:(BOOL)enabled
 {
+    [_backCameraDevice lockForConfiguration:nil];
     if (enabled) {
         _backCameraDevice.flashMode = AVCaptureFlashModeAuto;
     }else{
         _backCameraDevice.flashMode = AVCaptureFlashModeOff;
     }
+    [_backCameraDevice unlockForConfiguration];
 }
 
 -(void)lightToggle{

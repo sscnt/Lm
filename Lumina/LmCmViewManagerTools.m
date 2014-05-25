@@ -130,9 +130,24 @@
 
 - (void)flashModeDidSelect:(LmCmViewBarButtonFlashMode)mode
 {
+    LmCmViewController* _self = self.delegate;
     _flashList.hidden = YES;
     _flashButton.selected = NO;
     _flashButton.flashMode = mode;
+    [LmCmSharedCamera instance].flashMode = mode;
+    switch (mode) {
+        case LmCmViewBarButtonFlashModeOn:
+            [_self.cameraManager flash:YES];
+            break;
+        case LmCmViewBarButtonFlashModeOff:
+            [_self.cameraManager flash:NO];
+            break;
+        case LmCmViewBarButtonFlashModeAuto:
+            [_self.cameraManager autoFlash:YES];
+            break;            
+        default:
+            break;
+    }
 }
 
 #pragma mark delegate
@@ -203,7 +218,9 @@
     
     [LmCmSharedCamera instance].cropSize = size;
     [_self.blackRectView setRectWithCropSize:size];
+    [_self.cameraPreviewOverlay setNeedsDisplay];
     
 }
+
 
 @end

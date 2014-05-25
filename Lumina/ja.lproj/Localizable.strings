@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Lumina
+
+  Created by SSC on 2014/05/26.
+  Copyright (c) 2014年 SSC. All rights reserved.
+*/
+
+"Grid" = "グリッド";
+"Square" = "正方形";
+"Normal" = "デフォルト";
+"VolumeSnap" = "ボリューム撮影";
+"Zoom" = "ズーム";
+"Sound" = "シャッター音";
+"On" = "オン";
+"Off" = "オフ";
+"Auto" = "自動";

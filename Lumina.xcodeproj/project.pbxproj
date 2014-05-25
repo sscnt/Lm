@@ -22,6 +22,7 @@
 		5810F9511931EB0500E30401 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5810F9501931EB0500E30401 /* AudioToolbox.framework */; };
 		581708C5193233CF00E430AD /* LmCmViewFlashModeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708C4193233CF00E430AD /* LmCmViewFlashModeList.m */; };
 		581708C8193240F500E430AD /* LmCmButtonFlashModeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */; };
+		581708D019324FD300E430AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 581708D219324FD300E430AD /* Localizable.strings */; };
 		5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F46B1931C14200694AF0 /* LmCmViewCropList.m */; };
 		5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */; };
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
@@ -120,6 +121,11 @@
 		581708C4193233CF00E430AD /* LmCmViewFlashModeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewFlashModeList.m; sourceTree = "<group>"; };
 		581708C6193240F500E430AD /* LmCmButtonFlashModeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonFlashModeItem.h; sourceTree = "<group>"; };
 		581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmButtonFlashModeItem.m; sourceTree = "<group>"; };
+		581708CC19324F3800E430AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		581708CD19324F3800E430AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		581708CE19324F3900E430AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		581708D119324FD300E430AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		581708D319324FD900E430AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5818F46A1931C14200694AF0 /* LmCmViewCropList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewCropList.h; sourceTree = "<group>"; };
 		5818F46B1931C14200694AF0 /* LmCmViewCropList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropList.m; sourceTree = "<group>"; };
 		5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonCropListItem.h; sourceTree = "<group>"; };
@@ -401,6 +407,7 @@
 				5890ACEA192CD9CE00B6BD97 /* InfoPlist.strings */,
 				5890ACED192CD9CE00B6BD97 /* main.m */,
 				5890ACEF192CD9CE00B6BD97 /* Lumina-Prefix.pch */,
+				581708D219324FD300E430AD /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -605,6 +612,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 5890ACD5192CD9CD00B6BD97;
 			productRefGroup = 5890ACDF192CD9CD00B6BD97 /* Products */;
@@ -649,6 +657,7 @@
 				58F6FE55192F81CF00EF7BFC /* BrightnessShader.vsh in Resources */,
 				58FCDCD119306486009D54B1 /* Aller_Bd.ttf in Resources */,
 				5890ACFD192CD9CE00B6BD97 /* Images.xcassets in Resources */,
+				581708D019324FD300E430AD /* Localizable.strings in Resources */,
 				5890ACF5192CD9CE00B6BD97 /* Main_iPhone.storyboard in Resources */,
 				58FCDCD319306486009D54B1 /* mplus-1c-bold.ttf in Resources */,
 				58F6FE54192F81CF00EF7BFC /* BrightnessShader.fsh in Resources */,
@@ -732,10 +741,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		581708D219324FD300E430AD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				581708D119324FD300E430AD /* en */,
+				581708D319324FD900E430AD /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		5890ACEA192CD9CE00B6BD97 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				5890ACEB192CD9CE00B6BD97 /* en */,
+				581708CD19324F3800E430AD /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -744,6 +763,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5890ACF4192CD9CE00B6BD97 /* Base */,
+				581708CC19324F3800E430AD /* ja */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -752,6 +772,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				5890AD0D192CD9CE00B6BD97 /* en */,
+				581708CE19324F3900E430AD /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

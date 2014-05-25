@@ -21,6 +21,14 @@
         _label.textAlignment = NSTextAlignmentLeft;
         _label.minimumScaleFactor = 0.10f;
         [self addSubview:_label];
+        
+        if ([UIDevice isCurrentLanguageJapanese]) {
+            if ([UIDevice isIOS6]) {
+                
+            }else{
+                [_label setY:1.0f];
+            }
+        }
     }
     return self;
 }
@@ -32,6 +40,38 @@
         self.alpha = 1.0f;
     }else{
         self.alpha = 0.30f;
+    }
+}
+
+- (void)adjustLabelSize
+{
+    switch (_item) {
+        case LmCmViewSettingsListItemVolumeSnap:
+        {
+            if ([UIDevice isCurrentLanguageJapanese]) {
+                if ([UIDevice isIOS6]) {
+                    
+                }else{
+                    _label.fontSize = 12.0f;
+                }
+            }
+        }
+            break;
+            
+        case LmCmViewSettingsListItemEnableSound:
+        {
+            if ([UIDevice isCurrentLanguageJapanese]) {
+                if ([UIDevice isIOS6]) {
+                    
+                }else{
+                    _label.fontSize = 13.0f;
+                }
+            }
+        }
+            break;
+            
+        default:
+            break;
     }
 }
 
@@ -60,6 +100,7 @@
         default:
             break;
     }
+    [self adjustLabelSize];
 }
 
 - (void)drawRect:(CGRect)rect

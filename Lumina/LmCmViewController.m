@@ -220,6 +220,7 @@
     dispatch_queue_t q_main = dispatch_get_main_queue();
     dispatch_async(q_main, ^{
         [_self.blackRectView setRectWithCropSize:[LmCmSharedCamera instance].cropSize];
+        [_self.cameraPreviewOverlay setNeedsDisplay];
     });
     
     

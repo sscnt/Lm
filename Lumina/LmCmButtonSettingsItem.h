@@ -15,5 +15,7 @@
 @property (nonatomic, strong) VnViewLabel* label;
 @property (nonatomic, assign) BOOL active;
 
+- (void)adjustLabelSize;
+
 @end
 
