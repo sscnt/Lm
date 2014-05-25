@@ -46,14 +46,12 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
 
 + (void)reset
 {
-    LmCmSharedCamera* _self = [self instance];
-    _self.focusMode = LmCmSharedCameraFocusModeAuto;
-    _self.mode = LmCmSharedCameraModeNormal;
     [[LmCmSharedCamera instance] reset];
 }
 
 - (void)reset
 {
+    _mode = LmCmSharedCameraModeNormal;
     _zoom = 1.0f;
 }
 
@@ -228,6 +226,43 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
 {
     NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:cropSize forKey:@"cropSize"];
+    [ud synchronize];
+}
+
+
+- (LmCmViewBarButtonFlashMode)flashMode
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int size = (int)[ud integerForKey:@"flashMode"];
+    if (size == 0) {
+        self.flashMode = LmCmViewBarButtonFlashModeAuto;
+        return LmCmViewBarButtonFlashModeAuto;
+    }
+    return size;
+}
+
+- (void)setFlashMode:(LmCmViewBarButtonFlashMode)flashMode
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setInteger:flashMode forKey:@"flashMode"];
+    [ud synchronize];
+}
+
+- (LmCmSharedCameraFocusMode)focusMode
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int size = (int)[ud integerForKey:@"focusMode"];
+    if (size == 0) {
+        self.focusMode = LmCmSharedCameraFocusModeAuto;
+        return LmCmSharedCameraFocusModeAuto;
+    }
+    return size;
+}
+
+- (void)setFocusMode:(LmCmSharedCameraFocusMode)focusMode
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setInteger:focusMode forKey:@"focusMode"];
     [ud synchronize];
 }
 

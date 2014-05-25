@@ -14,6 +14,9 @@
 {
     CGRect frame;
     switch (type) {
+        case LmCmViewBarButtonTypeFlash:
+            frame = CGRectMake(0.0f, 0.0f, 88.0f, [LmCmSharedCamera topBarHeight]);
+            break;
         case LmCmViewBarButtonTypeSwitchCamera:
             frame = CGRectMake(0.0f, 0.0f, [LmCmSharedCamera topBarHeight], [LmCmSharedCamera topBarHeight]);
             break;
@@ -24,8 +27,39 @@
     self = [super initWithFrame:frame];
     if (self) {
         _type = type;
+        if (type == LmCmViewBarButtonTypeFlash) {
+            _textLabel = [[VnViewLabel alloc] initWithFrame:CGRectMake(40.0f, 0.0f, frame.size.width - frame.size.height, frame.size.height)];
+            _textLabel.fontSize = 15.0f;
+            _textLabel.textAlignment = NSTextAlignmentLeft;
+            [self addSubview:_textLabel];
+            self.flashMode = LmCmViewBarButtonFlashModeOff;
+        }
     }
     return self;
+}
+
+- (void)setFlashMode:(LmCmViewBarButtonFlashMode)flashMode
+{
+    _flashMode = flashMode;
+    [self applyFlashModeText];
+}
+
+- (void)applyFlashModeText
+{
+    switch (_flashMode) {
+        case LmCmViewBarButtonFlashModeOff:
+            _textLabel.text = NSLocalizedString(@"Off", nil);
+            break;
+        case LmCmViewBarButtonFlashModeOn:
+            _textLabel.text = NSLocalizedString(@"On", nil);
+            break;
+        case LmCmViewBarButtonFlashModeAuto:
+            _textLabel.text = NSLocalizedString(@"Auto", nil);
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)setSelected:(BOOL)selected
@@ -222,6 +256,30 @@
             
             
 
+        }
+            break;
+            
+        case LmCmViewBarButtonTypeFlash:
+        {
+            
+            //// Bezier 2 Drawing
+            UIBezierPath* bezier2Path = [UIBezierPath bezierPath];
+            [bezier2Path moveToPoint: CGPointMake(27.41, 13.92)];
+            [bezier2Path addLineToPoint: CGPointMake(20.69, 15.49)];
+            [bezier2Path addLineToPoint: CGPointMake(18.13, 27.4)];
+            [bezier2Path addLineToPoint: CGPointMake(24.85, 26.46)];
+            [bezier2Path addLineToPoint: CGPointMake(23.57, 36.48)];
+            [bezier2Path addLineToPoint: CGPointMake(32.22, 21.13)];
+            [bezier2Path addLineToPoint: CGPointMake(23.89, 22.38)];
+            [bezier2Path addLineToPoint: CGPointMake(27.41, 13.92)];
+            [bezier2Path closePath];
+            bezier2Path.miterLimit = 4;
+            
+            bezier2Path.usesEvenOddFillRule = YES;
+            
+            [color setFill];
+            [bezier2Path fill];
+            
         }
             break;
     }

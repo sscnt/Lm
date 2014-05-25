@@ -12,5 +12,6 @@
 @interface LmCmViewTopBar : UIView
 
 - (void)addCameraSwitchButton:(LmCmViewBarButton*)button;
+- (void)addFlashButton:(LmCmViewBarButton*)button;
 
 @end

@@ -20,6 +20,8 @@
 		5810F9491931D8AD00E30401 /* LmCmViewCropBlackRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810F9481931D8AD00E30401 /* LmCmViewCropBlackRect.m */; };
 		5810F94F1931EAFD00E30401 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5810F94E1931EAFC00E30401 /* MediaPlayer.framework */; };
 		5810F9511931EB0500E30401 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5810F9501931EB0500E30401 /* AudioToolbox.framework */; };
+		581708C5193233CF00E430AD /* LmCmViewFlashModeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708C4193233CF00E430AD /* LmCmViewFlashModeList.m */; };
+		581708C8193240F500E430AD /* LmCmButtonFlashModeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */; };
 		5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F46B1931C14200694AF0 /* LmCmViewCropList.m */; };
 		5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */; };
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
@@ -114,6 +116,10 @@
 		5810F9481931D8AD00E30401 /* LmCmViewCropBlackRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropBlackRect.m; sourceTree = "<group>"; };
 		5810F94E1931EAFC00E30401 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5810F9501931EB0500E30401 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		581708C3193233CF00E430AD /* LmCmViewFlashModeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewFlashModeList.h; sourceTree = "<group>"; };
+		581708C4193233CF00E430AD /* LmCmViewFlashModeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewFlashModeList.m; sourceTree = "<group>"; };
+		581708C6193240F500E430AD /* LmCmButtonFlashModeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonFlashModeItem.h; sourceTree = "<group>"; };
+		581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmButtonFlashModeItem.m; sourceTree = "<group>"; };
 		5818F46A1931C14200694AF0 /* LmCmViewCropList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewCropList.h; sourceTree = "<group>"; };
 		5818F46B1931C14200694AF0 /* LmCmViewCropList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropList.m; sourceTree = "<group>"; };
 		5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonCropListItem.h; sourceTree = "<group>"; };
@@ -242,6 +248,28 @@
 				5806D75E192E384B00B384F8 /* GPUImageTests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		581708BE193233B000E430AD /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				5818F46A1931C14200694AF0 /* LmCmViewCropList.h */,
+				5818F46B1931C14200694AF0 /* LmCmViewCropList.m */,
+				5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */,
+				5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */,
+			);
+			name = Crop;
+			sourceTree = "<group>";
+		};
+		581708C2193233B800E430AD /* Flash */ = {
+			isa = PBXGroup;
+			children = (
+				581708C3193233CF00E430AD /* LmCmViewFlashModeList.h */,
+				581708C4193233CF00E430AD /* LmCmViewFlashModeList.m */,
+				581708C6193240F500E430AD /* LmCmButtonFlashModeItem.h */,
+				581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */,
+			);
+			name = Flash;
 			sourceTree = "<group>";
 		};
 		583BA0BA192DF0EF00852B0D /* Libraries */ = {
@@ -453,6 +481,8 @@
 		58F455F119303C77008E55AB /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				581708C2193233B800E430AD /* Flash */,
+				581708BE193233B000E430AD /* Crop */,
 				58F6381C1930E87A004F506F /* Settings */,
 				588CC344192DE0390030AA82 /* Camera */,
 				58F455F319303C9B008E55AB /* Slider */,
@@ -480,10 +510,6 @@
 				58F638171930E6EF004F506F /* LmCmViewSettingsList.m */,
 				58F6381D1930E8C6004F506F /* LmCmButtonSettingsItem.h */,
 				58F6381E1930E8C6004F506F /* LmCmButtonSettingsItem.m */,
-				5818F46A1931C14200694AF0 /* LmCmViewCropList.h */,
-				5818F46B1931C14200694AF0 /* LmCmViewCropList.m */,
-				5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */,
-				5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -655,6 +681,7 @@
 				5806D754192E2B7600B384F8 /* LmCurrentImage.m in Sources */,
 				5890ACFB192CD9CE00B6BD97 /* LmCmViewController.m in Sources */,
 				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
+				581708C8193240F500E430AD /* LmCmButtonFlashModeItem.m in Sources */,
 				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
 				580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */,
 				58F6381F1930E8C6004F506F /* LmCmButtonSettingsItem.m in Sources */,
@@ -664,6 +691,7 @@
 				58F455FA19303CBF008E55AB /* LmCmViewSlider.m in Sources */,
 				583BA0C3192E050100852B0D /* LmObjectPixelData.m in Sources */,
 				583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */,
+				581708C5193233CF00E430AD /* LmCmViewFlashModeList.m in Sources */,
 				5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */,
 				5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */,
 				583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */,

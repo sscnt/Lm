@@ -10,6 +10,7 @@
 #import "LmCmViewBarButton.h"
 #import "LmCmViewSettingsList.h"
 #import "LmCmViewCropList.h"
+#import "LmCmViewFlashModeList.h"
 
 @protocol LmCmViewManagerToolsDelegate <NSObject>
 - (void)openCameraRoll;
@@ -17,7 +18,7 @@
 
 @class LmCmViewController;
 
-@interface LmCmViewManagerTools : NSObject <LmCmViewSettingsListDelegate, LmCmViewCropListDelegate>
+@interface LmCmViewManagerTools : NSObject <LmCmViewSettingsListDelegate, LmCmViewCropListDelegate, LmCmViewFlashModeListDelegate>
 
 @property (nonatomic, weak) UIView* view;
 @property (nonatomic, weak) LmCmViewController<LmCmViewManagerToolsDelegate>* delegate;
@@ -25,8 +26,10 @@
 @property (nonatomic, strong) LmCmViewBarButton* camerarollButton;
 @property (nonatomic, strong) LmCmViewBarButton* cropButton;
 @property (nonatomic, strong) LmCmViewBarButton* switchCameraButton;
+@property (nonatomic, strong) LmCmViewBarButton* flashButton;
 @property (nonatomic, strong) LmCmViewSettingsList* settingsList;
 @property (nonatomic, strong) LmCmViewCropList* cropList;
+@property (nonatomic, strong) LmCmViewFlashModeList* flashList;
 
 - (void)viewDidLoad;
 - (void)showSettingsList;
@@ -35,5 +38,6 @@
 - (void)camerarollButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)cropButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)cameraSwitchButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
+- (void)flashButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 
 @end

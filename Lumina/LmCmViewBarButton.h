@@ -20,7 +20,10 @@ typedef NS_ENUM(NSInteger, LmCmViewBarButtonType){
 @interface LmCmViewBarButton : UIButton
 
 @property (nonatomic, assign) LmCmViewBarButtonType type;
+@property (nonatomic, assign) LmCmViewBarButtonFlashMode flashMode;
+@property (nonatomic, strong) VnViewLabel* textLabel;
 
 - (id)initWithType:(LmCmViewBarButtonType)type;
+- (void)applyFlashModeText;
 
 @end

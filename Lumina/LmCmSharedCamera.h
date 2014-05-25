@@ -40,10 +40,17 @@ typedef NS_ENUM(NSInteger, LmCmViewCropSize){
     LmCmViewCropSize2x1
 };
 
+typedef NS_ENUM(NSInteger, LmCmViewBarButtonFlashMode){
+    LmCmViewBarButtonFlashModeAuto = 1,
+    LmCmViewBarButtonFlashModeOn,
+    LmCmViewBarButtonFlashModeOff
+};
+
 @interface LmCmSharedCamera : NSObject
 
 @property (nonatomic, assign) LmCmSharedCameraMode mode;
 @property (nonatomic, assign) LmCmSharedCameraFocusMode  focusMode;
+@property (nonatomic, assign) LmCmViewBarButtonFlashMode  flashMode;
 @property (nonatomic, assign) LmCmViewCropSize cropSize;
 @property (nonatomic, assign) int timerSeconds;
 @property (nonatomic, assign) float zoom;

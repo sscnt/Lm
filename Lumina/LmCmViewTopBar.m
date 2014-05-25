@@ -20,6 +20,12 @@
     return self;
 }
 
+- (void)addFlashButton:(LmCmViewBarButton *)button
+{
+    button.center = CGPointMake([button width] / 2.0f, [self height] / 2.0f);
+    [self addSubview:button];
+}
+
 - (void)addCameraSwitchButton:(LmCmViewBarButton *)button
 {
     button.center = CGPointMake([self width] - [button width] / 2.0f, [self height] / 2.0f);
