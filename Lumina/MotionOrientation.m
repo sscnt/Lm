@@ -48,6 +48,7 @@ NSString* const kMotionOrientationKey = @"kMotionOrientationKey";
 - (void)_initialize
 {
     self.showDebugLog = NO;
+    previousOrientation = UIDeviceOrientationPortrait;
     
     self.operationQueue = [[NSOperationQueue alloc] init];
     
@@ -74,6 +75,14 @@ NSString* const kMotionOrientationKey = @"kMotionOrientationKey";
         [self _initialize];
     }
     return self;
+}
+
+- (UIDeviceOrientation)deviceOrientation
+{
+    if (_deviceOrientation == UIDeviceOrientationFaceUp || _deviceOrientation == UIDeviceOrientationFaceDown) {
+        return previousOrientation;
+    }
+    return _deviceOrientation;
 }
 
 - (CGAffineTransform)affineTransform
@@ -193,6 +202,16 @@ NSString* const kMotionOrientationKey = @"kMotionOrientationKey";
     
     if ( newDeviceOrientation != self.deviceOrientation ) {
         deviceOrientationChanged = YES;
+        switch (_deviceOrientation) {
+            case UIDeviceOrientationPortraitUpsideDown:
+            case UIDeviceOrientationPortrait:
+            case UIDeviceOrientationLandscapeLeft:
+            case UIDeviceOrientationLandscapeRight:
+                previousOrientation = _deviceOrientation;
+                break;
+            default:
+                break;
+        }
         _deviceOrientation = newDeviceOrientation;
     }
     
@@ -233,6 +252,16 @@ NSString* const kMotionOrientationKey = @"kMotionOrientationKey";
 
 - (void)deviceOrientationChanged:(NSNotification *)notification
 {
+    switch (_deviceOrientation) {
+        case UIDeviceOrientationPortraitUpsideDown:
+        case UIDeviceOrientationPortrait:
+        case UIDeviceOrientationLandscapeLeft:
+        case UIDeviceOrientationLandscapeRight:
+            previousOrientation = _deviceOrientation;
+            break;
+        default:
+            break;
+    }
     _deviceOrientation = [UIDevice currentDevice].orientation;
     [[NSNotificationCenter defaultCenter] postNotificationName:MotionOrientationChangedNotification
                                                         object:nil

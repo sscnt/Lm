@@ -23,6 +23,7 @@
 		581708C5193233CF00E430AD /* LmCmViewFlashModeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708C4193233CF00E430AD /* LmCmViewFlashModeList.m */; };
 		581708C8193240F500E430AD /* LmCmButtonFlashModeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */; };
 		581708D019324FD300E430AD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 581708D219324FD300E430AD /* Localizable.strings */; };
+		581708D71932605C00E430AD /* LmCmImageAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 581708D61932605C00E430AD /* LmCmImageAsset.m */; };
 		5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F46B1931C14200694AF0 /* LmCmViewCropList.m */; };
 		5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */; };
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
@@ -126,6 +127,8 @@
 		581708CE19324F3900E430AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		581708D119324FD300E430AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		581708D319324FD900E430AD /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		581708D51932605C00E430AD /* LmCmImageAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmImageAsset.h; sourceTree = "<group>"; };
+		581708D61932605C00E430AD /* LmCmImageAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmImageAsset.m; sourceTree = "<group>"; };
 		5818F46A1931C14200694AF0 /* LmCmViewCropList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewCropList.h; sourceTree = "<group>"; };
 		5818F46B1931C14200694AF0 /* LmCmViewCropList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropList.m; sourceTree = "<group>"; };
 		5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonCropListItem.h; sourceTree = "<group>"; };
@@ -276,6 +279,15 @@
 				581708C7193240F500E430AD /* LmCmButtonFlashModeItem.m */,
 			);
 			name = Flash;
+			sourceTree = "<group>";
+		};
+		581708D41932603D00E430AD /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				581708D51932605C00E430AD /* LmCmImageAsset.h */,
+				581708D61932605C00E430AD /* LmCmImageAsset.m */,
+			);
+			name = Object;
 			sourceTree = "<group>";
 		};
 		583BA0BA192DF0EF00852B0D /* Libraries */ = {
@@ -469,6 +481,7 @@
 				5890AD22192CDC3E00B6BD97 /* LmCmCameraManager.m */,
 				5890ACF9192CD9CE00B6BD97 /* LmCmViewController.h */,
 				5890ACFA192CD9CE00B6BD97 /* LmCmViewController.m */,
+				581708D41932603D00E430AD /* Object */,
 				58F455F119303C77008E55AB /* UIComponents */,
 				58FA0F19192F4D6C00260A65 /* ViewManager */,
 				58F455F0193031E7008E55AB /* Shared */,
@@ -711,6 +724,7 @@
 				5890AD35192CDD0F00B6BD97 /* UIScreen+extend.m in Sources */,
 				5890AD38192CDD0F00B6BD97 /* UIImage+extend.m in Sources */,
 				58FA0F1F192F4DAF00260A65 /* LmCmViewManagerZoom.m in Sources */,
+				581708D71932605C00E430AD /* LmCmImageAsset.m in Sources */,
 				588CC34A192DE4EE0030AA82 /* LmCmViewBottomBar.m in Sources */,
 				5890AD23192CDC3E00B6BD97 /* LmCmCameraManager.m in Sources */,
 				588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */,
@@ -861,6 +875,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lumina/Lumina-Prefix.pch";
 				INFOPLIST_FILE = "Lumina/Lumina-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F0C00530-9322-4DA4-AEFF-EA611EB87BB6";
@@ -879,6 +894,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lumina/Lumina-Prefix.pch";
 				INFOPLIST_FILE = "Lumina/Lumina-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6F757C89-7E69-4CCF-B45A-821A61AC6F70";

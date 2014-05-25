@@ -7,9 +7,6 @@
 //
 
 #import "LmCmCameraManager.h"
-#import <MediaPlayer/MediaPlayer.h>
-
-
 
 @interface LmCmCameraManager(){
 
@@ -175,14 +172,14 @@
 #pragma  mark - 初期化
 
 //      デフォルト初期化
--(id)init{
-
-   if(super.init){
-       
-       _rawNSDataCache = [NSMutableArray array];
-       [self setupAVCapture:AVCaptureSessionPresetInputPriority];
-    return self;
-   }
+-(id)init
+{
+    self = [super init];
+    if(self){
+        _rawNSDataCache = [NSMutableArray array];
+        [self setupAVCapture:AVCaptureSessionPresetHigh];
+        return self;
+    }
 return nil;
 }
 
@@ -277,8 +274,6 @@ return nil;
         if(camera.position == AVCaptureDevicePositionBack){
             self.backCameraDevice = camera;
             if ([camera lockForConfiguration:nil]) {
-                
-                
                 for ( AVCaptureDeviceFormat *format in [camera formats] ) {
                     for ( AVFrameRateRange *range in format.videoSupportedFrameRateRanges ) {
                         if ( range.maxFrameRate > bestFrameRateRange.maxFrameRate ) {
@@ -288,15 +283,18 @@ return nil;
                     }
                     bestFormat = format;
                 }
-                bestFormat = [[camera formats] objectAtIndex:19];
+                bestFormat = [[camera formats] objectAtIndex:[[camera formats] count] - 1];
                 LOG(@"%@", bestFormat);
                 if (bestFormat) {
                     camera.activeFormat = bestFormat;
                     //[camera setActiveVideoMinFrameDuration:bestFrameRateRange.minFrameDuration];
                     //[camera setActiveVideoMaxFrameDuration:bestFrameRateRange.maxFrameDuration];
-                    
-                    [camera setActiveVideoMinFrameDuration:CMTimeMake(1, 5)];
-                    [camera setActiveVideoMaxFrameDuration:CMTimeMake(1, 5)];
+                    if ([UIDevice isIOS6]) {
+                        
+                    }else{
+                        [camera setActiveVideoMinFrameDuration:CMTimeMake(1, 5)];
+                        [camera setActiveVideoMaxFrameDuration:CMTimeMake(1, 5)];
+                    }
                     [camera unlockForConfiguration];
                 }
             }

@@ -14,6 +14,9 @@ extern NSString* const MotionOrientationInterfaceOrientationChangedNotification;
 extern NSString* const kMotionOrientationKey;
 
 @interface MotionOrientation : NSObject
+{
+    UIDeviceOrientation previousOrientation;
+}
 
 @property (readonly) UIInterfaceOrientation interfaceOrientation;
 @property (readonly) UIDeviceOrientation deviceOrientation;

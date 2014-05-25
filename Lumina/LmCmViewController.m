@@ -18,6 +18,9 @@
 {
     [super viewDidLoad];
     [self initVolumeHandling];
+    if (![UIDevice isCurrentLanguageJapanese]) {
+        [LmCmSharedCamera instance].soundEnabled = YES;
+    }
     
     [MotionOrientation initialize];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -69,6 +72,7 @@
     [_zoomViewManager viewDidLoad];
     [_previewManager viewDidLoad];
     [_toolsManager viewDidLoad];
+
 }
 
 #pragma mark shutter
@@ -163,6 +167,9 @@
     if ([[[viewController class] description] isEqualToString:@"PUUIAlbumListViewController"]) {
         self.toolsManager.camerarollButton.selected = NO;
     }
+    if ([[[viewController class] description] isEqualToString:@"PLUIAlbumListViewController"]) {
+        self.toolsManager.camerarollButton.selected = NO;
+    }
 }
 
 - (void)openCameraRoll
@@ -189,23 +196,6 @@
             UIImageWriteToSavedPhotosAlbum(imageOriginal, nil, nil, nil);
         }
         //// Do your stuff
-        
-    } else {
-        NSURL* imageurl = [info objectForKey:UIImagePickerControllerReferenceURL];
-        ALAssetsLibrary* library = [[ALAssetsLibrary alloc] init];
-        [library assetForURL:imageurl
-                 resultBlock: ^(ALAsset *asset)
-         {
-             ALAssetRepresentation *representation;
-             representation = [asset defaultRepresentation];
-             UIImage* imageOriginal = [[UIImage alloc] initWithCGImage:representation.fullResolutionImage];
-             //// Do your stuff
-             
-         }
-                failureBlock:^(NSError *error)
-         {
-         }
-         ];
     }
 }
 
@@ -216,6 +206,8 @@
 
 - (void)orientationDidChange
 {
+    UIDeviceOrientation o = [MotionOrientation sharedInstance].deviceOrientation;
+    
     __block LmCmViewController* _self = self;
     dispatch_queue_t q_main = dispatch_get_main_queue();
     dispatch_async(q_main, ^{

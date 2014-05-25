@@ -21,6 +21,20 @@
         _label.textAlignment = NSTextAlignmentLeft;
         _label.minimumScaleFactor = 0.10f;
         [self addSubview:_label];
+        
+        if ([UIDevice isCurrentLanguageJapanese]) {
+            if ([UIDevice isIOS6]) {
+                [_label setY:2.0f];
+            }else{
+                [_label setY:1.0f];
+            }
+        }else{
+            if ([UIDevice isIOS6]) {
+                
+            }else{
+                [_label setY:-0.50f];
+            }
+        }
     }
     return self;
 }

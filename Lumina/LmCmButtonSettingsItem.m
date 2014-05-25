@@ -24,9 +24,15 @@
         
         if ([UIDevice isCurrentLanguageJapanese]) {
             if ([UIDevice isIOS6]) {
-                
+                [_label setY:2.0f];
             }else{
                 [_label setY:1.0f];
+            }
+        }else{
+            if ([UIDevice isIOS6]) {
+                
+            }else{
+                [_label setY:-0.50f];
             }
         }
     }
@@ -50,9 +56,16 @@
         {
             if ([UIDevice isCurrentLanguageJapanese]) {
                 if ([UIDevice isIOS6]) {
-                    
+                    [_label setY:1.0f];
+                    _label.fontSize = 12.0f;
                 }else{
                     _label.fontSize = 12.0f;
+                }
+            }else{
+                if ([UIDevice isIOS6]) {
+                    [_label setY:0.0f];
+                }else{
+                    
                 }
             }
         }
@@ -62,7 +75,8 @@
         {
             if ([UIDevice isCurrentLanguageJapanese]) {
                 if ([UIDevice isIOS6]) {
-                    
+                    [_label setY:1.50f];
+                    _label.fontSize = 13.0f;
                 }else{
                     _label.fontSize = 13.0f;
                 }
