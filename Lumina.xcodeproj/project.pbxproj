@@ -17,6 +17,9 @@
 		5806D76B192E390600B384F8 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D75C192E384B00B384F8 /* libGPUImage.a */; };
 		580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */; };
 		580E03301930C270001C26B3 /* LmCmViewManagerTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */; };
+		5810F9491931D8AD00E30401 /* LmCmViewCropBlackRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5810F9481931D8AD00E30401 /* LmCmViewCropBlackRect.m */; };
+		5810F94F1931EAFD00E30401 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5810F94E1931EAFC00E30401 /* MediaPlayer.framework */; };
+		5810F9511931EB0500E30401 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5810F9501931EB0500E30401 /* AudioToolbox.framework */; };
 		5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F46B1931C14200694AF0 /* LmCmViewCropList.m */; };
 		5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */; };
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
@@ -107,6 +110,10 @@
 		580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewBarButton.m; sourceTree = "<group>"; };
 		580E032E1930C270001C26B3 /* LmCmViewManagerTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewManagerTools.h; sourceTree = "<group>"; };
 		580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewManagerTools.m; sourceTree = "<group>"; };
+		5810F9471931D8AD00E30401 /* LmCmViewCropBlackRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewCropBlackRect.h; sourceTree = "<group>"; };
+		5810F9481931D8AD00E30401 /* LmCmViewCropBlackRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropBlackRect.m; sourceTree = "<group>"; };
+		5810F94E1931EAFC00E30401 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		5810F9501931EB0500E30401 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		5818F46A1931C14200694AF0 /* LmCmViewCropList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewCropList.h; sourceTree = "<group>"; };
 		5818F46B1931C14200694AF0 /* LmCmViewCropList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropList.m; sourceTree = "<group>"; };
 		5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonCropListItem.h; sourceTree = "<group>"; };
@@ -199,6 +206,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5810F9511931EB0500E30401 /* AudioToolbox.framework in Frameworks */,
+				5810F94F1931EAFD00E30401 /* MediaPlayer.framework in Frameworks */,
 				5806D76B192E390600B384F8 /* libGPUImage.a in Frameworks */,
 				5806D76A192E390000B384F8 /* AssetsLibrary.framework in Frameworks */,
 				5806D768192E38F600B384F8 /* QuartzCore.framework in Frameworks */,
@@ -290,6 +299,8 @@
 				583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */,
 				580E03281930BAC6001C26B3 /* LmCmViewBarButton.h */,
 				580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */,
+				5810F9471931D8AD00E30401 /* LmCmViewCropBlackRect.h */,
+				5810F9481931D8AD00E30401 /* LmCmViewCropBlackRect.m */,
 			);
 			name = Camera;
 			sourceTree = "<group>";
@@ -316,6 +327,8 @@
 		5890ACE0192CD9CD00B6BD97 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5810F9501931EB0500E30401 /* AudioToolbox.framework */,
+				5810F94E1931EAFC00E30401 /* MediaPlayer.framework */,
 				5806D769192E390000B384F8 /* AssetsLibrary.framework */,
 				5806D767192E38F600B384F8 /* QuartzCore.framework */,
 				5806D765192E38ED00B384F8 /* AVFoundation.framework */,
@@ -655,6 +668,7 @@
 				5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */,
 				583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */,
 				5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */,
+				5810F9491931D8AD00E30401 /* LmCmViewCropBlackRect.m in Sources */,
 				588CC33D192DDA460030AA82 /* LmCmSharedCamera.m in Sources */,
 				5890AD36192CDD0F00B6BD97 /* UIView+extend.m in Sources */,
 				5890AD35192CDD0F00B6BD97 /* UIScreen+extend.m in Sources */,

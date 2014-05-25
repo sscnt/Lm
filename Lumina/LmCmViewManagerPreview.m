@@ -16,7 +16,7 @@
     LmCmViewController* _self = self.delegate;
     
     //// Grid
-    _self.cameraPreviewOverlay.showGrid = [LmCmSharedCamera showGrid];
+    _self.cameraPreviewOverlay.showGrid = [LmCmSharedCamera instance].showGrid;
     
     //// Tap
     UITapGestureRecognizer* recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewDidTouchUpInside:)];

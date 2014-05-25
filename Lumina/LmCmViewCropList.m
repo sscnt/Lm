@@ -72,7 +72,7 @@
     _currentSize = currentSize;
     LmCmButtonCropListItem* button = [self viewWithTag:currentSize];
     if (button) {
-        button.selected = YES;
+        button.active = YES;
     }
 }
 

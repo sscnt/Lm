@@ -17,7 +17,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initVolumeHandling];
+    
     [MotionOrientation initialize];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(orientationDidChange) name:@"MotionOrientationChangedNotification" object:nil];
+    
     _zoomViewManager = [[LmCmViewManagerZoom alloc] init];
     _zoomViewManager.view = self.view;
     _zoomViewManager.delegate = self;
@@ -36,6 +41,13 @@
     _cameraPreview = [[UIView alloc] initWithFrame:CGRectMake(0.0f, [LmCmSharedCamera topBarHeight], [UIScreen width], [UIScreen height] - [LmCmSharedCamera topBarHeight] - [LmCmSharedCamera bottomBarHeight])];
     [self.view addSubview:_cameraPreview];
     [_cameraManager setPreview:_cameraPreview];
+    
+    //// Black rect
+    _blackRectView = [[LmCmViewCropBlackRect alloc] initWithFrame:_cameraPreview.frame];
+    [_blackRectView setRectWithCropSize:[LmCmSharedCamera instance].cropSize];
+    [self.view addSubview:_blackRectView];
+    
+    //// Overlay
     _cameraPreviewOverlay = [[LmCmViewPreviewOverlay alloc] initWithFrame:_cameraPreview.frame];
     [self.view addSubview:_cameraPreviewOverlay];
         
@@ -194,5 +206,75 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)orientationDidChange
+{
+    __block LmCmViewController* _self = self;
+    dispatch_queue_t q_main = dispatch_get_main_queue();
+    dispatch_async(q_main, ^{
+        [_self.blackRectView setRectWithCropSize:[LmCmSharedCamera instance].cropSize];
+    });
+    
+    
+}
+
+#pragma mark volume
+
+- (void)initVolumeHandling
+{
+    [self setVolumeNotification];
+    
+    //MPVolumeViewをオフスクリーンに。
+    CGRect frame = CGRectMake(-100, -100, 100, 100);
+    MPVolumeView *volumeView = [[MPVolumeView alloc] initWithFrame:frame];
+    [volumeView sizeToFit];
+    [self.view addSubview:volumeView];
+    
+    AudioSessionInitialize(NULL, NULL, NULL, NULL);
+    UInt32 category = kAudioSessionCategory_AmbientSound;
+    AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(category), &category);
+    AudioSessionSetActive(true);
+    
+    initialVolume = [MPMusicPlayerController applicationMusicPlayer].volume;
+    
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [center addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    
+}
+
+- (void)setVolumeNotification {
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(volumeChanged:)
+     name:@"AVSystemController_SystemVolumeDidChangeNotification"
+     object:nil];
+}
+
+- (void)volumeChanged:(NSNotification *)notification{
+    //明示的にボリューム変更がされた時のみ
+    if ([[[notification userInfo]objectForKey:@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"]isEqualToString:@"ExplicitVolumeChange"]) {
+        
+        //ここで撮影をおこなうメソッド等を呼ぶ
+        if ([LmCmSharedCamera instance].volumeSnapEnabled) {
+            [self didShutterButtonTouchUpInside:_shutterButton];
+        }
+        
+        //一旦NSNotificationCenterからAVSystemController_SystemVolumeDidChangeNotificationを外して、ボリュームを元に戻す
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
+        [MPMusicPlayerController applicationMusicPlayer].volume = initialVolume;
+        [self performSelector:@selector(setVolumeNotification) withObject:nil afterDelay:0.2];
+    }
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"AVSystemController_SystemVolumeDidChangeNotification" object:nil];
+    AudioSessionSetActive(false);
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification {
+    initialVolume = [MPMusicPlayerController applicationMusicPlayer].volume;
+    [self setVolumeNotification];
+    AudioSessionSetActive(true);
+}
 
 @end

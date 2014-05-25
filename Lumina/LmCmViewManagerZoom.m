@@ -30,6 +30,7 @@
     _zoomSlider.center = CGPointMake(_zoomSlider.center.x, [_self.cameraPreviewOverlay height] / 2.0f);
     _zoomSlider.value = 0.0f;
     _zoomSlider.delegate = self;
+    _zoomSlider.hidden = ![LmCmSharedCamera instance].showZoomSlider;
     [_self.cameraPreviewOverlay addSubview:_zoomSlider];
 }
 

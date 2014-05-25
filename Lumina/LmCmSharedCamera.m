@@ -72,7 +72,7 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
 
 + (CGRect)shutterButtonRect
 {
-    return CGRectMake(0.0f, 0.0f, 70.0f, 70.0f);
+    return CGRectMake(0.0f, 0.0f, 66.0f, 66.0f);
 }
 
 + (UIColor *)topBarColor
@@ -83,11 +83,6 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
 + (UIColor *)bottomBarColor
 {
     return [self topBarColor];
-}
-
-+ (BOOL)showGrid
-{
-    return YES;
 }
 
 #pragma mark api
@@ -115,9 +110,127 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     return [UIColor colorWithWhite:0.10f alpha:0.90f];
 }
 
-+ (BOOL)showGrid
+//// 2 is YES, 1 is NO, 0 is Nil
+- (BOOL)showGrid
 {
-    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int show = (int)[ud integerForKey:@"showGrid"];
+    if (show == 2) {
+        return YES;
+    }
+    if (show == 1) {
+        return NO;
+    }
+    self.showGrid = YES;
+    return YES;
 }
+
+- (void)setShowGrid:(BOOL)showGrid
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if (showGrid) {
+        [ud setInteger:2 forKey:@"showGrid"];
+    }else{
+        [ud setInteger:1 forKey:@"showGrid"];
+    }
+    [ud synchronize];
+}
+
+- (BOOL)showZoomSlider
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int show = (int)[ud integerForKey:@"showZoomSlider"];
+    if (show == 2) {
+        return YES;
+    }
+    if (show == 1) {
+        return NO;
+    }
+    self.showZoomSlider = YES;
+    return YES;
+}
+
+- (void)setShowZoomSlider:(BOOL)showZoomSlider
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if (showZoomSlider) {
+        [ud setInteger:2 forKey:@"showZoomSlider"];
+    }else{
+        [ud setInteger:1 forKey:@"showZoomSlider"];
+    }
+    [ud synchronize];
+}
+
+- (BOOL)soundEnabled
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int show = (int)[ud integerForKey:@"soundEnabled"];
+    if (show == 2) {
+        return YES;
+    }
+    if (show == 1) {
+        return NO;
+    }
+    self.showZoomSlider = YES;
+    return YES;
+}
+
+- (void)setSoundEnabled:(BOOL)soundEnabled
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if (soundEnabled) {
+        [ud setInteger:2 forKey:@"soundEnabled"];
+    }else{
+        [ud setInteger:1 forKey:@"soundEnabled"];
+    }
+    [ud synchronize];
+}
+
+
+- (BOOL)volumeSnapEnabled
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int show = (int)[ud integerForKey:@"volumeSnapEnabled"];
+    if (show == 2) {
+        return YES;
+    }
+    if (show == 1) {
+        return NO;
+    }
+    self.showZoomSlider = YES;
+    return YES;
+}
+
+- (void)setVolumeSnapEnabled:(BOOL)volumeSnapEnabled
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    if (volumeSnapEnabled) {
+        [ud setInteger:2 forKey:@"volumeSnapEnabled"];
+    }else{
+        [ud setInteger:1 forKey:@"volumeSnapEnabled"];
+    }
+    [ud synchronize];
+}
+
+
+- (LmCmViewCropSize)cropSize
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    int size = (int)[ud integerForKey:@"cropSize"];
+    if (size == 0) {
+        self.cropSize = LmCmViewCropSizeNormal;
+        return LmCmViewCropSizeNormal;
+    }
+    return size;
+}
+
+- (void)setCropSize:(LmCmViewCropSize)cropSize
+{
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    [ud setInteger:cropSize forKey:@"cropSize"];
+    [ud synchronize];
+}
+
+
 
 @end

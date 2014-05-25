@@ -43,12 +43,13 @@ typedef NS_ENUM(NSInteger, LmCmViewCropSize){
 
 @property (nonatomic, assign) LmCmSharedCameraMode mode;
 @property (nonatomic, assign) LmCmSharedCameraFocusMode  focusMode;
+@property (nonatomic, assign) LmCmViewCropSize cropSize;
 @property (nonatomic, assign) int timerSeconds;
 @property (nonatomic, assign) float zoom;
-@property (nonatomic, assign) LmCmViewCropSize cropSize;
-@property (nonatomic, assign) BOOL showGrig;
+@property (nonatomic, assign) BOOL showGrid;
 @property (nonatomic, assign) BOOL showZoomSlider;
-@property (nonatomic, assign) BOOL VolumeSnapEnabled;
+@property (nonatomic, assign) BOOL volumeSnapEnabled;
+@property (nonatomic, assign) BOOL soundEnabled;
 
 + (LmCmSharedCamera*)instance;
 
@@ -68,7 +69,6 @@ typedef NS_ENUM(NSInteger, LmCmViewCropSize){
 + (CGRect)shutterButtonRect;
 + (UIColor*)topBarColor;
 + (UIColor*)bottomBarColor;
-+ (BOOL)showGrid;
 
 + (UIColor*)zoomSliderBgColor;
 + (UIColor*)settingsBgColor;

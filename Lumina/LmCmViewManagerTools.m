@@ -46,6 +46,7 @@
         _cropList = [[LmCmViewCropList alloc] initWithFrame:CGRectMake(x, y, width, height)];
         _cropList.hidden = YES;
         _cropList.delegate = self;
+        [_cropList setCurrentSize:[LmCmSharedCamera instance].cropSize];
         [_self.cameraPreviewOverlay addSubview:_cropList];
     }
 }
@@ -82,15 +83,18 @@
 
 - (void)settingItemDidEnabled:(LmCmViewSettingsListItem)item
 {
+    LmCmSharedCamera* camera = [LmCmSharedCamera instance];
     LmCmViewController* _self = self.delegate;
     switch (item) {
         case LmCmViewSettingsListItemVolumeSnap:
-            
+            camera.volumeSnapEnabled = YES;
             break;
         case LmCmViewSettingsListItemShowZoom:
+            camera.showZoomSlider = YES;
             _self.zoomViewManager.showZoomSlider = YES;
             break;
         case LmCmViewSettingsListItemShowGrid:
+            camera.showGrid = YES;
             _self.cameraPreviewOverlay.showGrid = YES;
             break;
         default:
@@ -100,14 +104,18 @@
 
 - (void)settingItemDidDisabled:(LmCmViewSettingsListItem)item
 {
+    LmCmSharedCamera* camera = [LmCmSharedCamera instance];
     LmCmViewController* _self = self.delegate;
     switch (item) {
         case LmCmViewSettingsListItemShowZoom:
+            camera.showZoomSlider = NO;
             _self.zoomViewManager.showZoomSlider = NO;
             break;
         case LmCmViewSettingsListItemVolumeSnap:
+            camera.volumeSnapEnabled = NO;
             break;
         case LmCmViewSettingsListItemShowGrid:
+            camera.showGrid = NO;
             _self.cameraPreviewOverlay.showGrid = NO;
             break;
         default:
@@ -117,6 +125,10 @@
 
 - (void)cropSizeSelected:(LmCmViewCropSize)size
 {
+    LmCmViewController* _self = self.delegate;
+    
+    [LmCmSharedCamera instance].cropSize = size;
+    [_self.blackRectView setRectWithCropSize:size];
     
 }
 

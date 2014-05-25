@@ -371,7 +371,8 @@ return nil;
 
 #pragma  mark - 撮影
 //      写真撮影
--(void)takePhoto:(takePhotoBlock) block{
+-(void)takePhoto:(takePhotoBlock) block
+{
 
     
     AVCaptureConnection* connection = [imageOutput connectionWithMediaType:AVMediaTypeVideo];
@@ -581,6 +582,13 @@ return nil;
 
 - (void)takeAPhoto
 {
+    if ([LmCmSharedCamera instance].soundEnabled) {
+        [self takePhoto:^(UIImage *image, NSError *error) {
+            UIImage* small = [image resizedImage:CGSizeMake(image.size.width / 10.0f, image.size.height / 10.0f) interpolationQuality:kCGInterpolationHigh];
+            
+        }];
+        return;
+    }
     _processingToConvert = NO;
     _allCaptureNumber = 1;
     _currentCapturedNumber = 0;

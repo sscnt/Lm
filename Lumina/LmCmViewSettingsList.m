@@ -26,6 +26,7 @@
         [button setX:0.0f];
         [button setY:0.0f];
         [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
+        button.active = [LmCmSharedCamera instance].showGrid;
         [self addSubview:button];
         
         //// Zoom
@@ -34,6 +35,7 @@
         [button setX:itemWidth];
         [button setY:0.0f];
         [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
+        button.active = [LmCmSharedCamera instance].showZoomSlider;
         [self addSubview:button];
         
         //// Volume Snap
@@ -42,6 +44,7 @@
         [button setX:0.0f];
         [button setY:itemHeight];
         [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
+        button.active = [LmCmSharedCamera instance].volumeSnapEnabled;
         [self addSubview:button];
     }
     return self;

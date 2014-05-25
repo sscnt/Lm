@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "LmCmCameraManager.h"
 #import "LmCmViewPreviewOverlay.h"
 #import "LmCmButtonShutter.h"
@@ -16,8 +18,12 @@
 #import "LmCmViewManagerZoom.h"
 #import "LmCmViewManagerPreview.h"
 #import "LmCmViewManagerTools.h"
+#import "LmCmViewCropBlackRect.h"
 
 @interface LmCmViewController : UIViewController <CameraManagerDelegate, UIGestureRecognizerDelegate, LmCmViewManagerZoomDelegate, LmCmViewManagerPreviewDelegate, LmCmViewManagerToolsDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+{
+     float initialVolume;
+}
 
 @property (nonatomic, strong) LmCmCameraManager* cameraManager;
 @property (nonatomic, strong) UIView* cameraPreview;
@@ -25,6 +31,7 @@
 @property (nonatomic, strong) LmCmButtonShutter* shutterButton;
 @property (nonatomic, strong) LmCmViewTopBar* topBar;
 @property (nonatomic, strong) LmCmViewBottomBar* bottomBar;
+@property (nonatomic, strong) LmCmViewCropBlackRect* blackRectView;
 
 @property (nonatomic, strong) LmCmViewManagerZoom* zoomViewManager;
 @property (nonatomic, strong) LmCmViewManagerPreview* previewManager;
@@ -32,5 +39,8 @@
 
 - (void)didShutterButtonTouchUpInside:(id)sender;
 - (void)didShutterButtonTouchCancel:(id)sender;
+- (void)orientationDidChange;
+
+- (void)initVolumeHandling;
 
 @end
