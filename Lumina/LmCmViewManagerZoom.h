@@ -22,6 +22,7 @@
 @property (nonatomic, assign) float beginScale;
 @property (nonatomic, assign) float currentScale;
 @property (nonatomic, strong) LmCmViewZoomSlider* zoomSlider;
+@property (nonatomic, assign) BOOL showZoomSlider;
 
 - (void)viewDidLoad;
 - (void)transformLayerWithZoomScale:(float)zoom;

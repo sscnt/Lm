@@ -12,7 +12,8 @@ typedef NS_ENUM(NSInteger, LmCmViewBarButtonType){
     LmCmViewBarButtonTypeCameraRoll = 1,
     LmCmViewBarButtonTypeLastPhoto,
     LmCmViewBarButtonTypeSettings,
-    LmCmViewBarButtonTypeFlash
+    LmCmViewBarButtonTypeFlash,
+    LmCmViewBarButtonTypeCrop
 };
 
 @interface LmCmViewBarButton : UIButton

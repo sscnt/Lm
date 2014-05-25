@@ -28,11 +28,19 @@
         [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
         
-        //// Square
+        //// Zoom
         button = [[LmCmButtonSettingsItem alloc] initWithFrame:buttonFrame];
-        button.item = LmCmViewSettingsListItemSquare;
+        button.item = LmCmViewSettingsListItemShowZoom;
         [button setX:itemWidth];
         [button setY:0.0f];
+        [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:button];
+        
+        //// Volume Snap
+        button = [[LmCmButtonSettingsItem alloc] initWithFrame:buttonFrame];
+        button.item = LmCmViewSettingsListItemVolumeSnap;
+        [button setX:0.0f];
+        [button setY:itemHeight];
         [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:button];
     }

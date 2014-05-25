@@ -115,4 +115,9 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     return [UIColor colorWithWhite:0.10f alpha:0.90f];
 }
 
++ (BOOL)showGrid
+{
+    
+}
+
 @end

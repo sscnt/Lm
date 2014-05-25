@@ -52,6 +52,12 @@
     return YES;
 }
 
+- (void)setShowZoomSlider:(BOOL)showZoomSlider
+{
+    _showZoomSlider = showZoomSlider;
+    _zoomSlider.hidden = !showZoomSlider;
+}
+
 - (void)handlePinchFrom:(UIPinchGestureRecognizer *)recognizer
 {
     LmCmViewController* _self = self.delegate;

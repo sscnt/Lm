@@ -17,6 +17,8 @@
 		5806D76B192E390600B384F8 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D75C192E384B00B384F8 /* libGPUImage.a */; };
 		580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */; };
 		580E03301930C270001C26B3 /* LmCmViewManagerTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */; };
+		5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F46B1931C14200694AF0 /* LmCmViewCropList.m */; };
+		5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */; };
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
 		583BA0BC192DF1D700852B0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583BA0BB192DF1D700852B0D /* CoreMotion.framework */; };
 		583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */; };
@@ -105,6 +107,10 @@
 		580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewBarButton.m; sourceTree = "<group>"; };
 		580E032E1930C270001C26B3 /* LmCmViewManagerTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewManagerTools.h; sourceTree = "<group>"; };
 		580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewManagerTools.m; sourceTree = "<group>"; };
+		5818F46A1931C14200694AF0 /* LmCmViewCropList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewCropList.h; sourceTree = "<group>"; };
+		5818F46B1931C14200694AF0 /* LmCmViewCropList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewCropList.m; sourceTree = "<group>"; };
+		5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmButtonCropListItem.h; sourceTree = "<group>"; };
+		5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmButtonCropListItem.m; sourceTree = "<group>"; };
 		583BA0B7192DF0E800852B0D /* MotionOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MotionOrientation.h; sourceTree = "<group>"; };
 		583BA0B8192DF0E800852B0D /* MotionOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MotionOrientation.m; sourceTree = "<group>"; };
 		583BA0BB192DF1D700852B0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
@@ -461,6 +467,10 @@
 				58F638171930E6EF004F506F /* LmCmViewSettingsList.m */,
 				58F6381D1930E8C6004F506F /* LmCmButtonSettingsItem.h */,
 				58F6381E1930E8C6004F506F /* LmCmButtonSettingsItem.m */,
+				5818F46A1931C14200694AF0 /* LmCmViewCropList.h */,
+				5818F46B1931C14200694AF0 /* LmCmViewCropList.m */,
+				5818F4701931C39C00694AF0 /* LmCmButtonCropListItem.h */,
+				5818F4711931C39C00694AF0 /* LmCmButtonCropListItem.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -641,6 +651,7 @@
 				58F455FA19303CBF008E55AB /* LmCmViewSlider.m in Sources */,
 				583BA0C3192E050100852B0D /* LmObjectPixelData.m in Sources */,
 				583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */,
+				5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */,
 				5890ACF2192CD9CE00B6BD97 /* AppDelegate.m in Sources */,
 				583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */,
 				5890AD1F192CDA9000B6BD97 /* LmViewControllerExport.m in Sources */,
@@ -652,6 +663,7 @@
 				588CC34A192DE4EE0030AA82 /* LmCmViewBottomBar.m in Sources */,
 				5890AD23192CDC3E00B6BD97 /* LmCmCameraManager.m in Sources */,
 				588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */,
+				5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */,
 				5890ACEE192CD9CE00B6BD97 /* main.m in Sources */,
 				58F638231930E9F5004F506F /* VnViewLabel.m in Sources */,
 				5890AD3A192CDD0F00B6BD97 /* UIImagePickerController+extend.m in Sources */,

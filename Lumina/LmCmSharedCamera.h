@@ -28,7 +28,15 @@ typedef NS_ENUM(NSInteger, LmCmSharedCameraTheme){
 
 typedef NS_ENUM(NSInteger, LmCmViewSettingsListItem){
     LmCmViewSettingsListItemShowGrid = 1,
-    LmCmViewSettingsListItemSquare
+    LmCmViewSettingsListItemShowZoom,
+    LmCmViewSettingsListItemVolumeSnap
+};
+
+typedef NS_ENUM(NSInteger, LmCmViewCropSize){
+    LmCmViewCropSizeNormal = 1,
+    LmCmViewCropSizeSquare,
+    LmCmViewCropSize16x9,
+    LmCmViewCropSize2x1
 };
 
 @interface LmCmSharedCamera : NSObject
@@ -37,7 +45,10 @@ typedef NS_ENUM(NSInteger, LmCmViewSettingsListItem){
 @property (nonatomic, assign) LmCmSharedCameraFocusMode  focusMode;
 @property (nonatomic, assign) int timerSeconds;
 @property (nonatomic, assign) float zoom;
-@property (nonatomic, assign) BOOL square;
+@property (nonatomic, assign) LmCmViewCropSize cropSize;
+@property (nonatomic, assign) BOOL showGrig;
+@property (nonatomic, assign) BOOL showZoomSlider;
+@property (nonatomic, assign) BOOL VolumeSnapEnabled;
 
 + (LmCmSharedCamera*)instance;
 

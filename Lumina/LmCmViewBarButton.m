@@ -94,23 +94,60 @@
 
         }
             break;
+        case LmCmViewBarButtonTypeCrop:
+        {
+            
+            //// Bezier Drawing
+            UIBezierPath* bezierPath = [UIBezierPath bezierPath];
+            [bezierPath moveToPoint: CGPointMake(30.09, 19)];
+            [bezierPath addLineToPoint: CGPointMake(19, 19)];
+            [bezierPath addLineToPoint: CGPointMake(19, 30.09)];
+            [bezierPath addLineToPoint: CGPointMake(30.09, 19)];
+            [bezierPath closePath];
+            [bezierPath moveToPoint: CGPointMake(31.5, 20.41)];
+            [bezierPath addLineToPoint: CGPointMake(20.41, 31.5)];
+            [bezierPath addLineToPoint: CGPointMake(31.5, 31.5)];
+            [bezierPath addLineToPoint: CGPointMake(31.5, 20.41)];
+            [bezierPath closePath];
+            [bezierPath moveToPoint: CGPointMake(19, 16)];
+            [bezierPath addLineToPoint: CGPointMake(33.09, 16)];
+            [bezierPath addLineToPoint: CGPointMake(35.63, 13.45)];
+            [bezierPath addLineToPoint: CGPointMake(37.05, 14.87)];
+            [bezierPath addLineToPoint: CGPointMake(34.5, 17.41)];
+            [bezierPath addLineToPoint: CGPointMake(34.5, 19)];
+            [bezierPath addLineToPoint: CGPointMake(34.5, 31.5)];
+            [bezierPath addLineToPoint: CGPointMake(37.5, 31.5)];
+            [bezierPath addLineToPoint: CGPointMake(37.5, 34.5)];
+            [bezierPath addLineToPoint: CGPointMake(34.5, 34.5)];
+            [bezierPath addLineToPoint: CGPointMake(34.5, 37.5)];
+            [bezierPath addLineToPoint: CGPointMake(31.5, 37.5)];
+            [bezierPath addLineToPoint: CGPointMake(31.5, 34.5)];
+            [bezierPath addLineToPoint: CGPointMake(16, 34.5)];
+            [bezierPath addLineToPoint: CGPointMake(16, 31.5)];
+            [bezierPath addLineToPoint: CGPointMake(16, 19)];
+            [bezierPath addLineToPoint: CGPointMake(13, 19)];
+            [bezierPath addLineToPoint: CGPointMake(13, 16)];
+            [bezierPath addLineToPoint: CGPointMake(16, 16)];
+            [bezierPath addLineToPoint: CGPointMake(16, 13)];
+            [bezierPath addLineToPoint: CGPointMake(19, 13)];
+            [bezierPath addLineToPoint: CGPointMake(19, 16)];
+            [bezierPath closePath];
+            [color setFill];
+            [bezierPath fill];
+            
+            
+        }
+            break;
         case LmCmViewBarButtonTypeCameraRoll:
-        {           
-            //// Cameraroll Drawing
+        {   //// Cameraroll Drawing
             UIBezierPath* camerarollPath = [UIBezierPath bezierPath];
-            [camerarollPath moveToPoint: CGPointMake(12, 29.99)];
-            [camerarollPath addCurveToPoint: CGPointMake(15.02, 33.16) controlPoint1: CGPointMake(12, 31.67) controlPoint2: CGPointMake(13.36, 33.08)];
-            [camerarollPath addLineToPoint: CGPointMake(15.02, 27.72)];
-            [camerarollPath addLineToPoint: CGPointMake(15.02, 25.91)];
-            [camerarollPath addLineToPoint: CGPointMake(15.02, 17.37)];
-            [camerarollPath addCurveToPoint: CGPointMake(17.37, 15.02) controlPoint1: CGPointMake(15.02, 16.15) controlPoint2: CGPointMake(16.15, 15.02)];
-            [camerarollPath addLineToPoint: CGPointMake(23.49, 15.02)];
-            [camerarollPath addLineToPoint: CGPointMake(27.72, 15.02)];
-            [camerarollPath addLineToPoint: CGPointMake(33.16, 15.02)];
-            [camerarollPath addCurveToPoint: CGPointMake(29.99, 12) controlPoint1: CGPointMake(33.08, 13.36) controlPoint2: CGPointMake(31.67, 12)];
-            [camerarollPath addLineToPoint: CGPointMake(15.17, 12)];
-            [camerarollPath addCurveToPoint: CGPointMake(12, 15.17) controlPoint1: CGPointMake(13.45, 12) controlPoint2: CGPointMake(12, 13.45)];
-            [camerarollPath addLineToPoint: CGPointMake(12, 29.99)];
+            [camerarollPath moveToPoint: CGPointMake(12, 33)];
+            [camerarollPath addLineToPoint: CGPointMake(15, 33)];
+            [camerarollPath addLineToPoint: CGPointMake(15, 15)];
+            [camerarollPath addLineToPoint: CGPointMake(33, 15)];
+            [camerarollPath addLineToPoint: CGPointMake(33, 12)];
+            [camerarollPath addLineToPoint: CGPointMake(12, 12)];
+            [camerarollPath addLineToPoint: CGPointMake(12, 33)];
             [camerarollPath closePath];
             [camerarollPath moveToPoint: CGPointMake(22.28, 24.09)];
             [camerarollPath addCurveToPoint: CGPointMake(24.09, 25.91) controlPoint1: CGPointMake(22.28, 25.1) controlPoint2: CGPointMake(23.09, 25.91)];
@@ -118,19 +155,13 @@
             [camerarollPath addCurveToPoint: CGPointMake(24.09, 22.28) controlPoint1: CGPointMake(25.91, 23.09) controlPoint2: CGPointMake(25.1, 22.28)];
             [camerarollPath addCurveToPoint: CGPointMake(22.28, 24.09) controlPoint1: CGPointMake(23.09, 22.28) controlPoint2: CGPointMake(22.28, 23.09)];
             [camerarollPath closePath];
-            [camerarollPath moveToPoint: CGPointMake(20.01, 16.84)];
-            [camerarollPath addCurveToPoint: CGPointMake(16.84, 20.01) controlPoint1: CGPointMake(18.28, 16.84) controlPoint2: CGPointMake(16.84, 18.28)];
-            [camerarollPath addLineToPoint: CGPointMake(16.84, 34.83)];
-            [camerarollPath addCurveToPoint: CGPointMake(20.01, 38) controlPoint1: CGPointMake(16.84, 36.56) controlPoint2: CGPointMake(18.28, 38)];
-            [camerarollPath addLineToPoint: CGPointMake(34.83, 38)];
-            [camerarollPath addCurveToPoint: CGPointMake(38, 34.83) controlPoint1: CGPointMake(36.55, 38) controlPoint2: CGPointMake(38, 36.56)];
-            [camerarollPath addLineToPoint: CGPointMake(38, 20.01)];
-            [camerarollPath addCurveToPoint: CGPointMake(34.83, 16.84) controlPoint1: CGPointMake(38, 18.28) controlPoint2: CGPointMake(36.55, 16.84)];
-            [camerarollPath addLineToPoint: CGPointMake(20.01, 16.84)];
+            [camerarollPath moveToPoint: CGPointMake(17, 17)];
+            [camerarollPath addLineToPoint: CGPointMake(17, 38)];
+            [camerarollPath addLineToPoint: CGPointMake(38, 38)];
+            [camerarollPath addLineToPoint: CGPointMake(38, 17)];
+            [camerarollPath addLineToPoint: CGPointMake(17, 17)];
             [camerarollPath closePath];
-            [camerarollPath moveToPoint: CGPointMake(22.21, 19.79)];
-            [camerarollPath addLineToPoint: CGPointMake(32.56, 19.79)];
-            [camerarollPath addCurveToPoint: CGPointMake(34.98, 22.21) controlPoint1: CGPointMake(33.77, 19.79) controlPoint2: CGPointMake(34.98, 20.99)];
+            [camerarollPath moveToPoint: CGPointMake(35, 20)];
             [camerarollPath addLineToPoint: CGPointMake(34.98, 30.44)];
             [camerarollPath addCurveToPoint: CGPointMake(31.52, 26.56) controlPoint1: CGPointMake(33.88, 29.18) controlPoint2: CGPointMake(32.03, 27.18)];
             [camerarollPath addCurveToPoint: CGPointMake(29.6, 26.36) controlPoint1: CGPointMake(30.53, 25.37) controlPoint2: CGPointMake(29.6, 26.36)];
@@ -140,8 +171,8 @@
             [camerarollPath addCurveToPoint: CGPointMake(23.98, 29.74) controlPoint1: CGPointMake(26.95, 33.7) controlPoint2: CGPointMake(24.77, 30.66)];
             [camerarollPath addCurveToPoint: CGPointMake(22.39, 29.87) controlPoint1: CGPointMake(23.18, 28.81) controlPoint2: CGPointMake(22.39, 29.87)];
             [camerarollPath addLineToPoint: CGPointMake(19.86, 32.79)];
-            [camerarollPath addLineToPoint: CGPointMake(19.86, 22.21)];
-            [camerarollPath addCurveToPoint: CGPointMake(22.21, 19.79) controlPoint1: CGPointMake(19.86, 20.99) controlPoint2: CGPointMake(20.99, 19.79)];
+            [camerarollPath addLineToPoint: CGPointMake(20, 20)];
+            [camerarollPath addLineToPoint: CGPointMake(35, 20)];
             [camerarollPath closePath];
             camerarollPath.miterLimit = 4;
             
