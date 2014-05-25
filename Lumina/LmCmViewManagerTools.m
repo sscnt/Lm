@@ -97,6 +97,10 @@
             camera.showGrid = YES;
             _self.cameraPreviewOverlay.showGrid = YES;
             break;
+        case LmCmViewSettingsListItemEnableSound:
+            camera.soundEnabled = YES;
+            _self.shutterButton.soundEnabled = YES;
+            break;
         default:
             break;
     }
@@ -117,6 +121,10 @@
         case LmCmViewSettingsListItemShowGrid:
             camera.showGrid = NO;
             _self.cameraPreviewOverlay.showGrid = NO;
+            break;
+        case LmCmViewSettingsListItemEnableSound:
+            camera.soundEnabled = NO;
+            _self.shutterButton.soundEnabled = NO;
             break;
         default:
             break;

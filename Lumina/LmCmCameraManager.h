@@ -29,6 +29,7 @@
 
 -(void)videoFrameUpdate:(CGImageRef)cgImage from:(LmCmCameraManager*)manager;
 - (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation;
+- (void)singleImageDidTake:(UIImage*)image;
 @end
 
 //////////////////////////////////////////////////
@@ -53,7 +54,7 @@ AVCaptureSessionPresetiFrame1280x720
 -(id)init;                                              //  640x480
 -(id)initWithPreset:(NSString*)preset;
 
-@property(nonatomic, assign) id <CameraManagerDelegate> delegate;
+@property(nonatomic, weak) UIViewController<CameraManagerDelegate>* delegate;
 
 @property (nonatomic, assign) BOOL processingToConvert;
 @property (nonatomic, assign) int currentCapturedNumber;

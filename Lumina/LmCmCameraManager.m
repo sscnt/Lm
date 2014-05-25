@@ -583,9 +583,9 @@ return nil;
 - (void)takeAPhoto
 {
     if ([LmCmSharedCamera instance].soundEnabled) {
+        __block LmCmCameraManager* _self = self;
         [self takePhoto:^(UIImage *image, NSError *error) {
-            UIImage* small = [image resizedImage:CGSizeMake(image.size.width / 10.0f, image.size.height / 10.0f) interpolationQuality:kCGInterpolationHigh];
-            
+            [_self.delegate singleImageDidTake:image];
         }];
         return;
     }

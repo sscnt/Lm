@@ -171,7 +171,7 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     if (show == 1) {
         return NO;
     }
-    self.showZoomSlider = YES;
+    self.soundEnabled = YES;
     return YES;
 }
 
@@ -197,7 +197,7 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     if (show == 1) {
         return NO;
     }
-    self.showZoomSlider = YES;
+    self.volumeSnapEnabled = YES;
     return YES;
 }
 

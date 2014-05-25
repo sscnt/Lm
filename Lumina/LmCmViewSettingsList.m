@@ -46,6 +46,17 @@
         [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
         button.active = [LmCmSharedCamera instance].volumeSnapEnabled;
         [self addSubview:button];
+        
+        //// Sound
+        if ([UIDevice isCurrentLanguageJapanese]) {
+            button = [[LmCmButtonSettingsItem alloc] initWithFrame:buttonFrame];
+            button.item = LmCmViewSettingsListItemEnableSound;
+            [button setX:itemWidth];
+            [button setY:itemHeight];
+            [button addTarget:self action:@selector(didSelectItem:) forControlEvents:UIControlEventTouchUpInside];
+            button.active = [LmCmSharedCamera instance].soundEnabled;
+            [self addSubview:button];
+        }
     }
     return self;
 }

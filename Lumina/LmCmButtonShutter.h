@@ -11,5 +11,6 @@
 @interface LmCmButtonShutter : UIButton
 
 @property (nonatomic, assign) BOOL holding;
+@property (nonatomic, assign) BOOL soundEnabled;
 
 @end

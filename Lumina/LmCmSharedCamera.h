@@ -29,7 +29,8 @@ typedef NS_ENUM(NSInteger, LmCmSharedCameraTheme){
 typedef NS_ENUM(NSInteger, LmCmViewSettingsListItem){
     LmCmViewSettingsListItemShowGrid = 1,
     LmCmViewSettingsListItemShowZoom,
-    LmCmViewSettingsListItemVolumeSnap
+    LmCmViewSettingsListItemVolumeSnap,
+    LmCmViewSettingsListItemEnableSound
 };
 
 typedef NS_ENUM(NSInteger, LmCmViewCropSize){

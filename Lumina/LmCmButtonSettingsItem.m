@@ -54,6 +54,9 @@
         case LmCmViewSettingsListItemShowGrid:
             _label.text = NSLocalizedString(@"Grid", nil);
             break;
+        case LmCmViewSettingsListItemEnableSound:
+            _label.text = NSLocalizedString(@"Sound", nil);
+            break;
         default:
             break;
     }
@@ -184,6 +187,44 @@
             UIBezierPath* rectangle6Path = [UIBezierPath bezierPathWithRect: CGRectMake(15, 20.5, 1.5, 2.5)];
             [color setFill];
             [rectangle6Path fill];
+        }
+            break;
+        case LmCmViewSettingsListItemEnableSound:
+        {
+            
+            //// Bezier 6 Drawing
+            UIBezierPath* bezier6Path = [UIBezierPath bezierPath];
+            [bezier6Path moveToPoint: CGPointMake(19.15, 19.53)];
+            [bezier6Path addLineToPoint: CGPointMake(15.02, 19.53)];
+            [bezier6Path addLineToPoint: CGPointMake(15.02, 25.43)];
+            [bezier6Path addLineToPoint: CGPointMake(19.1, 25.43)];
+            [bezier6Path addLineToPoint: CGPointMake(23, 29.46)];
+            [bezier6Path addLineToPoint: CGPointMake(23, 15.46)];
+            [bezier6Path addLineToPoint: CGPointMake(19.15, 19.53)];
+            [bezier6Path closePath];
+            [bezier6Path moveToPoint: CGPointMake(24.12, 19.18)];
+            [bezier6Path addCurveToPoint: CGPointMake(25.02, 22.51) controlPoint1: CGPointMake(24.69, 20.15) controlPoint2: CGPointMake(25.02, 21.29)];
+            [bezier6Path addCurveToPoint: CGPointMake(24.01, 26.03) controlPoint1: CGPointMake(25.02, 23.81) controlPoint2: CGPointMake(24.65, 25.02)];
+            [bezier6Path addLineToPoint: CGPointMake(25.02, 26.96)];
+            [bezier6Path addCurveToPoint: CGPointMake(26.36, 22.51) controlPoint1: CGPointMake(25.87, 25.7) controlPoint2: CGPointMake(26.36, 24.17)];
+            [bezier6Path addCurveToPoint: CGPointMake(25.12, 18.21) controlPoint1: CGPointMake(26.36, 20.92) controlPoint2: CGPointMake(25.91, 19.44)];
+            [bezier6Path addLineToPoint: CGPointMake(24.12, 19.18)];
+            [bezier6Path closePath];
+            [bezier6Path moveToPoint: CGPointMake(26.3, 17.08)];
+            [bezier6Path addCurveToPoint: CGPointMake(27.93, 22.51) controlPoint1: CGPointMake(27.33, 18.62) controlPoint2: CGPointMake(27.93, 20.49)];
+            [bezier6Path addCurveToPoint: CGPointMake(26.22, 28.06) controlPoint1: CGPointMake(27.93, 24.58) controlPoint2: CGPointMake(27.3, 26.5)];
+            [bezier6Path addLineToPoint: CGPointMake(27.22, 28.98)];
+            [bezier6Path addCurveToPoint: CGPointMake(29.26, 22.51) controlPoint1: CGPointMake(28.5, 27.17) controlPoint2: CGPointMake(29.26, 24.94)];
+            [bezier6Path addCurveToPoint: CGPointMake(27.28, 16.14) controlPoint1: CGPointMake(29.26, 20.13) controlPoint2: CGPointMake(28.52, 17.93)];
+            [bezier6Path addLineToPoint: CGPointMake(26.3, 17.08)];
+            [bezier6Path closePath];
+            bezier6Path.miterLimit = 4;
+            
+            bezier6Path.usesEvenOddFillRule = YES;
+            
+            [color setFill];
+            [bezier6Path fill];
+
         }
             break;
         default:

@@ -60,6 +60,7 @@
     
     //// Shutter
     _shutterButton = [[LmCmButtonShutter alloc] initWithFrame:[LmCmSharedCamera shutterButtonRect]];
+    _shutterButton.soundEnabled = [LmCmSharedCamera instance].soundEnabled;
     [_shutterButton addTarget:self action:@selector(didShutterButtonTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [_shutterButton addTarget:self action:@selector(didShutterButtonTouchCancel:) forControlEvents:UIControlEventTouchUpOutside];
     [_bottomBar addShutterButton:_shutterButton];
@@ -75,6 +76,9 @@
 - (void)didShutterButtonTouchUpInside:(id)sender
 {
     ((LmCmButtonShutter*)sender).holding = NO;
+    if ([LmCmSharedCamera instance].soundEnabled) {
+        [_cameraPreviewOverlay flash];
+    }
     [_cameraManager takeAPhoto];
 }
 
@@ -139,7 +143,11 @@
             
         });
     });
+}
 
+- (void)singleImageDidTake:(UIImage *)image
+{
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
 }
 
 #pragma mark camera roll
