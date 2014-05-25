@@ -34,5 +34,6 @@
 - (void)settingsButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)camerarollButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)cropButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
+- (void)cameraSwitchButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 
 @end

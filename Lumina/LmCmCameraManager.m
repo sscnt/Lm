@@ -82,6 +82,24 @@
 
 #pragma mark - ライト制御
 
+- (void)flash:(BOOL)enabled
+{
+    if (enabled) {
+        _backCameraDevice.flashMode = AVCaptureFlashModeOn;
+    }else{
+        _backCameraDevice.flashMode = AVCaptureFlashModeOff;
+    }
+}
+
+- (void)autoFlash:(BOOL)enabled
+{
+    if (enabled) {
+        _backCameraDevice.flashMode = AVCaptureFlashModeAuto;
+    }else{
+        _backCameraDevice.flashMode = AVCaptureFlashModeOff;
+    }
+}
+
 -(void)lightToggle{
     if(self.isLightOn)
         [self light:NO];

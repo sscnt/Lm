@@ -53,7 +53,7 @@
     
     //// Switch
     _switchCameraButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeSwitchCamera];
-    [_settingsButton addTarget:self action:@selector(settingsButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [_switchCameraButton addTarget:self action:@selector(cameraSwitchButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [topBar addCameraSwitchButton:_switchCameraButton];
 }
 
@@ -83,6 +83,12 @@
     //// Hide Settings
     _settingsList.hidden = YES;
     _settingsButton.selected = NO;
+}
+
+- (void)cameraSwitchButtonDidTouchUpInside:(LmCmViewBarButton *)sender
+{
+    LmCmViewController* _self = self.delegate;
+    [_self.cameraManager flipCamera];
 }
 
 #pragma mark delegate

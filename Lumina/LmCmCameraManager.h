@@ -83,6 +83,9 @@ AVCaptureSessionPresetiFrame1280x720
 -(void)lightToggle;                                             // ライト ON/OFF切り替え
 -(BOOL)isLightOn;                                               // 現在ライトがついているか
 
+- (void)flash:(BOOL)enabled;
+- (void)autoFlash:(BOOL)enabled;
+
 /////////////////////////////////////////////////////////
 //      カメラ制御
 /////////////////////////////////////////////////////////
