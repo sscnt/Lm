@@ -24,6 +24,7 @@
 @property (nonatomic, strong) LmCmViewBarButton* settingsButton;
 @property (nonatomic, strong) LmCmViewBarButton* camerarollButton;
 @property (nonatomic, strong) LmCmViewBarButton* cropButton;
+@property (nonatomic, strong) LmCmViewBarButton* switchCameraButton;
 @property (nonatomic, strong) LmCmViewSettingsList* settingsList;
 @property (nonatomic, strong) LmCmViewCropList* cropList;
 

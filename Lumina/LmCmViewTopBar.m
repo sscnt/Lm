@@ -20,13 +20,10 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)addCameraSwitchButton:(LmCmViewBarButton *)button
 {
-    // Drawing code
+    button.center = CGPointMake([self width] - [button width] / 2.0f, [self height] / 2.0f);
+    [self addSubview:button];
 }
-*/
 
 @end

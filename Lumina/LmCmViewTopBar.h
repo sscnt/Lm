@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LmCmViewBarButton.h"
 
 @interface LmCmViewTopBar : UIView
+
+- (void)addCameraSwitchButton:(LmCmViewBarButton*)button;
 
 @end

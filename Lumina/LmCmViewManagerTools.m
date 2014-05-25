@@ -15,6 +15,7 @@
 {
     LmCmViewController* _self = self.delegate;
     LmCmViewBottomBar* bar = _self.bottomBar;
+    LmCmViewTopBar* topBar = _self.topBar;
     
     //// Settings
     _settingsButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeSettings];
@@ -49,6 +50,11 @@
         [_cropList setCurrentSize:[LmCmSharedCamera instance].cropSize];
         [_self.cameraPreviewOverlay addSubview:_cropList];
     }
+    
+    //// Switch
+    _switchCameraButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeSwitchCamera];
+    [_settingsButton addTarget:self action:@selector(settingsButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [topBar addCameraSwitchButton:_switchCameraButton];
 }
 
 #pragma mark button
