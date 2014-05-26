@@ -19,5 +19,6 @@
 @property (nonatomic, strong) NSData* pixelData;
 @property (nonatomic, assign) float zoom;
 @property (nonatomic, assign) LmCmViewCropSize cropSize;
+@property (nonatomic, assign) BOOL frontCamera;
 
 @end

@@ -64,8 +64,10 @@ AVCaptureSessionPresetiFrame1280x720
 @property (nonatomic, assign) int currentCapturedNumber;
 @property (nonatomic, assign) int allCaptureNumber;
 @property (nonatomic, strong) NSMutableArray* rawNSDataCache;
+@property (nonatomic, strong) NSMutableArray* imageCache;
 
 - (void)addPixelDataObject:(LmCmPixelData*)data;
+- (void)addAssetToCache:(LmCmImageAsset*)asset;
 - (void)popCacheAndConvert;
 
 - (void)takeOnePicture;

@@ -220,7 +220,15 @@ return nil;
 - (void)addPixelDataObject:(NSData *)data
 {
     [_rawNSDataCache addObject:data];
+    if (_processingToConvert) {
+        return;
+    }
     [self popCacheAndConvert];
+}
+
+- (void)addAssetToCache:(LmCmImageAsset *)asset
+{
+    
 }
 
 - (void)popCacheAndConvert
@@ -238,31 +246,41 @@ return nil;
     dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(q_global, ^{
         LOG(@"count: %d", (int)[_self.rawNSDataCache count]);
-        LmCmPixelData* data = (LmCmPixelData*)[_self.rawNSDataCache objectAtIndex:0];
         LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
-        @autoreleasepool {
-            CVPixelBufferRef imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
-            
-            CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-            
-            void* baseAddress = imageBuffer;
-            CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, baseAddress, data.bufferSize, NULL);
-            CGImageRef cgImage = CGImageCreate(data.width, data.height, 8, 32, data.bytesPerRow, colorspace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, TRUE, kCGRenderingIntentDefault);
-            CGDataProviderRelease(dataProvider);
-            UIImage* image = [UIImage imageWithCGImage:cgImage];
-            [LmCurrentImage writeTmpImage:image];
-            CGImageRelease(cgImage);
-            CGColorSpaceRelease(colorspace);
-        }
+        
+        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+        CVPixelBufferRef imageBuffer;
+        CGDataProviderRef dataProvider;
+        size_t width, height, bytesPerRow;
+        CGImageRef cgImage;
+        
+        LmCmPixelData* data = (LmCmPixelData*)[_self.rawNSDataCache objectAtIndex:0];
+        imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
+        void* baseAddress = imageBuffer;
+        dataProvider = CGDataProviderCreateWithData(NULL, baseAddress, data.bufferSize, NULL);
+        [_self.rawNSDataCache removeObjectAtIndex:0];
         asset.orientation = data.orientation;
-        asset.image = [LmCurrentImage tmpImage];
         asset.zoom = data.zoom;
         asset.cropSize = data.cropSize;
+        asset.frontCamera = data.frontCamera;
+        width = data.width;
+        height = data.height;
+        bytesPerRow = data.bytesPerRow;
+        cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorspace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, TRUE, kCGRenderingIntentDefault);
+        CGDataProviderRelease(dataProvider);
+        asset.image = [[UIImage alloc] initWithCGImage:cgImage];
+        CGImageRelease(cgImage);
+        //[LmCurrentImage writeTmpImage:image];
+        CGColorSpaceRelease(colorspace);
+                
+        LOG(@"Finish!");
         
         [_self.delegate singleImageNoSoundDidTakeWithAsset:asset];
-        [_self.rawNSDataCache removeObjectAtIndex:0];
         _self.processingToConvert = NO;
-        [_self performSelector:@selector(popCacheAndConvert) withObject:nil afterDelay:0.01];
+        if ([self.rawNSDataCache count] > 0) {
+            [_self performSelector:@selector(popCacheAndConvert) withObject:nil afterDelay:0.1];
+        }
+        
     });
     
     return;
@@ -584,6 +602,8 @@ return nil;
 /////////////////////////////////////////////////////////////////////////////////
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
+    @autoreleasepool {
+        
         if (_currentCapturedNumber < _allCaptureNumber) {
             
             AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -594,6 +614,23 @@ return nil;
             
             _currentCapturedNumber++;
             
+            CGImageRef cgImage = [LmCmCameraManager imageFromSampleBuffer:sampleBuffer];
+            UIImage* captureImage = [UIImage imageWithCGImage:cgImage];
+            CGImageRelease(cgImage);
+            
+            LmCmSharedCamera* camera = [LmCmSharedCamera instance];
+            LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
+            asset.zoom = camera.zoom;
+            asset.cropSize = camera.cropSize;
+            asset.frontCamera = [self isUsingFrontCamera];
+            asset.image = captureImage;
+            asset.orientation = [MotionOrientation sharedInstance].deviceOrientation;
+            [self.delegate performSelectorOnMainThread:@selector(singleImageNoSoundDidTakeWithAsset:) withObject:asset waitUntilDone:NO];
+            return;
+            
+            
+            
+            /*
             CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
             CVPixelBufferLockBaseAddress(imageBuffer,0);
             
@@ -614,23 +651,22 @@ return nil;
             LmCmSharedCamera* camera = [LmCmSharedCamera instance];
             data.zoom = camera.zoom;
             data.cropSize = camera.cropSize;
+            data.frontCamera = [self isUsingFrontCamera];
             
             [self addPixelDataObject:data];
+             */
             
             /*
-            CGImageRef cgImage = [CameraManager imageFromSampleBuffer:sampleBuffer];
-            UIImage* captureImage = [UIImage imageWithCGImage:cgImage];
-            CGImageRelease(cgImage);
-            
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                [_self.delegate singleImageCaptured:captureImage withOrientation:[MotionOrientation sharedInstance].deviceOrientation];
-            });
+             CGImageRef cgImage = [CameraManager imageFromSampleBuffer:sampleBuffer];
+             UIImage* captureImage = [UIImage imageWithCGImage:cgImage];
+             CGImageRelease(cgImage);
+             
+             dispatch_async(dispatch_get_main_queue(), ^(void) {
+             [_self.delegate singleImageCaptured:captureImage withOrientation:[MotionOrientation sharedInstance].deviceOrientation];
+             });
              */
-        }else{
-            CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
-            [[LmLivePreview instance] processNewCameraFrame:imageBuffer];
         }
-        
+    }
         /*
         return;
         ////////////////////////////////////////////
@@ -706,7 +742,10 @@ return nil;
 
 - (void)takeOnePicutreWithNoSound
 {
-    _processingToConvert = NO;
+    if (_processingToConvert) {
+        return;
+    }
+    _processingToConvert = YES;
     _allCaptureNumber = 1;
     _currentCapturedNumber = 0;
 }
@@ -717,20 +756,7 @@ return nil;
     
     //      画像の向きを調整する
     if(connection.isVideoOrientationSupported){
-        switch ([MotionOrientation sharedInstance].deviceOrientation) {
-            case UIDeviceOrientationPortraitUpsideDown:
-                connection.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
-                break;
-            case UIDeviceOrientationPortrait:
-                connection.videoOrientation = AVCaptureVideoOrientationPortrait;
-                break;
-            case UIDeviceOrientationLandscapeLeft:
-                connection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
-                break;
-            case UIDeviceOrientationLandscapeRight:
-                connection.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
-                break;
-        }
+        connection.videoOrientation = [MotionOrientation sharedInstance].deviceOrientation;
     }
     
     //      UIImage化した画像を通知する
@@ -743,15 +769,32 @@ return nil;
                                                  @autoreleasepool {
                                                      NSData *data = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                                                      image = [[UIImage alloc] initWithData:data];
-                                                     image = [LmCmCameraManager fixOrientationOfImage:image];
                                                  }
-                                                                                                  
+                                                 @autoreleasepool {
+                                                     switch (image.imageOrientation) {
+                                                         case UIImageOrientationUp:
+                                                             image = [LmCmCameraManager rotateImage:image angle:180];
+                                                             break;
+                                                         case UIImageOrientationDown:
+                                                             break;
+                                                         case UIImageOrientationRight:
+                                                             image = [LmCmCameraManager rotateImage:image angle:270];
+                                                             break;
+                                                         case UIImageOrientationLeft:
+                                                             image = [LmCmCameraManager rotateImage:image angle:90];
+                                                             break;
+                                                         default:
+                                                             break;
+                                                     }
+                                                 }
+                                                 
                                                  LmCmSharedCamera* camera = [LmCmSharedCamera instance];
                                                  LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
                                                  asset.image = image;
                                                  asset.zoom = camera.zoom;
                                                  asset.cropSize = camera.cropSize;
                                                  asset.orientation = [MotionOrientation sharedInstance].deviceOrientation;
+                                                 asset.frontCamera = [self isUsingFrontCamera];
                                                  [self.delegate singleImageByNormalCameraDidTakeWithAsset:asset];
                                                  
                                              }];

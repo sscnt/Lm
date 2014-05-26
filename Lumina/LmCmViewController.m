@@ -119,22 +119,50 @@
                 image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
             }
         }
-        switch (lmAsset.orientation) {
-            case UIDeviceOrientationUnknown:
-                break;
-            case UIDeviceOrientationPortraitUpsideDown:
-                image = [LmCmCameraManager rotateImage:image angle:90];
-                break;
-            case UIDeviceOrientationPortrait:
-                image = [LmCmCameraManager rotateImage:image angle:270];
-                break;
-            case UIDeviceOrientationLandscapeLeft:
-                break;
-            case UIDeviceOrientationLandscapeRight:
-                image = [LmCmCameraManager rotateImage:image angle:180];
-                break;
-            default:
-                break;
+        if (lmAsset.frontCamera) {
+            switch (lmAsset.orientation) {
+                case UIDeviceOrientationUnknown:
+                    break;
+                case UIDeviceOrientationPortraitUpsideDown:
+                    image = [LmCmCameraManager rotateImage:image angle:90];
+                    break;
+                case UIDeviceOrientationPortrait:
+                    image = [LmCmCameraManager rotateImage:image angle:270];
+                    break;
+                case UIDeviceOrientationLandscapeLeft:
+                    image = [LmCmCameraManager rotateImage:image angle:180];
+                    break;
+                case UIDeviceOrientationLandscapeRight:
+                    break;
+                case UIDeviceOrientationFaceUp:
+                    break;
+                case UIDeviceOrientationFaceDown:
+                    break;
+                default:
+                    break;
+            }
+        }else{
+            switch (lmAsset.orientation) {
+                case UIDeviceOrientationUnknown:
+                    break;
+                case UIDeviceOrientationPortraitUpsideDown:
+                    image = [LmCmCameraManager rotateImage:image angle:90];
+                    break;
+                case UIDeviceOrientationPortrait:
+                    image = [LmCmCameraManager rotateImage:image angle:270];
+                    break;
+                case UIDeviceOrientationLandscapeLeft:
+                    break;
+                case UIDeviceOrientationLandscapeRight:
+                    image = [LmCmCameraManager rotateImage:image angle:180];
+                    break;
+                case UIDeviceOrientationFaceUp:
+                    break;
+                case UIDeviceOrientationFaceDown:
+                    break;
+                default:
+                    break;
+            }
         }
     }
     lmAsset.image = image;
@@ -152,9 +180,12 @@
     
     UIImage* crop = [asset.image resizedImage:CGSizeMake(asset.image.size.width/10.0f, asset.image.size.height/10.0f) interpolationQuality:kCGInterpolationHigh];
     
+    __block LmCmViewController* _self = self;
+    
     [self.assetLibrary writeImageToSavedPhotosAlbum:asset.image.CGImage orientation:ALAssetOrientationUp completionBlock:^(NSURL *assetURL, NSError *error) {
-            [self.assetLibrary assetForURL:assetURL resultBlock:^(ALAsset *asset) {
-                [self performSelectorOnMainThread:@selector(lastAssetDidLoad:) withObject:asset waitUntilDone:NO];
+            [_self.assetLibrary assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                _self.cameraManager.processingToConvert = NO;
+                [_self performSelectorOnMainThread:@selector(lastAssetDidLoad:) withObject:asset waitUntilDone:NO];
             } failureBlock:^(NSError *error) {
                 
             }];
