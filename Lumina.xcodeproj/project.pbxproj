@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5804DC711933947100B063F6 /* LmEdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5804DC701933947100B063F6 /* LmEdViewController.m */; };
 		5806D754192E2B7600B384F8 /* LmCurrentImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5806D753192E2B7600B384F8 /* LmCurrentImage.m */; };
 		5806D760192E38D700B384F8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D75F192E38D700B384F8 /* CoreMedia.framework */; };
 		5806D762192E38DE00B384F8 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5806D761192E38DE00B384F8 /* CoreVideo.framework */; };
@@ -100,6 +101,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5804DC6F1933947100B063F6 /* LmEdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmEdViewController.h; sourceTree = "<group>"; };
+		5804DC701933947100B063F6 /* LmEdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmEdViewController.m; sourceTree = "<group>"; };
 		5806D752192E2B7600B384F8 /* LmCurrentImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentImage.h; sourceTree = "<group>"; };
 		5806D753192E2B7600B384F8 /* LmCurrentImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCurrentImage.m; sourceTree = "<group>"; };
 		5806D755192E384B00B384F8 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
@@ -247,6 +250,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5804DC6E1933905800B063F6 /* EditorModule */ = {
+			isa = PBXGroup;
+			children = (
+				5804DC6F1933947100B063F6 /* LmEdViewController.h */,
+				5804DC701933947100B063F6 /* LmEdViewController.m */,
+			);
+			name = EditorModule;
+			sourceTree = "<group>";
+		};
 		5806D756192E384B00B384F8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +397,7 @@
 			children = (
 				583BA0BA192DF0EF00852B0D /* Libraries */,
 				5890AD24192CDCE600B6BD97 /* Categories */,
+				5804DC6E1933905800B063F6 /* EditorModule */,
 				58F455EC193031DD008E55AB /* CameraModule */,
 				588CC33E192DDA4C0030AA82 /* Shared */,
 				583BA0C0192E04E600852B0D /* Objects */,
@@ -445,8 +458,8 @@
 		5890AD24192CDCE600B6BD97 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				5890AD26192CDD0F00B6BD97 /* UIDevice+extend.h */,
 				5890AD27192CDD0F00B6BD97 /* UIDevice+extend.m */,
+				5890AD26192CDD0F00B6BD97 /* UIDevice+extend.h */,
 				5890AD28192CDD0F00B6BD97 /* UIScreen+extend.h */,
 				5890AD29192CDD0F00B6BD97 /* UIScreen+extend.m */,
 				5890AD2A192CDD0F00B6BD97 /* UIView+extend.h */,
@@ -728,6 +741,7 @@
 				58FA0F1F192F4DAF00260A65 /* LmCmViewManagerZoom.m in Sources */,
 				581708D71932605C00E430AD /* LmCmImageAsset.m in Sources */,
 				588CC34A192DE4EE0030AA82 /* LmCmViewBottomBar.m in Sources */,
+				5804DC711933947100B063F6 /* LmEdViewController.m in Sources */,
 				5890AD23192CDC3E00B6BD97 /* LmCmCameraManager.m in Sources */,
 				588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */,
 				5818F4721931C39C00694AF0 /* LmCmButtonCropListItem.m in Sources */,
@@ -881,6 +895,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F0C00530-9322-4DA4-AEFF-EA611EB87BB6";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "GPUImage/framework/**";
 				WRAPPER_EXTENSION = app;
@@ -900,6 +915,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6F757C89-7E69-4CCF-B45A-821A61AC6F70";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "GPUImage/framework/**";
 				WRAPPER_EXTENSION = app;

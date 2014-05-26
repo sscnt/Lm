@@ -116,9 +116,13 @@
             float y = roundf((image.size.height - height) / 2.0f);
             @autoreleasepool {
                 image = [image croppedImage:CGRectMake(x, y, width, height)];
-                image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
+                if (afterWidth < image.size.width) {
+                    image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
+                }
             }
         }
+    }
+    @autoreleasepool {
         if (lmAsset.frontCamera) {
             switch (lmAsset.orientation) {
                 case UIDeviceOrientationUnknown:
@@ -171,6 +175,29 @@
 
 - (void)singleImageByNormalCameraDidTakeWithAsset:(LmCmImageAsset *)lmAsset
 {
+    UIImage* image = lmAsset.image;
+    @autoreleasepool {
+        float zoom = [LmCmSharedCamera instance].zoom;
+        if (zoom != 1.0f) {
+            float width = roundf(image.size.width / zoom);
+            float height = roundf(image.size.height / zoom);
+            float afterWidth = image.size.width;
+            float afterHeight = image.size.height;
+            float length = MAX(width, height);
+            if (length < 1920.0f) {
+                afterWidth = roundf(afterWidth / 2.0f);
+                afterHeight = roundf(afterHeight / 2.0f);
+            }
+            float x = roundf((image.size.width - width) / 2.0f);
+            float y = roundf((image.size.height - height) / 2.0f);
+            @autoreleasepool {
+                image = [image croppedImage:CGRectMake(x, y, width, height)];
+                if (afterWidth < image.size.width) {
+                    image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
+                }
+            }
+        }
+    }
     [self singleImageDidTakeWithAsset:lmAsset];
 }
 
