@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LmCmImageAsset.h"
 
-@interface LmObjectPixelData : NSObject
+@interface LmCmPixelData : NSObject
 
 @property (nonatomic, assign) size_t bufferSize;
 @property (nonatomic, assign) size_t bytesPerRow;
@@ -16,5 +17,7 @@
 @property (nonatomic, assign) size_t height;
 @property (nonatomic, assign) UIDeviceOrientation orientation;
 @property (nonatomic, strong) NSData* pixelData;
+@property (nonatomic, assign) float zoom;
+@property (nonatomic, assign) LmCmViewCropSize cropSize;
 
 @end

@@ -70,6 +70,8 @@ typedef NS_ENUM(NSInteger, LmCmViewBarButtonFlashMode){
 + (void)setZoom:(float)zoom;
 + (float)maxZoomScaleSupported;
 
++ (UIImage*)cropImage:(UIImage*)image WithCropSize:(LmCmViewCropSize)cropSize;
+
 #pragma mark settings
 
 + (float)topBarHeight;

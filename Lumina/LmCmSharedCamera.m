@@ -55,6 +55,52 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     _zoom = 1.0f;
 }
 
++ (UIImage *)cropImage:(UIImage *)image WithCropSize:(LmCmViewCropSize)cropSize
+{
+    
+    if (cropSize == LmCmViewCropSizeNormal) {
+        return image;
+    }
+    UIImage* cropImage;
+    float width = image.size.width, height, x = 0.0f, y;
+    switch (cropSize) {
+        case LmCmViewCropSize2x1:
+        {
+            height = width / 2.0f;
+            y = (image.size.height - height) / 2.0f;
+            return [image croppedImage:CGRectMake(x, y, width, height)];
+        }
+            break;
+        case LmCmViewCropSize16x9:
+        {
+            height = width * 9.0f / 16.0f;
+            y = (image.size.height - height) / 2.0f;
+            return [image croppedImage:CGRectMake(x, y, width, height)];
+            
+        }
+            break;
+        case LmCmViewCropSizeSquare:
+        {
+            if (image.size.width > image.size.height) {
+                width = image.size.height;
+                height = width;
+                y = 0.0f;
+                x = (image.size.width - width) / 2.0f;
+                return [image croppedImage:CGRectMake(x, y, width, height)];
+            }else{
+                width = image.size.width;
+                height = width;
+                y = (image.size.height - height) / 2.0f;
+                x = 0.0f;
+                return [image croppedImage:CGRectMake(x, y, width, height)];
+            }
+        }
+            break;
+    }
+    
+    return nil;
+}
+
 #pragma mark settings
 
 

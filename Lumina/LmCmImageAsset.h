@@ -10,4 +10,9 @@
 
 @interface LmCmImageAsset : NSObject
 
+@property (nonatomic, assign) UIDeviceOrientation orientation;
+@property (nonatomic, assign) float zoom;
+@property (nonatomic, assign) LmCmViewCropSize cropSize;
+@property (nonatomic, strong) UIImage* image;
+
 @end

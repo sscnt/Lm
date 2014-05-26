@@ -44,8 +44,7 @@
 - (void)orientationDidChange;
 - (void)loadLastPhoto;
 - (void)lastAssetDidLoad:(ALAsset*)asset;
-- (void)singleImageDidSave;
-- (void)noSoundPhotoDidSaveToPhotoAlbum:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
+- (void)flashScreen;
 
 - (void)initVolumeHandling;
 

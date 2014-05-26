@@ -29,7 +29,7 @@
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
 		583BA0BC192DF1D700852B0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583BA0BB192DF1D700852B0D /* CoreMotion.framework */; };
 		583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */; };
-		583BA0C3192E050100852B0D /* LmObjectPixelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0C2192E050100852B0D /* LmObjectPixelData.m */; };
+		583BA0C3192E050100852B0D /* LmCmPixelData.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0C2192E050100852B0D /* LmCmPixelData.m */; };
 		588CC33D192DDA460030AA82 /* LmCmSharedCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC33C192DDA460030AA82 /* LmCmSharedCamera.m */; };
 		588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC341192DDF430030AA82 /* LmCurrentSettings.m */; };
 		588CC347192DE04F0030AA82 /* LmCmButtonShutter.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC346192DE04F0030AA82 /* LmCmButtonShutter.m */; };
@@ -138,8 +138,8 @@
 		583BA0BB192DF1D700852B0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		583BA0BD192DF47400852B0D /* LmCmViewPreviewOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewPreviewOverlay.h; sourceTree = "<group>"; };
 		583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewPreviewOverlay.m; sourceTree = "<group>"; };
-		583BA0C1192E050100852B0D /* LmObjectPixelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmObjectPixelData.h; sourceTree = "<group>"; };
-		583BA0C2192E050100852B0D /* LmObjectPixelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmObjectPixelData.m; sourceTree = "<group>"; };
+		583BA0C1192E050100852B0D /* LmCmPixelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmPixelData.h; sourceTree = "<group>"; };
+		583BA0C2192E050100852B0D /* LmCmPixelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmPixelData.m; sourceTree = "<group>"; };
 		588CC33B192DDA460030AA82 /* LmCmSharedCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmSharedCamera.h; sourceTree = "<group>"; };
 		588CC33C192DDA460030AA82 /* LmCmSharedCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmSharedCamera.m; sourceTree = "<group>"; };
 		588CC340192DDF430030AA82 /* LmCurrentSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentSettings.h; sourceTree = "<group>"; };
@@ -284,6 +284,8 @@
 		581708D41932603D00E430AD /* Object */ = {
 			isa = PBXGroup;
 			children = (
+				583BA0C1192E050100852B0D /* LmCmPixelData.h */,
+				583BA0C2192E050100852B0D /* LmCmPixelData.m */,
 				581708D51932605C00E430AD /* LmCmImageAsset.h */,
 				581708D61932605C00E430AD /* LmCmImageAsset.m */,
 			);
@@ -304,8 +306,6 @@
 		583BA0C0192E04E600852B0D /* Objects */ = {
 			isa = PBXGroup;
 			children = (
-				583BA0C1192E050100852B0D /* LmObjectPixelData.h */,
-				583BA0C2192E050100852B0D /* LmObjectPixelData.m */,
 			);
 			name = Objects;
 			sourceTree = "<group>";
@@ -719,7 +719,7 @@
 				5890AD37192CDD0F00B6BD97 /* UIScrollView+extend.m in Sources */,
 				5890AD39192CDD0F00B6BD97 /* UIViewController+extend.m in Sources */,
 				58F455FA19303CBF008E55AB /* LmCmViewSlider.m in Sources */,
-				583BA0C3192E050100852B0D /* LmObjectPixelData.m in Sources */,
+				583BA0C3192E050100852B0D /* LmCmPixelData.m in Sources */,
 				583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */,
 				581708C5193233CF00E430AD /* LmCmViewFlashModeList.m in Sources */,
 				5818F46C1931C14200694AF0 /* LmCmViewCropList.m in Sources */,

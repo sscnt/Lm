@@ -177,7 +177,15 @@
     self = [super init];
     if(self){
         _rawNSDataCache = [NSMutableArray array];
+        
+        if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
+#define IS_IOS6
+        }
+#ifdef IS_IOS6
         [self setupAVCapture:AVCaptureSessionPresetHigh];
+#else
+        [self setupAVCapture:AVCaptureSessionPresetInputPriority];
+#endif
         return self;
     }
 return nil;
@@ -228,29 +236,36 @@ return nil;
     }
     self.processingToConvert = YES;
     __block LmCmCameraManager* _self = self;
-    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_queue_t q_main = dispatch_get_main_queue();
     
-    dispatch_async(q_main, ^{
+    
+    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(q_global, ^{
         LOG(@"count: %d", (int)[_self.rawNSDataCache count]);
-        LmObjectPixelData* data = (LmObjectPixelData*)[_self.rawNSDataCache objectAtIndex:0];
-        CVPixelBufferRef imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
+        LmCmPixelData* data = (LmCmPixelData*)[_self.rawNSDataCache objectAtIndex:0];
+        LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
+        @autoreleasepool {
+            CVPixelBufferRef imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
+            
+            CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+            
+            void* baseAddress = imageBuffer;
+            CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, baseAddress, data.bufferSize, NULL);
+            CGImageRef cgImage = CGImageCreate(data.width, data.height, 8, 32, data.bytesPerRow, colorspace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, TRUE, kCGRenderingIntentDefault);
+            CGDataProviderRelease(dataProvider);
+            UIImage* image = [UIImage imageWithCGImage:cgImage];
+            [LmCurrentImage writeTmpImage:image];
+            CGImageRelease(cgImage);
+            CGColorSpaceRelease(colorspace);
+        }
+        asset.orientation = data.orientation;
+        asset.image = [LmCurrentImage tmpImage];
+        asset.zoom = data.zoom;
+        asset.cropSize = data.cropSize;
         
-        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-        
-        void* baseAddress = imageBuffer;
-        CGDataProviderRef dataProvider = CGDataProviderCreateWithData(NULL, baseAddress, data.bufferSize, NULL);
-        CGImageRef cgImage = CGImageCreate(data.width, data.height, 8, 32, data.bytesPerRow, colorspace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, TRUE, kCGRenderingIntentDefault);
-        CGDataProviderRelease(dataProvider);
-        UIImage* image = [UIImage imageWithCGImage:cgImage];
-        [LmCurrentImage writeTmpImage:image];
-        CGImageRelease(cgImage);
-        CGColorSpaceRelease(colorspace);
-        
-        [_self.delegate singleImageSavedWithOrientation:data.orientation];
+        [_self.delegate singleImageNoSoundDidTakeWithAsset:asset];
         [_self.rawNSDataCache removeObjectAtIndex:0];
         _self.processingToConvert = NO;
-        [_self popCacheAndConvert];
+        [_self performSelector:@selector(popCacheAndConvert) withObject:nil afterDelay:0.01];
     });
     
     return;
@@ -356,6 +371,7 @@ return nil;
     videoOutput = AVCaptureVideoDataOutput.new;
 	[videoOutput setVideoSettings:rgbOutputSettings];
 	[videoOutput setAlwaysDiscardsLateVideoFrames:YES];     //  NOだとコマ落ちしないが重い処理には向かない
+    
   	videoOutputQueue = dispatch_queue_create("VideoData Output Queue", DISPATCH_QUEUE_SERIAL);
 	[videoOutput setSampleBufferDelegate:self queue:videoOutputQueue];
     
@@ -511,7 +527,7 @@ return nil;
             size_t height = CVPixelBufferGetHeight(imageBuffer);
             void *src_buff = CVPixelBufferGetBaseAddress(imageBuffer);
             
-            LmObjectPixelData* data = [[LmObjectPixelData alloc] init];
+            LmCmPixelData* data = [[LmCmPixelData alloc] init];
             data.width = width;
             data.height = height;
             data.bytesPerRow = bytesPerRow;
@@ -519,6 +535,10 @@ return nil;
             data.orientation = [MotionOrientation sharedInstance].deviceOrientation;
             data.pixelData = [NSData dataWithBytes:src_buff length:bytesPerRow * height];
             CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+            
+            LmCmSharedCamera* camera = [LmCmSharedCamera instance];
+            data.zoom = camera.zoom;
+            data.cropSize = camera.cropSize;
             
             [self addPixelDataObject:data];
             
@@ -600,18 +620,54 @@ return nil;
 
 #pragma mark Shooting
 
-- (void)takeAPhoto
+- (void)takeOnePicture
 {
     if ([LmCmSharedCamera instance].soundEnabled) {
-        __block LmCmCameraManager* _self = self;
-        [self takePhoto:^(UIImage *image, NSError *error) {
-            [_self.delegate singleImageDidTake:image];
-        }];
+        [self takeOnePicutreByNormalCamera];
         return;
     }
+    [self takeOnePicutreWithNoSound];
+}
+
+- (void)takeOnePicutreWithNoSound
+{
     _processingToConvert = NO;
     _allCaptureNumber = 1;
     _currentCapturedNumber = 0;
+}
+
+- (void)takeOnePicutreByNormalCamera
+{
+    AVCaptureConnection* connection = [imageOutput connectionWithMediaType:AVMediaTypeVideo];
+    
+    //      画像の向きを調整する
+    if(connection.isVideoOrientationSupported){
+        connection.videoOrientation = UIDevice.currentDevice.orientation;
+    }
+    
+    //      UIImage化した画像を通知する
+    [imageOutput captureStillImageAsynchronouslyFromConnection:connection
+                                             completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+                                                 if(imageDataSampleBuffer == nil){
+                                                     return;
+                                                 }
+                                                 
+                                                 UIImage* image;
+                                                 NSData *data = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                                 image = [[UIImage alloc] initWithData:data];
+                                                 
+                                                 
+                                                 LmCmSharedCamera* camera = [LmCmSharedCamera instance];
+                                                 LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
+                                                 asset.image = image;
+                                                 asset.zoom = camera.zoom;
+                                                 asset.cropSize = camera.cropSize;
+                                                 asset.orientation = [MotionOrientation sharedInstance].deviceOrientation;
+                                                 [self.delegate singleImageByNormalCameraDidTakeWithAsset:asset];
+                                                 
+                                             }];
+    
+
 }
 
 #pragma mark - クラス・メソッド

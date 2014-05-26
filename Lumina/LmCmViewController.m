@@ -85,7 +85,7 @@
     if ([LmCmSharedCamera instance].soundEnabled) {
         [_cameraPreviewOverlay flash];
     }
-    [_cameraManager takeAPhoto];
+    [_cameraManager takeOnePicture];
 }
 
 - (void)didShutterButtonTouchCancel:(id)sender
@@ -96,85 +96,73 @@
 #pragma mark delegate
 
 #pragma makr camera delegate
-- (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation
+- (void)singleImageNoSoundDidTakeWithAsset:(LmCmImageAsset *)lmAsset
 {
-    LOG(@"photo saved.");
-    [_cameraPreviewOverlay flash];
-    
-    __block LmCmViewController* _self = self;
-    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_queue_t q_main = dispatch_get_main_queue();
-    dispatch_async(q_global, ^{
-        @autoreleasepool
-        {
-            UIImage* image = [LmCurrentImage tmpImage];
-            float zoom = [LmCmSharedCamera instance].zoom;
-            if (zoom != 1.0f) {
-                float width = roundf(image.size.width / zoom);
-                float height = roundf(image.size.height / zoom);
-                float afterWidth = image.size.width;
-                float afterHeight = image.size.height;
-                float length = MAX(width, height);
-                if (length < 1920.0f) {
-                    afterWidth = roundf(afterWidth / 2.0f);
-                    afterHeight = roundf(afterHeight / 2.0f);
-                }
-                float x = roundf((image.size.width - width) / 2.0f);
-                float y = roundf((image.size.height - height) / 2.0f);
-                @autoreleasepool {
-                    image = [image croppedImage:CGRectMake(x, y, width, height)];
-                    image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
-                }
+    [self performSelectorOnMainThread:@selector(flashScreen) withObject:nil waitUntilDone:NO];
+    UIImage* image = lmAsset.image;
+    @autoreleasepool {
+        float zoom = [LmCmSharedCamera instance].zoom;
+        if (zoom != 1.0f) {
+            float width = roundf(image.size.width / zoom);
+            float height = roundf(image.size.height / zoom);
+            float afterWidth = image.size.width;
+            float afterHeight = image.size.height;
+            float length = MAX(width, height);
+            if (length < 1920.0f) {
+                afterWidth = roundf(afterWidth / 2.0f);
+                afterHeight = roundf(afterHeight / 2.0f);
             }
-            switch (orientation) {
-                case UIDeviceOrientationUnknown:
-                    break;
-                case UIDeviceOrientationPortraitUpsideDown:
-                    image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeft];
-                    break;
-                case UIDeviceOrientationPortrait:
-                    image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationRight];
-                    break;
-                case UIDeviceOrientationLandscapeLeft:
-                    break;
-                case UIDeviceOrientationLandscapeRight:
-                    image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationDown];
-                    break;
-                default:
-                    break;
+            float x = roundf((image.size.width - width) / 2.0f);
+            float y = roundf((image.size.height - height) / 2.0f);
+            @autoreleasepool {
+                image = [image croppedImage:CGRectMake(x, y, width, height)];
+                image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
             }
-            [_self performSelectorOnMainThread:@selector(unko:) withObject:image waitUntilDone:nil];
-            //UIImageWriteToSavedPhotosAlbum(image, _self, @selector(noSoundPhotoDidSaveToPhotoAlbum:didFinishSavingWithError:contextInfo:), nil);
         }
-    });
+        switch (lmAsset.orientation) {
+            case UIDeviceOrientationUnknown:
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeft];
+                break;
+            case UIDeviceOrientationPortrait:
+                image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationRight];
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationDown];
+                break;
+            default:
+                break;
+        }
+    }
+    lmAsset.image = image;
+    [self singleImageDidTakeWithAsset:lmAsset];
 }
 
-- (void)unko:(UIImage*)image
+- (void)singleImageByNormalCameraDidTakeWithAsset:(LmCmImageAsset *)lmAsset
 {
-    [self.assetLibrary writeImageToSavedPhotosAlbum:image.CGImage orientation:ALAssetOrientationUp completionBlock:^(NSURL *assetURL, NSError *error) {
+    [self performSelectorOnMainThread:@selector(flashScreen) withObject:nil waitUntilDone:NO];
+    [self singleImageDidTakeWithAsset:lmAsset];
+}
+
+- (void)singleImageDidTakeWithAsset:(LmCmImageAsset *)asset
+{
+    asset.image = [LmCmSharedCamera cropImage:asset.image WithCropSize:asset.cropSize];
+    
+    [self.assetLibrary writeImageToSavedPhotosAlbum:asset.image.CGImage orientation:asset.image.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
             [self.assetLibrary assetForURL:assetURL resultBlock:^(ALAsset *asset) {
-                [self lastAssetDidLoad:asset];
+                [self performSelectorOnMainThread:@selector(lastAssetDidLoad:) withObject:asset waitUntilDone:NO];
             } failureBlock:^(NSError *error) {
                 
             }];
     }];
 }
 
-- (void)singleImageDidTake:(UIImage *)image
+- (void)flashScreen
 {
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
-    [self singleImageDidSave];
-}
-
-- (void)singleImageDidSave
-{
-    [self loadLastPhoto];
-}
-
-- (void)noSoundPhotoDidSaveToPhotoAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    LOG(@"Photo saved to album.");
-    [self performSelectorOnMainThread:@selector(singleImageDidSave) withObject:nil waitUntilDone:NO];
+    [self.cameraPreviewOverlay flash];
 }
 
 #pragma mark camera roll

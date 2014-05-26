@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CMBufferQueue.h>
-#import "LmObjectPixelData.h"
+#import "LmCmPixelData.h"
+#import "LmCmImageAsset.h"
 
 
 ////////////////////////////////
@@ -29,7 +30,10 @@
 
 -(void)videoFrameUpdate:(CGImageRef)cgImage from:(LmCmCameraManager*)manager;
 - (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation;
+- (void)singleImageNoSoundDidTakeWithAsset:(LmCmImageAsset*)lmAsset;
+- (void)singleImageByNormalCameraDidTakeWithAsset:(LmCmImageAsset*)lmAsset;
 - (void)singleImageDidTake:(UIImage*)image;
+- (void)singleImageDidTakeWithAsset:(LmCmImageAsset*)asset;
 @end
 
 //////////////////////////////////////////////////
@@ -61,10 +65,12 @@ AVCaptureSessionPresetiFrame1280x720
 @property (nonatomic, assign) int allCaptureNumber;
 @property (nonatomic, strong) NSMutableArray* rawNSDataCache;
 
-- (void)addPixelDataObject:(LmObjectPixelData*)data;
+- (void)addPixelDataObject:(LmCmPixelData*)data;
 - (void)popCacheAndConvert;
 
-- (void)takeAPhoto;
+- (void)takeOnePicture;
+- (void)takeOnePicutreWithNoSound;
+- (void)takeOnePicutreByNormalCamera;
 
 /////////////////////////////////////////////////////////
 //      プレビュー制御

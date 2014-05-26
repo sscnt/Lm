@@ -6,8 +6,8 @@
 //  Copyright (c) 2014年 SSC. All rights reserved.
 //
 
-#import "LmObjectPixelData.h"
+#import "LmCmPixelData.h"
 
-@implementation LmObjectPixelData
+@implementation LmCmPixelData
 
 @end
