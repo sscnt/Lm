@@ -83,7 +83,7 @@
 {
     ((LmCmButtonShutter*)sender).holding = NO;
     if ([LmCmSharedCamera instance].soundEnabled) {
-        [_cameraPreviewOverlay flash];
+        [self flashScreen];
     }
     [_cameraManager takeOnePicture];
 }
@@ -123,15 +123,15 @@
             case UIDeviceOrientationUnknown:
                 break;
             case UIDeviceOrientationPortraitUpsideDown:
-                image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationLeft];
+                image = [LmCmCameraManager rotateImage:image angle:90];
                 break;
             case UIDeviceOrientationPortrait:
-                image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationRight];
+                image = [LmCmCameraManager rotateImage:image angle:270];
                 break;
             case UIDeviceOrientationLandscapeLeft:
                 break;
             case UIDeviceOrientationLandscapeRight:
-                image = [UIImage imageWithCGImage:image.CGImage scale:image.scale orientation:UIImageOrientationDown];
+                image = [LmCmCameraManager rotateImage:image angle:180];
                 break;
             default:
                 break;
@@ -143,7 +143,6 @@
 
 - (void)singleImageByNormalCameraDidTakeWithAsset:(LmCmImageAsset *)lmAsset
 {
-    [self performSelectorOnMainThread:@selector(flashScreen) withObject:nil waitUntilDone:NO];
     [self singleImageDidTakeWithAsset:lmAsset];
 }
 
@@ -151,7 +150,9 @@
 {
     asset.image = [LmCmSharedCamera cropImage:asset.image WithCropSize:asset.cropSize];
     
-    [self.assetLibrary writeImageToSavedPhotosAlbum:asset.image.CGImage orientation:asset.image.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
+    UIImage* crop = [asset.image resizedImage:CGSizeMake(asset.image.size.width/10.0f, asset.image.size.height/10.0f) interpolationQuality:kCGInterpolationHigh];
+    
+    [self.assetLibrary writeImageToSavedPhotosAlbum:asset.image.CGImage orientation:ALAssetOrientationUp completionBlock:^(NSURL *assetURL, NSError *error) {
             [self.assetLibrary assetForURL:assetURL resultBlock:^(ALAsset *asset) {
                 [self performSelectorOnMainThread:@selector(lastAssetDidLoad:) withObject:asset waitUntilDone:NO];
             } failureBlock:^(NSError *error) {

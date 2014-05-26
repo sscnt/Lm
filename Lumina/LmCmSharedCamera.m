@@ -61,21 +61,21 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     if (cropSize == LmCmViewCropSizeNormal) {
         return image;
     }
-    UIImage* cropImage;
+    //image = [image resizedImage:CGSizeMake(image.size.width/ 10.0f, image.size.height/10.0f) interpolationQuality:kCGInterpolationHigh];
     float width = image.size.width, height, x = 0.0f, y;
     switch (cropSize) {
         case LmCmViewCropSize2x1:
         {
             height = width / 2.0f;
             y = (image.size.height - height) / 2.0f;
-            return [image croppedImage:CGRectMake(x, y, width, height)];
+            return [image croppedImage:CGRectMake(roundf(x), roundf(y), roundf(width), roundf(height))];
         }
             break;
         case LmCmViewCropSize16x9:
         {
             height = width * 9.0f / 16.0f;
             y = (image.size.height - height) / 2.0f;
-            return [image croppedImage:CGRectMake(x, y, width, height)];
+            return [image croppedImage:CGRectMake(roundf(x), roundf(y), roundf(width), roundf(height))];
             
         }
             break;
@@ -86,13 +86,13 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
                 height = width;
                 y = 0.0f;
                 x = (image.size.width - width) / 2.0f;
-                return [image croppedImage:CGRectMake(x, y, width, height)];
+                return [image croppedImage:CGRectMake(roundf(x), roundf(y), roundf(width), roundf(height))];
             }else{
                 width = image.size.width;
                 height = width;
                 y = (image.size.height - height) / 2.0f;
                 x = 0.0f;
-                return [image croppedImage:CGRectMake(x, y, width, height)];
+                return [image croppedImage:CGRectMake(roundf(x), roundf(y), roundf(width), roundf(height))];
             }
         }
             break;

@@ -132,5 +132,6 @@ typedef void (^takePhotoBlock)(UIImage *image, NSError *error);
 +(CGImageRef) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer;
 //      画像回転
 +(UIImage*)rotateImage:(UIImage*)img angle:(int)angle;
++(UIImage*)fixOrientationOfImage:(UIImage *)image;
 
 @end

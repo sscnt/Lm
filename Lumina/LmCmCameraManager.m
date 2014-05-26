@@ -178,13 +178,10 @@
     if(self){
         _rawNSDataCache = [NSMutableArray array];
         
-        if(SYSTEM_VERSION_LESS_THAN(@"7.0")){
-#define IS_IOS6
-        }
-#ifdef IS_IOS6
-        [self setupAVCapture:AVCaptureSessionPresetHigh];
-#else
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
         [self setupAVCapture:AVCaptureSessionPresetInputPriority];
+#else
+        [self setupAVCapture:AVCaptureSessionPresetHigh];
 #endif
         return self;
     }
@@ -503,7 +500,85 @@ return nil;
     UIGraphicsEndImageContext();
     return result;
 }
-
++ (UIImage *)fixOrientationOfImage:(UIImage *)image {
+    
+    // No-op if the orientation is already correct
+    if (image.imageOrientation == UIImageOrientationUp) return image;
+    
+    // We need to calculate the proper transformation to make the image upright.
+    // We do it in 2 steps: Rotate if Left/Right/Down, and then flip if Mirrored.
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    
+    switch (image.imageOrientation) {
+        case UIImageOrientationDown:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.width, image.size.height);
+            transform = CGAffineTransformRotate(transform, M_PI);
+            break;
+            
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.width, 0);
+            transform = CGAffineTransformRotate(transform, M_PI_2);
+            break;
+            
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, 0, image.size.height);
+            transform = CGAffineTransformRotate(transform, -M_PI_2);
+            break;
+        case UIImageOrientationUp:
+        case UIImageOrientationUpMirrored:
+            break;
+    }
+    
+    switch (image.imageOrientation) {
+        case UIImageOrientationUpMirrored:
+        case UIImageOrientationDownMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.width, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+            
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRightMirrored:
+            transform = CGAffineTransformTranslate(transform, image.size.height, 0);
+            transform = CGAffineTransformScale(transform, -1, 1);
+            break;
+        case UIImageOrientationUp:
+        case UIImageOrientationDown:
+        case UIImageOrientationLeft:
+        case UIImageOrientationRight:
+            break;
+    }
+    
+    // Now we draw the underlying CGImage into a new context, applying the transform
+    // calculated above.
+    CGContextRef ctx = CGBitmapContextCreate(NULL, image.size.width, image.size.height,
+                                             CGImageGetBitsPerComponent(image.CGImage), 0,
+                                             CGImageGetColorSpace(image.CGImage),
+                                             CGImageGetBitmapInfo(image.CGImage));
+    CGContextConcatCTM(ctx, transform);
+    switch (image.imageOrientation) {
+        case UIImageOrientationLeft:
+        case UIImageOrientationLeftMirrored:
+        case UIImageOrientationRight:
+        case UIImageOrientationRightMirrored:
+            // Grr...
+            CGContextDrawImage(ctx, CGRectMake(0,0,image.size.height,image.size.width), image.CGImage);
+            break;
+            
+        default:
+            CGContextDrawImage(ctx, CGRectMake(0,0,image.size.width,image.size.height), image.CGImage);
+            break;
+    }
+    
+    // And now we just create a new UIImage from the drawing context
+    CGImageRef cgimg = CGBitmapContextCreateImage(ctx);
+    UIImage *img = [UIImage imageWithCGImage:cgimg];
+    CGContextRelease(ctx);
+    CGImageRelease(cgimg);
+    return img;
+}
 /////////////////////////////////////////////////////////////////////////////////
 //      ビデオキャプチャ時、 新しいフレームが書き込まれた際に通知を受けるデリゲートメソッド
 /////////////////////////////////////////////////////////////////////////////////
@@ -642,7 +717,20 @@ return nil;
     
     //      画像の向きを調整する
     if(connection.isVideoOrientationSupported){
-        connection.videoOrientation = UIDevice.currentDevice.orientation;
+        switch ([MotionOrientation sharedInstance].deviceOrientation) {
+            case UIDeviceOrientationPortraitUpsideDown:
+                connection.videoOrientation = AVCaptureVideoOrientationPortraitUpsideDown;
+                break;
+            case UIDeviceOrientationPortrait:
+                connection.videoOrientation = AVCaptureVideoOrientationPortrait;
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                connection.videoOrientation = AVCaptureVideoOrientationLandscapeLeft;
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                connection.videoOrientation = AVCaptureVideoOrientationLandscapeRight;
+                break;
+        }
     }
     
     //      UIImage化した画像を通知する
@@ -651,12 +739,13 @@ return nil;
                                                  if(imageDataSampleBuffer == nil){
                                                      return;
                                                  }
-                                                 
                                                  UIImage* image;
-                                                 NSData *data = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-                                                 image = [[UIImage alloc] initWithData:data];
-                                                 
-                                                 
+                                                 @autoreleasepool {
+                                                     NSData *data = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+                                                     image = [[UIImage alloc] initWithData:data];
+                                                     image = [LmCmCameraManager fixOrientationOfImage:image];
+                                                 }
+                                                                                                  
                                                  LmCmSharedCamera* camera = [LmCmSharedCamera instance];
                                                  LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
                                                  asset.image = image;
