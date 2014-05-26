@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CMBufferQueue.h>
-#import "LmCmPixelData.h"
 #import "LmCmImageAsset.h"
 
 
@@ -27,13 +26,9 @@
 @class LmCmCameraManager;
 @protocol CameraManagerDelegate <NSObject>
 @optional
-
 -(void)videoFrameUpdate:(CGImageRef)cgImage from:(LmCmCameraManager*)manager;
-- (void)singleImageSavedWithOrientation:(UIDeviceOrientation)orientation;
 - (void)singleImageNoSoundDidTakeWithAsset:(LmCmImageAsset*)lmAsset;
 - (void)singleImageByNormalCameraDidTakeWithAsset:(LmCmImageAsset*)lmAsset;
-- (void)singleImageDidTake:(UIImage*)image;
-- (void)singleImageDidTakeWithAsset:(LmCmImageAsset*)asset;
 @end
 
 //////////////////////////////////////////////////
@@ -63,10 +58,7 @@ AVCaptureSessionPresetiFrame1280x720
 @property (nonatomic, assign) BOOL processingToConvert;
 @property (nonatomic, assign) int currentCapturedNumber;
 @property (nonatomic, assign) int allCaptureNumber;
-@property (nonatomic, strong) NSMutableArray* rawNSDataCache;
-@property (nonatomic, strong) NSMutableArray* imageCache;
 
-- (void)addPixelDataObject:(LmCmPixelData*)data;
 - (void)addAssetToCache:(LmCmImageAsset*)asset;
 - (void)popCacheAndConvert;
 

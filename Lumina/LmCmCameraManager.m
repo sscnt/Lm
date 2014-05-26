@@ -176,7 +176,6 @@
 {
     self = [super init];
     if(self){
-        _rawNSDataCache = [NSMutableArray array];
         
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
         [self setupAVCapture:AVCaptureSessionPresetInputPriority];
@@ -196,8 +195,6 @@ return nil;
 -(id)initWithPreset:(NSString*)preset{
 
     if(super.init){
-    
-        _rawNSDataCache = [NSMutableArray array];
         [self setupAVCapture:preset];
         
         return self;
@@ -213,79 +210,6 @@ return nil;
     [view.layer addSublayer:_previewLayer];
     
 }
-
-
-#pragma mark convert
-
-- (void)addPixelDataObject:(NSData *)data
-{
-    [_rawNSDataCache addObject:data];
-    if (_processingToConvert) {
-        return;
-    }
-    [self popCacheAndConvert];
-}
-
-- (void)addAssetToCache:(LmCmImageAsset *)asset
-{
-    
-}
-
-- (void)popCacheAndConvert
-{
-    if (self.processingToConvert) {
-        return;
-    }
-    if ([self.rawNSDataCache count] == 0) {
-        return;
-    }
-    self.processingToConvert = YES;
-    __block LmCmCameraManager* _self = self;
-    
-    
-    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_async(q_global, ^{
-        LOG(@"count: %d", (int)[_self.rawNSDataCache count]);
-        LmCmImageAsset* asset = [[LmCmImageAsset alloc] init];
-        
-        CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-        CVPixelBufferRef imageBuffer;
-        CGDataProviderRef dataProvider;
-        size_t width, height, bytesPerRow;
-        CGImageRef cgImage;
-        
-        LmCmPixelData* data = (LmCmPixelData*)[_self.rawNSDataCache objectAtIndex:0];
-        imageBuffer = (CVPixelBufferRef)[data.pixelData bytes];
-        void* baseAddress = imageBuffer;
-        dataProvider = CGDataProviderCreateWithData(NULL, baseAddress, data.bufferSize, NULL);
-        [_self.rawNSDataCache removeObjectAtIndex:0];
-        asset.orientation = data.orientation;
-        asset.zoom = data.zoom;
-        asset.cropSize = data.cropSize;
-        asset.frontCamera = data.frontCamera;
-        width = data.width;
-        height = data.height;
-        bytesPerRow = data.bytesPerRow;
-        cgImage = CGImageCreate(width, height, 8, 32, bytesPerRow, colorspace, kCGImageAlphaNoneSkipFirst | kCGBitmapByteOrder32Little, dataProvider, NULL, TRUE, kCGRenderingIntentDefault);
-        CGDataProviderRelease(dataProvider);
-        asset.image = [[UIImage alloc] initWithCGImage:cgImage];
-        CGImageRelease(cgImage);
-        //[LmCurrentImage writeTmpImage:image];
-        CGColorSpaceRelease(colorspace);
-                
-        LOG(@"Finish!");
-        
-        [_self.delegate singleImageNoSoundDidTakeWithAsset:asset];
-        _self.processingToConvert = NO;
-        if ([self.rawNSDataCache count] > 0) {
-            [_self performSelector:@selector(popCacheAndConvert) withObject:nil afterDelay:0.1];
-        }
-        
-    });
-    
-    return;
-}
-
 
 //
 - (void)setupAVCapture:(NSString*)preset{
@@ -759,6 +683,7 @@ return nil;
         connection.videoOrientation = [MotionOrientation sharedInstance].deviceOrientation;
     }
     
+    __block LmCmCameraManager* _self = self;
     //      UIImage化した画像を通知する
     [imageOutput captureStillImageAsynchronouslyFromConnection:connection
                                              completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
@@ -771,21 +696,7 @@ return nil;
                                                      image = [[UIImage alloc] initWithData:data];
                                                  }
                                                  @autoreleasepool {
-                                                     switch (image.imageOrientation) {
-                                                         case UIImageOrientationUp:
-                                                             image = [LmCmCameraManager rotateImage:image angle:180];
-                                                             break;
-                                                         case UIImageOrientationDown:
-                                                             break;
-                                                         case UIImageOrientationRight:
-                                                             image = [LmCmCameraManager rotateImage:image angle:270];
-                                                             break;
-                                                         case UIImageOrientationLeft:
-                                                             image = [LmCmCameraManager rotateImage:image angle:90];
-                                                             break;
-                                                         default:
-                                                             break;
-                                                     }
+                                                     image = [LmCmCameraManager fixOrientationOfImage:image];
                                                  }
                                                  
                                                  LmCmSharedCamera* camera = [LmCmSharedCamera instance];
@@ -794,8 +705,8 @@ return nil;
                                                  asset.zoom = camera.zoom;
                                                  asset.cropSize = camera.cropSize;
                                                  asset.orientation = [MotionOrientation sharedInstance].deviceOrientation;
-                                                 asset.frontCamera = [self isUsingFrontCamera];
-                                                 [self.delegate singleImageByNormalCameraDidTakeWithAsset:asset];
+                                                 asset.frontCamera = [_self isUsingFrontCamera];
+                                                 [_self.delegate singleImageByNormalCameraDidTakeWithAsset:asset];
                                                  
                                              }];
     
