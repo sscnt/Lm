@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 typedef NS_ENUM(NSInteger, LmCmViewBarButtonType){
     LmCmViewBarButtonTypeCameraRoll = 1,
@@ -22,8 +23,11 @@ typedef NS_ENUM(NSInteger, LmCmViewBarButtonType){
 @property (nonatomic, assign) LmCmViewBarButtonType type;
 @property (nonatomic, assign) LmCmViewBarButtonFlashMode flashMode;
 @property (nonatomic, strong) VnViewLabel* textLabel;
+@property (nonatomic, strong) UIImageView* imgView;
+@property (nonatomic, strong) ALAsset* asset;
 
 - (id)initWithType:(LmCmViewBarButtonType)type;
 - (void)applyFlashModeText;
+- (void)addImage:(UIImage*)image;
 
 @end

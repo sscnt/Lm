@@ -28,7 +28,7 @@
 
 - (void)addSettingsButton:(LmCmViewBarButton *)button
 {
-    button.center = CGPointMake([self width] / 2.0f + [LmCmSharedCamera shutterButtonRect].size.width / 2.0f + [button width] / 2.0f + 20.0f, [self height] / 2.0f);
+    button.center = CGPointMake([self width] - [button width] * 3.0f / 2.0f - 10.0f, [self height] / 2.0f);
     [self addSubview:button];
 }
 
@@ -41,6 +41,12 @@
 - (void)addCamerarollButton:(LmCmViewBarButton *)button
 {
     button.center = CGPointMake([button width] / 2.0f + 10.0f, [self height] / 2.0f);
+    [self addSubview:button];
+}
+
+- (void)addLastPhotoButton:(LmCmViewBarButton *)button
+{
+    button.center = CGPointMake([button width] * 3.0f / 2.0f + 10.0f, [self height] / 2.0f);
     [self addSubview:button];
 }
 

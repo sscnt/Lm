@@ -221,10 +221,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5806D76A192E390000B384F8 /* AssetsLibrary.framework in Frameworks */,
 				5810F9511931EB0500E30401 /* AudioToolbox.framework in Frameworks */,
 				5810F94F1931EAFD00E30401 /* MediaPlayer.framework in Frameworks */,
 				5806D76B192E390600B384F8 /* libGPUImage.a in Frameworks */,
-				5806D76A192E390000B384F8 /* AssetsLibrary.framework in Frameworks */,
 				5806D768192E38F600B384F8 /* QuartzCore.framework in Frameworks */,
 				5806D766192E38ED00B384F8 /* AVFoundation.framework in Frameworks */,
 				5806D764192E38E500B384F8 /* OpenGLES.framework in Frameworks */,
@@ -337,14 +337,8 @@
 			children = (
 				588CC345192DE04F0030AA82 /* LmCmButtonShutter.h */,
 				588CC346192DE04F0030AA82 /* LmCmButtonShutter.m */,
-				588CC348192DE4EE0030AA82 /* LmCmViewBottomBar.h */,
-				588CC349192DE4EE0030AA82 /* LmCmViewBottomBar.m */,
-				588CC34B192DE4FE0030AA82 /* LmCmViewTopBar.h */,
-				588CC34C192DE4FE0030AA82 /* LmCmViewTopBar.m */,
 				583BA0BD192DF47400852B0D /* LmCmViewPreviewOverlay.h */,
 				583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */,
-				580E03281930BAC6001C26B3 /* LmCmViewBarButton.h */,
-				580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */,
 				5810F9471931D8AD00E30401 /* LmCmViewCropBlackRect.h */,
 				5810F9481931D8AD00E30401 /* LmCmViewCropBlackRect.m */,
 			);
@@ -501,6 +495,7 @@
 		58F455F119303C77008E55AB /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				58FB02321932E2FE00EA4BA5 /* Bar */,
 				581708C2193233B800E430AD /* Flash */,
 				581708BE193233B000E430AD /* Crop */,
 				58F6381C1930E87A004F506F /* Settings */,
@@ -554,6 +549,19 @@
 				580E032F1930C270001C26B3 /* LmCmViewManagerTools.m */,
 			);
 			name = ViewManager;
+			sourceTree = "<group>";
+		};
+		58FB02321932E2FE00EA4BA5 /* Bar */ = {
+			isa = PBXGroup;
+			children = (
+				580E03281930BAC6001C26B3 /* LmCmViewBarButton.h */,
+				580E03291930BAC6001C26B3 /* LmCmViewBarButton.m */,
+				588CC348192DE4EE0030AA82 /* LmCmViewBottomBar.h */,
+				588CC349192DE4EE0030AA82 /* LmCmViewBottomBar.m */,
+				588CC34B192DE4FE0030AA82 /* LmCmViewTopBar.h */,
+				588CC34C192DE4FE0030AA82 /* LmCmViewTopBar.m */,
+			);
+			name = Bar;
 			sourceTree = "<group>";
 		};
 		58FCDCCD19306472009D54B1 /* Fonts */ = {

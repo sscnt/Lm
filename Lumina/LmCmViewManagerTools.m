@@ -27,6 +27,11 @@
     [_camerarollButton addTarget:self action:@selector(camerarollButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [bar addCamerarollButton:_camerarollButton];
     
+    //// Last Photo
+    _lastPhotoButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeLastPhoto];
+    [_lastPhotoButton addTarget:self action:@selector(lastPhotoDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [bar addLastPhotoButton:_lastPhotoButton];
+    
     //// Crop
     _cropButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeCrop];
     [_cropButton addTarget:self action:@selector(cropButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
@@ -150,6 +155,11 @@
     }
 }
 
+- (void)lastPhotoDidTouchUpInside:(LmCmViewBarButton *)sender
+{
+    
+}
+
 #pragma mark delegate
 
 - (void)settingItemDidEnabled:(LmCmViewSettingsListItem)item
@@ -222,5 +232,13 @@
     
 }
 
+#pragma mark last photo
+
+- (void)lastPhotoButtonSetAsset:(ALAsset *)asset
+{
+    _lastPhotoButton.asset = asset;
+    UIImage* image = [[UIImage alloc] initWithCGImage:[asset thumbnail]];
+    [_lastPhotoButton addImage:image];
+}
 
 @end

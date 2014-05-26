@@ -83,6 +83,11 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     return [self topBarColor];
 }
 
++ (UIColor *)cropMaskColor
+{
+    return [UIColor colorWithWhite:0.15f alpha:1.0f];
+}
+
 #pragma mark api
 #pragma mark zoom
 

@@ -38,6 +38,16 @@
     return self;
 }
 
+- (void)addImage:(UIImage *)image
+{
+    if (_imgView == nil) {
+        _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
+        _imgView.center = CGPointMake(self.width / 2.0f, self.height / 2.0f);
+        [self addSubview:_imgView];
+    }
+    _imgView.image = image;
+}
+
 - (void)setFlashMode:(LmCmViewBarButtonFlashMode)flashMode
 {
     _flashMode = flashMode;

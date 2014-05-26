@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "LmCmViewBarButton.h"
 #import "LmCmViewSettingsList.h"
 #import "LmCmViewCropList.h"
@@ -26,6 +27,7 @@
 @property (nonatomic, strong) LmCmViewBarButton* camerarollButton;
 @property (nonatomic, strong) LmCmViewBarButton* cropButton;
 @property (nonatomic, strong) LmCmViewBarButton* switchCameraButton;
+@property (nonatomic, strong) LmCmViewBarButton* lastPhotoButton;
 @property (nonatomic, strong) LmCmViewBarButton* flashButton;
 @property (nonatomic, strong) LmCmViewSettingsList* settingsList;
 @property (nonatomic, strong) LmCmViewCropList* cropList;
@@ -33,11 +35,13 @@
 
 - (void)viewDidLoad;
 - (void)showSettingsList;
+- (void)lastPhotoButtonSetAsset:(ALAsset*)asset;
 
 - (void)settingsButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)camerarollButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)cropButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)cameraSwitchButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)flashButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
+- (void)lastPhotoDidTouchUpInside:(LmCmViewBarButton*)sender;
 
 @end

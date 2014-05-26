@@ -37,9 +37,15 @@
 @property (nonatomic, strong) LmCmViewManagerPreview* previewManager;
 @property (nonatomic, strong) LmCmViewManagerTools* toolsManager;
 
+@property (nonatomic, strong) ALAssetsLibrary* assetLibrary;
+
 - (void)didShutterButtonTouchUpInside:(id)sender;
 - (void)didShutterButtonTouchCancel:(id)sender;
 - (void)orientationDidChange;
+- (void)loadLastPhoto;
+- (void)lastAssetDidLoad:(ALAsset*)asset;
+- (void)singleImageDidSave;
+- (void)noSoundPhotoDidSaveToPhotoAlbum:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
 
 - (void)initVolumeHandling;
 

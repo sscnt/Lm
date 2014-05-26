@@ -30,7 +30,7 @@
 - (void)drawRect:(CGRect)rect
 {
     UIBezierPath* rectanglePath;
-    UIColor* color = [UIColor colorWithRed: 0 green: 0 blue: 0 alpha: 1];
+    UIColor* color = [LmCmSharedCamera cropMaskColor];
     
     switch (_cropSize) {
         case LmCmViewCropSizeSquare:

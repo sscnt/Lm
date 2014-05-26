@@ -72,6 +72,8 @@
     [_zoomViewManager viewDidLoad];
     [_previewManager viewDidLoad];
     [_toolsManager viewDidLoad];
+    
+    [self loadLastPhoto];
 
 }
 
@@ -99,6 +101,7 @@
     LOG(@"photo saved.");
     [_cameraPreviewOverlay flash];
     
+    __block LmCmViewController* _self = self;
     dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_queue_t q_main = dispatch_get_main_queue();
     dispatch_async(q_global, ^{
@@ -120,7 +123,7 @@
                 float y = roundf((image.size.height - height) / 2.0f);
                 @autoreleasepool {
                     image = [image croppedImage:CGRectMake(x, y, width, height)];
-                    //image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
+                    image = [image resizedImage:CGSizeMake(afterWidth, afterHeight) interpolationQuality:kCGInterpolationHigh];
                 }
             }
             switch (orientation) {
@@ -140,18 +143,38 @@
                 default:
                     break;
             }
-            
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+            [_self performSelectorOnMainThread:@selector(unko:) withObject:image waitUntilDone:nil];
+            //UIImageWriteToSavedPhotosAlbum(image, _self, @selector(noSoundPhotoDidSaveToPhotoAlbum:didFinishSavingWithError:contextInfo:), nil);
         }
-        dispatch_async(q_main, ^{
-            
-        });
     });
+}
+
+- (void)unko:(UIImage*)image
+{
+    [self.assetLibrary writeImageToSavedPhotosAlbum:image.CGImage orientation:ALAssetOrientationUp completionBlock:^(NSURL *assetURL, NSError *error) {
+            [self.assetLibrary assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+                [self lastAssetDidLoad:asset];
+            } failureBlock:^(NSError *error) {
+                
+            }];
+    }];
 }
 
 - (void)singleImageDidTake:(UIImage *)image
 {
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    [self singleImageDidSave];
+}
+
+- (void)singleImageDidSave
+{
+    [self loadLastPhoto];
+}
+
+- (void)noSoundPhotoDidSaveToPhotoAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    LOG(@"Photo saved to album.");
+    [self performSelectorOnMainThread:@selector(singleImageDidSave) withObject:nil waitUntilDone:NO];
 }
 
 #pragma mark camera roll
@@ -216,6 +239,43 @@
     });
     
     
+}
+
+#pragma mark photo
+
+- (void)loadLastPhoto
+{
+    __block LmCmViewController* _self = self;
+    static dispatch_once_t pred = 0;
+    dispatch_once(&pred, ^{
+        _self.assetLibrary = [[ALAssetsLibrary alloc] init];
+    });
+    
+    dispatch_queue_t q_global = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(q_global, ^{
+        @autoreleasepool
+        {
+            [_self.assetLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup* group, BOOL* stop){
+                int numberOfAssets = (int)[group numberOfAssets];
+                LOG(@"Assets: %d", numberOfAssets);
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+                if (numberOfAssets > 0) {
+                    [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numberOfAssets - 1] options:0 usingBlock:^(ALAsset* asset, NSUInteger index, BOOL* stop) {
+                        if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
+                            [self performSelectorOnMainThread:@selector(lastAssetDidLoad:) withObject:asset waitUntilDone:nil];
+                        }
+                    }];
+                }
+            } failureBlock:^(NSError* error){
+                
+            }];
+        }
+    });
+}
+
+- (void)lastAssetDidLoad:(ALAsset *)asset
+{
+    [self.toolsManager lastPhotoButtonSetAsset:asset];
 }
 
 #pragma mark volume
