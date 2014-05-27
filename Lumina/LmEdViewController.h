@@ -10,4 +10,6 @@
 
 @interface LmEdViewController : UIViewController
 
+@property (nonatomic, assign) UIImage* imageToProcess;
+
 @end

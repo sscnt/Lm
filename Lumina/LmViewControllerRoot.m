@@ -7,6 +7,7 @@
 //
 
 #import "LmViewControllerRoot.h"
+#import "AppDelegate.h"
 
 @interface LmViewControllerRoot ()
 
@@ -17,10 +18,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+    appdelegate.rootViewController = self;
+    
     [self.navigationBar setHidden:YES];
     self.delegate = self;
-    LmCmViewController* controller = [[LmCmViewController alloc] init];
-    [self pushViewController:controller animated:NO];
+    
+    _lmCmViewController = [[LmCmViewController alloc] init];
+    [self pushViewController:_lmCmViewController animated:NO];
     
 }
 
@@ -32,6 +37,19 @@
         navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
+}
+
+#pragma mark application
+
+- (void)applicationDidEnterBackground
+{
+    [self.lmCmViewController disableCamera];
+}
+
+- (void)applicationWillEnterForeground
+{
+    [self.lmCmViewController enableCamera];
+    [self.lmCmViewController loadLastPhoto];
 }
 
 - (void)didReceiveMemoryWarning

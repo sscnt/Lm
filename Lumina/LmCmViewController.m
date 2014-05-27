@@ -21,10 +21,10 @@
     if (![UIDevice isCurrentLanguageJapanese]) {
         [LmCmSharedCamera instance].soundEnabled = YES;
     }
-    
     [MotionOrientation initialize];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(orientationDidChange) name:@"MotionOrientationChangedNotification" object:nil];
+    
     
     _zoomViewManager = [[LmCmViewManagerZoom alloc] init];
     _zoomViewManager.view = self.view;
@@ -303,9 +303,9 @@
         @autoreleasepool
         {
             [_self.assetLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup* group, BOOL* stop){
+                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                 int numberOfAssets = (int)[group numberOfAssets];
                 LOG(@"Assets: %d", numberOfAssets);
-                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
                 if (numberOfAssets > 0) {
                     [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numberOfAssets - 1] options:0 usingBlock:^(ALAsset* asset, NSUInteger index, BOOL* stop) {
                         if ([[asset valueForProperty:ALAssetPropertyType] isEqualToString:ALAssetTypePhoto]) {
@@ -383,6 +383,16 @@
     initialVolume = [MPMusicPlayerController applicationMusicPlayer].volume;
     [self setVolumeNotification];
     AudioSessionSetActive(true);
+}
+
+- (void)enableCamera
+{
+    [self.cameraManager enableCamera];
+}
+
+- (void)disableCamera
+{
+    [self.cameraManager disableCamera];
 }
 
 @end

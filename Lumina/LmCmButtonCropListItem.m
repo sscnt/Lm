@@ -55,7 +55,7 @@
     self.tag = cropSize;
     switch (cropSize) {
         case LmCmViewCropSizeNormal:
-            _label.text = NSLocalizedString(@"Normal", nil);
+            _label.text = NSLocalizedString(@"Original", nil);
             break;
         case LmCmViewCropSizeSquare:
             _label.text = NSLocalizedString(@"Square", nil);

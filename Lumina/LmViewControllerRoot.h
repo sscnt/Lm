@@ -11,4 +11,9 @@
 
 @interface LmViewControllerRoot : UINavigationController <UINavigationControllerDelegate>
 
+@property (nonatomic, strong) LmCmViewController* lmCmViewController;
+
+- (void)applicationDidEnterBackground;
+- (void)applicationWillEnterForeground;
+
 @end

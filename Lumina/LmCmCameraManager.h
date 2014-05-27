@@ -66,6 +66,10 @@ AVCaptureSessionPresetiFrame1280x720
 - (void)takeOnePicutreWithNoSound;
 - (void)takeOnePicutreByNormalCamera;
 
+- (void)enableCamera;
+- (void)disableCamera;
+- (void)deallocCamera;
+
 /////////////////////////////////////////////////////////
 //      プレビュー制御
 ////////////////////////////////////////////////////////

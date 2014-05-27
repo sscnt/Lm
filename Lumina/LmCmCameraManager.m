@@ -68,6 +68,30 @@
     [captureSession startRunning];
 }
 
+- (void)enableCamera
+{
+    LOG(@"Camera Enabled.");
+    [captureSession startRunning];
+}
+
+- (void)disableCamera
+{
+    LOG(@"Camera Disabled.");
+    [captureSession stopRunning];
+}
+
+- (void)deallocCamera
+{
+    [self disableCamera];
+    
+    for (AVCaptureOutput *output in captureSession.outputs) {
+        [captureSession removeOutput:output];
+    }
+    for (AVCaptureInput *input in captureSession.inputs) {
+        [captureSession removeInput:input];
+    }
+}
+
 -(BOOL)isUsingFrontCamera{
 
     //      フロントカメラを使っているか
@@ -178,7 +202,11 @@
     if(self){
         
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_7_0
-        [self setupAVCapture:AVCaptureSessionPresetInputPriority];
+        if ([UIDevice underIPhone5]) {
+            [self setupAVCapture:AVCaptureSessionPresetHigh];
+        }else{
+            [self setupAVCapture:AVCaptureSessionPresetInputPriority];
+        }
 #else
         [self setupAVCapture:AVCaptureSessionPresetHigh];
 #endif
@@ -237,7 +265,11 @@ return nil;
                     }
                     bestFormat = format;
                 }
-                bestFormat = [[camera formats] objectAtIndex:[[camera formats] count] - 1];
+                if ([UIDevice underIPhone5]) {
+                    bestFormat = [[camera formats] objectAtIndex:[[camera formats] count] - 5];
+                }else{
+                    bestFormat = [[camera formats] objectAtIndex:[[camera formats] count] - 1];
+                }
                 LOG(@"%@", bestFormat);
                 if (bestFormat) {
                     camera.activeFormat = bestFormat;
@@ -526,8 +558,7 @@ return nil;
 /////////////////////////////////////////////////////////////////////////////////
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    @autoreleasepool {
-        
+    
         if (_currentCapturedNumber < _allCaptureNumber) {
             
             AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -590,7 +621,6 @@ return nil;
              });
              */
         }
-    }
         /*
         return;
         ////////////////////////////////////////////

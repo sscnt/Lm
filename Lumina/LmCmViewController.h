@@ -48,4 +48,7 @@
 
 - (void)initVolumeHandling;
 
+- (void)enableCamera;
+- (void)disableCamera;
+
 @end

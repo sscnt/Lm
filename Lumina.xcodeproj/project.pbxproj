@@ -253,6 +253,8 @@
 		5804DC6E1933905800B063F6 /* EditorModule */ = {
 			isa = PBXGroup;
 			children = (
+				5842BADC19344B5A00293515 /* UIComponents */,
+				5842BAD819344B5200293515 /* Shared */,
 				5804DC6F1933947100B063F6 /* LmEdViewController.h */,
 				5804DC701933947100B063F6 /* LmEdViewController.m */,
 			);
@@ -315,6 +317,20 @@
 			children = (
 			);
 			name = Objects;
+			sourceTree = "<group>";
+		};
+		5842BAD819344B5200293515 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Shared;
+			sourceTree = "<group>";
+		};
+		5842BADC19344B5A00293515 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = UIComponents;
 			sourceTree = "<group>";
 		};
 		588CC33E192DDA4C0030AA82 /* Shared */ = {
