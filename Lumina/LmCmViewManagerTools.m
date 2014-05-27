@@ -43,7 +43,7 @@
         float right = [_self.zoomViewManager.zoomSlider width];
         float x = [_self.cameraPreviewOverlay width] - width - right;
         float height = 44.0f * 2.0f;
-        float y = _self.bottomBar.frame.origin.y - height;
+        float y = _self.bottomBar.frame.origin.y - height - _self.cameraPreviewOverlay.frame.origin.y;
         _settingsList = [[LmCmViewSettingsList alloc] initWithFrame:CGRectMake(x, y, width, height)];
         _settingsList.hidden = YES;
         _settingsList.delegate = self;
@@ -75,7 +75,7 @@
     {
         float width = [_flashButton width] - 4.0f;
         float height = [LmCmSharedCamera topBarHeight] * 2.0f;
-        _flashList = [[LmCmViewFlashModeList alloc] initWithFrame:CGRectMake(2.0f, 0.0f, width, height)];
+        _flashList = [[LmCmViewFlashModeList alloc] initWithFrame:CGRectMake(2.0f, [LmCmSharedCamera topBarHeight] - _self.cameraPreviewOverlay.frame.origin.y, width, height)];
         _flashList.hidden = YES;
         _flashList.delegate = self;
         _flashList.currentMode = [LmCmSharedCamera instance].flashMode;
@@ -90,7 +90,9 @@
     LmCmViewController* _self = self.delegate;
     
     _settingsList.hidden = sender.selected;
-    _self.bottomBar.transparent = sender.selected;
+    if ([UIDevice underIPhone5]) {
+        _self.bottomBar.transparent = sender.selected;
+    }
     
     //// Reverse
     sender.selected = !sender.selected;
@@ -111,7 +113,9 @@
     LmCmViewController* _self = self.delegate;
     
     _cropList.hidden = sender.selected;
-    _self.bottomBar.transparent = sender.selected;
+    if ([UIDevice underIPhone5]) {
+        _self.bottomBar.transparent = sender.selected;
+    }
     
     //// Reverse
     sender.selected = !sender.selected;
@@ -139,7 +143,10 @@
 
 - (void)flashButtonDidTouchUpInside:(LmCmViewBarButton *)sender
 {
+    LmCmViewController* _self = self.delegate;
+    
     _flashList.hidden = sender.selected;
+    _self.topBar.transparent = sender.selected;
     sender.selected = !sender.selected;
 }
 
@@ -148,6 +155,9 @@
     LmCmViewController* _self = self.delegate;
     _flashList.hidden = YES;
     _flashButton.selected = NO;
+    if ([UIDevice underIPhone5]) {
+        _self.topBar.transparent = YES;
+    }
     _flashButton.flashMode = mode;
     [LmCmSharedCamera instance].flashMode = mode;
     switch (mode) {
