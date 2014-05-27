@@ -558,9 +558,9 @@ return nil;
 /////////////////////////////////////////////////////////////////////////////////
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    
-        if (_currentCapturedNumber < _allCaptureNumber) {
-            
+    LOG(@"Captured.");
+    if (_currentCapturedNumber < _allCaptureNumber) {
+        @autoreleasepool {
             AVCaptureDevice* device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
             if (device.adjustingFocus) {
                 LOG(@"Sorry adjusting focus.");
@@ -583,8 +583,9 @@ return nil;
             [self.delegate performSelectorOnMainThread:@selector(singleImageNoSoundDidTakeWithAsset:) withObject:asset waitUntilDone:NO];
             return;
             
-            
-            
+        }
+        
+        
             /*
             CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
             CVPixelBufferLockBaseAddress(imageBuffer,0);

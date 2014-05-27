@@ -30,6 +30,7 @@
 		583BA0B9192DF0E800852B0D /* MotionOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0B8192DF0E800852B0D /* MotionOrientation.m */; };
 		583BA0BC192DF1D700852B0D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 583BA0BB192DF1D700852B0D /* CoreMotion.framework */; };
 		583BA0BF192DF47400852B0D /* LmCmViewPreviewOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */; };
+		587679E719346EBF00F01BBA /* LmStViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587679E619346EBE00F01BBA /* LmStViewController.m */; };
 		588CC33D192DDA460030AA82 /* LmCmSharedCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC33C192DDA460030AA82 /* LmCmSharedCamera.m */; };
 		588CC342192DDF430030AA82 /* LmCurrentSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC341192DDF430030AA82 /* LmCurrentSettings.m */; };
 		588CC347192DE04F0030AA82 /* LmCmButtonShutter.m in Sources */ = {isa = PBXBuildFile; fileRef = 588CC346192DE04F0030AA82 /* LmCmButtonShutter.m */; };
@@ -140,6 +141,8 @@
 		583BA0BB192DF1D700852B0D /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		583BA0BD192DF47400852B0D /* LmCmViewPreviewOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmViewPreviewOverlay.h; sourceTree = "<group>"; };
 		583BA0BE192DF47400852B0D /* LmCmViewPreviewOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmViewPreviewOverlay.m; sourceTree = "<group>"; };
+		587679E519346EBE00F01BBA /* LmStViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmStViewController.h; sourceTree = "<group>"; };
+		587679E619346EBE00F01BBA /* LmStViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmStViewController.m; sourceTree = "<group>"; };
 		588CC33B192DDA460030AA82 /* LmCmSharedCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCmSharedCamera.h; sourceTree = "<group>"; };
 		588CC33C192DDA460030AA82 /* LmCmSharedCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LmCmSharedCamera.m; sourceTree = "<group>"; };
 		588CC340192DDF430030AA82 /* LmCurrentSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LmCurrentSettings.h; sourceTree = "<group>"; };
@@ -333,6 +336,15 @@
 			name = UIComponents;
 			sourceTree = "<group>";
 		};
+		587679E119346E2C00F01BBA /* SettingsModule */ = {
+			isa = PBXGroup;
+			children = (
+				587679E519346EBE00F01BBA /* LmStViewController.h */,
+				587679E619346EBE00F01BBA /* LmStViewController.m */,
+			);
+			name = SettingsModule;
+			sourceTree = "<group>";
+		};
 		588CC33E192DDA4C0030AA82 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +425,7 @@
 			children = (
 				583BA0BA192DF0EF00852B0D /* Libraries */,
 				5890AD24192CDCE600B6BD97 /* Categories */,
+				587679E119346E2C00F01BBA /* SettingsModule */,
 				5804DC6E1933905800B063F6 /* EditorModule */,
 				58F455EC193031DD008E55AB /* CameraModule */,
 				588CC33E192DDA4C0030AA82 /* Shared */,
@@ -737,6 +750,7 @@
 				5890AD34192CDD0F00B6BD97 /* UIDevice+extend.m in Sources */,
 				581708C8193240F500E430AD /* LmCmButtonFlashModeItem.m in Sources */,
 				5890AD1C192CDA4100B6BD97 /* LmViewControllerRoot.m in Sources */,
+				587679E719346EBF00F01BBA /* LmStViewController.m in Sources */,
 				580E032A1930BAC6001C26B3 /* LmCmViewBarButton.m in Sources */,
 				58F6381F1930E8C6004F506F /* LmCmButtonSettingsItem.m in Sources */,
 				588CC34D192DE4FE0030AA82 /* LmCmViewTopBar.m in Sources */,

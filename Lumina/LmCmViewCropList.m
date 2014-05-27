@@ -89,7 +89,7 @@
     UIColor* color = [LmCmSharedCamera settingsBgColor];
     
     //// Rounded Rectangle Drawing
-    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: rect byRoundingCorners: UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii: CGSizeMake(3, 3)];
+    UIBezierPath* roundedRectanglePath = [UIBezierPath bezierPathWithRoundedRect: rect byRoundingCorners: UIRectCornerBottomLeft | UIRectCornerBottomRight cornerRadii: CGSizeMake(3, 3)];
     [roundedRectanglePath closePath];
     [color setFill];
     [roundedRectanglePath fill];

@@ -14,6 +14,7 @@
 @property (nonatomic, assign) BOOL transparent;
 
 - (void)addCameraSwitchButton:(LmCmViewBarButton*)button;
+- (void)addCropButton:(LmCmViewBarButton*)button;
 - (void)addFlashButton:(LmCmViewBarButton*)button;
 
 @end

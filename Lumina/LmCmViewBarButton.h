@@ -15,7 +15,8 @@ typedef NS_ENUM(NSInteger, LmCmViewBarButtonType){
     LmCmViewBarButtonTypeSettings,
     LmCmViewBarButtonTypeFlash,
     LmCmViewBarButtonTypeCrop,
-    LmCmViewBarButtonTypeSwitchCamera
+    LmCmViewBarButtonTypeSwitchCamera,
+    LmCmViewBarButtonTypeGeneralSettings
 };
 
 @interface LmCmViewBarButton : UIButton

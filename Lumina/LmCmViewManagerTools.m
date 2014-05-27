@@ -32,12 +32,12 @@
     [_lastPhotoButton addTarget:self action:@selector(lastPhotoDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [bar addLastPhotoButton:_lastPhotoButton];
     
-    //// Crop
-    _cropButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeCrop];
-    [_cropButton addTarget:self action:@selector(cropButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
-    [bar addCropButton:_cropButton];
+    //// General Settings
+    _generalSettingsButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeGeneralSettings];
+    [_generalSettingsButton addTarget:self action:@selector(generalSettingsButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [bar addGeneralSettingsButton:_generalSettingsButton];
     
-    //// Settings & Crop
+    //// Settings
     {
         float width = 240.0f;
         float right = [_self.zoomViewManager.zoomSlider width];
@@ -48,12 +48,6 @@
         _settingsList.hidden = YES;
         _settingsList.delegate = self;
         [_self.cameraPreviewOverlay addSubview:_settingsList];
-        
-        _cropList = [[LmCmViewCropList alloc] initWithFrame:CGRectMake(x, y, width, height)];
-        _cropList.hidden = YES;
-        _cropList.delegate = self;
-        [_cropList setCurrentSize:[LmCmSharedCamera instance].cropSize];
-        [_self.cameraPreviewOverlay addSubview:_cropList];
     }
     
     
@@ -61,6 +55,11 @@
     _switchCameraButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeSwitchCamera];
     [_switchCameraButton addTarget:self action:@selector(cameraSwitchButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [topBar addCameraSwitchButton:_switchCameraButton];
+    
+    //// Crop
+    _cropButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeCrop];
+    [_cropButton addTarget:self action:@selector(cropButtonDidTouchUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [topBar addCropButton:_cropButton];
     
     //// Flash Button
     _flashButton = [[LmCmViewBarButton alloc] initWithType:LmCmViewBarButtonTypeFlash];
@@ -71,15 +70,27 @@
     }
     [topBar addFlashButton:_flashButton];
     
-    //// Flash
+    //// Flash & Crop
     {
+        float x = 2.0f;
         float width = [_flashButton width] - 4.0f;
+        float y = [LmCmSharedCamera topBarHeight] - _self.cameraPreviewOverlay.frame.origin.y;
         float height = [LmCmSharedCamera topBarHeight] * 2.0f;
-        _flashList = [[LmCmViewFlashModeList alloc] initWithFrame:CGRectMake(2.0f, [LmCmSharedCamera topBarHeight] - _self.cameraPreviewOverlay.frame.origin.y, width, height)];
+        _flashList = [[LmCmViewFlashModeList alloc] initWithFrame:CGRectMake(x, y, width, height)];
         _flashList.hidden = YES;
         _flashList.delegate = self;
         _flashList.currentMode = [LmCmSharedCamera instance].flashMode;
         [_self.cameraPreviewOverlay addSubview:_flashList];
+        
+        width = 240.0f;
+        float right = [_self.zoomViewManager.zoomSlider width];
+        x = [_self.cameraPreviewOverlay width] - width - right;
+        height = 44.0f * 2.0f;
+        _cropList = [[LmCmViewCropList alloc] initWithFrame:CGRectMake(x, y, width, height)];
+        _cropList.hidden = YES;
+        _cropList.delegate = self;
+        [_cropList setCurrentSize:[LmCmSharedCamera instance].cropSize];
+        [_self.cameraPreviewOverlay addSubview:_cropList];
     }
 }
 
@@ -114,7 +125,7 @@
     
     _cropList.hidden = sender.selected;
     if ([UIDevice underIPhone5]) {
-        _self.bottomBar.transparent = sender.selected;
+        _self.topBar.transparent = sender.selected;
     }
     
     //// Reverse
@@ -141,12 +152,19 @@
     }
 }
 
+- (void)generalSettingsButtonDidTouchUpInside:(LmCmViewBarButton *)sender
+{
+
+}
+
 - (void)flashButtonDidTouchUpInside:(LmCmViewBarButton *)sender
 {
     LmCmViewController* _self = self.delegate;
     
     _flashList.hidden = sender.selected;
-    _self.topBar.transparent = sender.selected;
+    if ([UIDevice underIPhone5]) {
+        _self.topBar.transparent = sender.selected;
+    }
     sender.selected = !sender.selected;
 }
 

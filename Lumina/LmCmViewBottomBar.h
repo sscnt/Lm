@@ -18,6 +18,6 @@
 - (void)addSettingsButton:(LmCmViewBarButton*)button;
 - (void)addCamerarollButton:(LmCmViewBarButton*)button;
 - (void)addLastPhotoButton:(LmCmViewBarButton*)button;
-- (void)addCropButton:(LmCmViewBarButton*)button;
+- (void)addGeneralSettingsButton:(LmCmViewBarButton*)button;
 
 @end

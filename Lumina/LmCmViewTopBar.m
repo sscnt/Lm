@@ -40,4 +40,10 @@
     [self addSubview:button];
 }
 
+- (void)addCropButton:(LmCmViewBarButton *)button
+{
+    button.center = CGPointMake([self width] - [button width] * 3.0f / 2.0f, [self height] / 2.0f);
+    [self addSubview:button];
+}
+
 @end

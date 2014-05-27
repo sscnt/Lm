@@ -27,6 +27,7 @@
 @property (nonatomic, strong) LmCmViewBarButton* camerarollButton;
 @property (nonatomic, strong) LmCmViewBarButton* cropButton;
 @property (nonatomic, strong) LmCmViewBarButton* switchCameraButton;
+@property (nonatomic, strong) LmCmViewBarButton* generalSettingsButton;
 @property (nonatomic, strong) LmCmViewBarButton* lastPhotoButton;
 @property (nonatomic, strong) LmCmViewBarButton* flashButton;
 @property (nonatomic, strong) LmCmViewSettingsList* settingsList;
@@ -43,5 +44,6 @@
 - (void)cameraSwitchButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)flashButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 - (void)lastPhotoDidTouchUpInside:(LmCmViewBarButton*)sender;
+- (void)generalSettingsButtonDidTouchUpInside:(LmCmViewBarButton*)sender;
 
 @end
