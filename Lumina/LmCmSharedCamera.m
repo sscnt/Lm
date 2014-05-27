@@ -129,6 +129,16 @@ static LmCmSharedCamera* sharedLmCurrentCamera = nil;
     return [self topBarColor];
 }
 
++ (UIColor *)topBarTransparentColor
+{
+    return [UIColor colorWithWhite:0.10f alpha:0.60f];
+}
+
++ (UIColor *)bottomBarTransparentColor
+{
+    return [self topBarTransparentColor];
+}
+
 + (UIColor *)cropMaskColor
 {
     return [UIColor colorWithWhite:0.15f alpha:1.0f];

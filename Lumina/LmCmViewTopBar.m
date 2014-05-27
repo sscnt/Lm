@@ -14,10 +14,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        self.backgroundColor = [LmCmSharedCamera topBarColor];
+        self.transparent = NO;
     }
     return self;
+}
+
+- (void)setTransparent:(BOOL)transparent
+{
+    if (transparent) {
+        self.backgroundColor = [LmCmSharedCamera topBarTransparentColor];
+    }else{
+        self.backgroundColor = [LmCmSharedCamera topBarColor];
+    }
 }
 
 - (void)addFlashButton:(LmCmViewBarButton *)button

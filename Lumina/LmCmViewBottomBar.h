@@ -12,6 +12,8 @@
 
 @interface LmCmViewBottomBar : UIView
 
+@property (nonatomic, assign) BOOL transparent;
+
 - (void)addShutterButton:(LmCmButtonShutter*)button;
 - (void)addSettingsButton:(LmCmViewBarButton*)button;
 - (void)addCamerarollButton:(LmCmViewBarButton*)button;

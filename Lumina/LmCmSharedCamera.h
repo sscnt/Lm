@@ -79,6 +79,8 @@ typedef NS_ENUM(NSInteger, LmCmViewBarButtonFlashMode){
 + (CGRect)shutterButtonRect;
 + (UIColor*)topBarColor;
 + (UIColor*)bottomBarColor;
++ (UIColor*)topBarTransparentColor;
++ (UIColor*)bottomBarTransparentColor;
 + (UIColor*)cropMaskColor;
 
 + (UIColor*)zoomSliderBgColor;

@@ -14,10 +14,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
-        self.backgroundColor = [LmCmSharedCamera bottomBarColor];
+        self.transparent = NO;
     }
     return self;
+}
+
+- (void)setTransparent:(BOOL)transparent
+{
+    if (transparent) {
+        self.backgroundColor = [LmCmSharedCamera bottomBarTransparentColor];
+    }else{
+        self.backgroundColor = [LmCmSharedCamera bottomBarColor];
+    }
 }
 
 - (void)addShutterButton:(LmCmButtonShutter *)button

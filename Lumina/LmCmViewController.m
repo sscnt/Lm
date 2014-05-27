@@ -41,7 +41,13 @@
     _cameraManager.delegate = self;
     
     //// Preview
-    _cameraPreview = [[UIView alloc] initWithFrame:CGRectMake(0.0f, [LmCmSharedCamera topBarHeight], [UIScreen width], [UIScreen height] - [LmCmSharedCamera topBarHeight] - [LmCmSharedCamera bottomBarHeight])];
+    CGRect previewFrame;
+    if ([UIDevice underIPhone5]) {
+        previewFrame = self.view.bounds;
+    }else{
+        previewFrame = CGRectMake(0.0f, [LmCmSharedCamera topBarHeight], [UIScreen width], [UIScreen height] - [LmCmSharedCamera topBarHeight] - [LmCmSharedCamera bottomBarHeight]);
+    }
+    _cameraPreview = [[UIView alloc] initWithFrame:previewFrame];
     [self.view addSubview:_cameraPreview];
     [_cameraManager setPreview:_cameraPreview];
     
@@ -60,6 +66,10 @@
     _bottomBar = [[LmCmViewBottomBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [UIScreen width], [LmCmSharedCamera bottomBarHeight])];
     [_bottomBar setY:[UIScreen height] - [_bottomBar height]];
     [self.view addSubview:_bottomBar];
+    if ([UIDevice underIPhone5]) {
+        _topBar.transparent = YES;
+        _bottomBar.transparent = YES;
+    }
     
     //// Shutter
     _shutterButton = [[LmCmButtonShutter alloc] initWithFrame:[LmCmSharedCamera shutterButtonRect]];

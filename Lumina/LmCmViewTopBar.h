@@ -11,6 +11,8 @@
 
 @interface LmCmViewTopBar : UIView
 
+@property (nonatomic, assign) BOOL transparent;
+
 - (void)addCameraSwitchButton:(LmCmViewBarButton*)button;
 - (void)addFlashButton:(LmCmViewBarButton*)button;
 
